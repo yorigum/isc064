@@ -1,0 +1,125 @@
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.UI.WebControls;
+using System.Text;
+
+namespace ISC056.LAUNCHING
+{
+    public partial class PrintSPTemplate : System.Web.UI.UserControl
+    {
+        //Passing parameter
+        public string nomor;
+        public int index = 0, index2 = 0;
+        public string NoKontrak
+        {
+            set { nomor = value; }
+        }
+
+        protected void Page_Load(object sender, System.EventArgs e)
+        {
+
+            string Unit = Db.SingleString("Select NoUnit From MS_KONTRAK Where NoKontrak = '" + nomor + "'");
+            string Jenis = Db.SingleString("Select JenisProperti From MS_UNIT Where NoUnit = '" + Unit + "'");
+
+            string Skema = Db.SingleString("Select Skema From MS_KONTRAK Where NoKontrak = '" + nomor + "'");
+            string CaraBayar = Db.SingleString("Select CaraBayar From MS_KONTRAK Where NoKontrak = '" + nomor + "'");
+
+            Fill();
+        }
+
+        private void Fill()
+        {
+            string strSql = "SELECT *, "
+                + " C.Nama AS Agent, "
+                + " C.Principal as Principal, "
+                + " B.SumberData as SumberData, "
+                + " B.NPWP as NPWP, "
+                + " B.NoKTP as NoKTP,"
+                + " B.TglLahir,"
+                + " B.Email, "
+                + " B.Nama AS N"
+                + " FROM MS_KONTRAK A"
+                + " INNER JOIN MS_CUSTOMER B ON A.NoCustomer = B.NoCustomer "
+                + " INNER JOIN MS_AGENT C ON A.NoAgent = C.NoAgent "
+                + " WHERE NoKontrak = '" + nomor + "'";
+
+            DataTable rs = Db.Rs(strSql);
+            if (rs.Rows.Count != 0)
+            {
+
+                int Reprint = Convert.ToInt32(rs.Rows[0]["PrintSP"]);
+                string Tower = Db.SingleString("Select Nama From REF_LOKASI Where Lokasi = '"+ rs.Rows[0]["Lokasi"].ToString() +"'");
+
+                tower.Text = towerk.Text = Tower.ToString();
+
+                nosp.Text = rs.Rows[0]["NoKontrak"].ToString();
+                tglKontrak.Text = Cf.DayIndo(rs.Rows[0]["TglKontrak"].ToString());
+
+                Label1.Text = rs.Rows[0]["NoKontrak"].ToString();
+                Label2.Text = Cf.DayIndo(rs.Rows[0]["TglKontrak"].ToString());
+
+                Nama.Text = Nama1.Text = nama2.Text = namak.Text = rs.Rows[0]["N"].ToString();
+                alamat.Text = alamatk.Text = rs.Rows[0]["Alamat1"].ToString();
+                alamat2.Text = alamatk2.Text = rs.Rows[0]["Alamat2"].ToString();
+                alamat3.Text = alamatk3.Text = rs.Rows[0]["Alamat3"].ToString();
+                alamat4.Text = alamatk4.Text = rs.Rows[0]["Alamat4"].ToString();
+                hp.Text = hpk.Text = rs.Rows[0]["NoHp"].ToString();
+                email.Text = emailk.Text = rs.Rows[0]["Email"].ToString();
+                cbk.Text = cb.Text = Db.SingleString("SELECT NAMA FROM REF_SKEMA WHERE Nomor = '" + rs.Rows[0]["RefSkema"].ToString() + "'");
+                nda.Text = ndak.Text = rs.Rows[0]["NoUnit"].ToString();
+                ktp.Text = ktp2.Text = rs.Rows[0]["NoKTP"].ToString();
+                sga.Text = sgak.Text = Cf.Num(Db.SingleDecimal("SELECT LuasSG from ms_unit where nounit = '" + rs.Rows[0]["NoUnit"].ToString() + "'")) + " m<sup>2</sup>";
+
+                string Lt = rs.Rows[0]["NoUnit"].ToString().Substring(Convert.ToInt32((rs.Rows[0]["NoUnit"].ToString().Length - 5)), 2);
+                string Unt = rs.Rows[0]["NoUnit"].ToString().Substring(Convert.ToInt32((rs.Rows[0]["NoUnit"].ToString().Length - 2)), 2);
+
+                typ.Text = typk.Text = rs.Rows[0]["Jenis"].ToString();
+
+                totalharga2.Text = totalhargak.Text = Cf.Num(rs.Rows[0]["gross"]);
+
+                decimal NilaiPelunasan = Db.SingleDecimal("select ISNULL(SUM(NilaiPelunasan),0) from ms_pelunasan a inner join ms_tagihan b "
+                    + "on a.NoKontrak = b.NoKontrak and a.NoTagihan = b.NoUrut where a.nokontrak = '" + nomor + "'");
+                string AdaNup = Db.SingleString("SELECT NUP FROM MS_KONTRAK WHERE NoKontrak = '" + nomor + "'");
+                if (AdaNup == "")
+                {
+                    bookingfeek.Text = bookingfee.Text = Cf.Num(NilaiPelunasan);
+                    terbilangk.Text = terbilang.Text = Money.Str(NilaiPelunasan) + " RUPIAH";
+                }
+                else
+                {
+                    if (Db.SingleString("SELECT JenisProperti FROM MS_UNIT WHERE NoUnit = '" + rs.Rows[0]["NoUnit"].ToString() + "'") == "RUSUNAMI")
+                    {
+                        terbilangk.Text = terbilang.Text = Money.Str(1000000) + " RUPIAH";
+                        bookingfeek.Text = bookingfee.Text = Cf.Num(1000000);
+                    }
+                    else
+                    {
+                        terbilangk.Text = terbilang.Text = Money.Str(5000000) + " RUPIAH";
+                        bookingfeek.Text = bookingfee.Text = Cf.Num(5000000);
+                    }
+                }
+            }
+        }
+
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
+
+        /// <summary>
+        ///		Required method for Designer support - do not modify
+        ///		the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+
+        }
+        #endregion
+    }
+}

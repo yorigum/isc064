@@ -1,0 +1,730 @@
+﻿using System;
+using System.Drawing;
+using System.Data;
+using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+using Excel = Microsoft.Office.Interop.Excel;
+
+namespace ISC056A.MARKETINGJUAL.Laporan
+{
+    public partial class tes : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, System.EventArgs e)
+        {
+            InitializeComponent();
+            Act.Pass();
+
+            if (!Page.IsPostBack)
+            {
+                comp.InnerHtml = Mi.Pt;
+                rpt.Visible = false;
+                Js.Focus(this, scr);
+                init();
+                if (!Act.Sec("DownloadExcel")) xls.Enabled = false;
+            }
+
+            
+        }
+
+        protected int UserAgent()
+        {
+            int a = Db.SingleInteger("SELECT NoAgent FROM " + Mi.DbPrefix + "SECURITY..USERNAME WHERE UserID = '" + Act.UserID + "'");
+
+            return a;
+        }
+
+        private void init()
+        {
+            dari.Text = Cf.Day(Cf.AwalBulan());
+            sampai.Text = Cf.Day(Cf.AkhirBulan());
+
+            DataTable rs;
+
+            rs = Db.Rs("SELECT * FROM REF_JENIS ORDER BY SN");
+            for (int i = 0; i < rs.Rows.Count; i++)
+            {
+                string v = rs.Rows[i]["Jenis"].ToString();
+                string t = v + " - " + rs.Rows[i]["Nama"].ToString();
+                jenis.Items.Add(new ListItem(t, v));
+                jenis.Items[i].Selected = true;
+            }
+
+            cblcarabayar.Items.Add(new ListItem("Cash Keras", "CASH KERAS"));
+            cblcarabayar.Items.Add(new ListItem("Cash Bertahap", "CASH BERTAHAP"));
+            cblcarabayar.Items.Add(new ListItem("KPA", "KPA"));
+            for (int i = 0; i < 3; i++)
+            {
+                cblcarabayar.Items[i].Selected = true;
+            }
+            rs = Db.Rs("SELECT DISTINCT Lokasi FROM MS_KONTRAK ORDER BY Lokasi");
+            for (int i = 0; i < rs.Rows.Count; i++)
+                lokasi.Items.Add(new ListItem(rs.Rows[i][0].ToString()));
+
+            rs = Db.Rs("SELECT DISTINCT Principal FROM MS_AGENT WHERE Status = 'A' ORDER BY Principal");
+            for (int i = 0; i < rs.Rows.Count; i++)
+                agent.Items.Add(new ListItem(rs.Rows[i][0].ToString()));
+
+            lokasi.SelectedIndex = 0;
+            agent.SelectedIndex = 0;
+        }
+
+        private bool valid()
+        {
+            string s = "";
+            bool x = true;
+
+            if (!Cf.isTgl(dari))
+            {
+                x = false;
+                if (s == "") s = dari.ID;
+                daric.Text = "Tanggal";
+            }
+            else
+                daric.Text = "";
+
+            if (!Cf.isTgl(sampai))
+            {
+                x = false;
+                if (s == "") s = sampai.ID;
+                sampaic.Text = "Tanggal";
+            }
+            else
+                sampaic.Text = "";
+
+            if (!Cf.isPilih(jenis))
+            {
+                x = false;
+                jenisc.Text = " Pilih Minimum Satu";
+            }
+            else
+                jenisc.Text = "";
+
+            if (!x && s != "")
+            {
+                RegisterStartupScript("err"
+                    , "<script language='javascript'>document.getElementById('" + s + "').select()</script>");
+            }
+
+
+            if (!Cf.isPilih(cblcarabayar))
+            {
+                x = false;
+                if (s == "")
+                    s = cblcarabayar.ID;
+
+                errcarabayar.Text = "Pilih minimum satu";
+            }
+            else
+                errcarabayar.Text = "";
+
+            return x;
+        }
+
+        protected void scr_Click(object sender, System.EventArgs e)
+        {
+            if (valid())
+            {
+                Report();
+            }
+        }
+        protected void xls_Click(object sender, System.EventArgs e)
+        {
+            if (valid())
+            {
+                Report();
+                Rpt.ToExcel(this, rpt);
+            }
+        }
+
+        private void Report()
+        {
+            param.Visible = false;
+            rpt.Visible = true;
+
+            Header();
+            Fill();
+        }
+
+        private void chart()
+        {            
+            Excel.Application xlApp;
+            Excel.Workbook xlWorkBook;
+            Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+
+            xlApp = new Excel.ApplicationClass();
+            xlWorkBook = xlApp.Workbooks.Add(misValue);
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+            //add data 
+            xlWorkSheet.Cells[1, 1] = "";
+            xlWorkSheet.Cells[1, 2] = "Student1";
+            xlWorkSheet.Cells[1, 3] = "Student2";
+            xlWorkSheet.Cells[1, 4] = "Student3";
+
+            xlWorkSheet.Cells[2, 1] = "Term1";
+            xlWorkSheet.Cells[2, 2] = "80";
+            xlWorkSheet.Cells[2, 3] = "65";
+            xlWorkSheet.Cells[2, 4] = "45";
+
+            xlWorkSheet.Cells[3, 1] = "Term2";
+            xlWorkSheet.Cells[3, 2] = "78";
+            xlWorkSheet.Cells[3, 3] = "72";
+            xlWorkSheet.Cells[3, 4] = "60";
+
+            xlWorkSheet.Cells[4, 1] = "Term3";
+            xlWorkSheet.Cells[4, 2] = "82";
+            xlWorkSheet.Cells[4, 3] = "80";
+            xlWorkSheet.Cells[4, 4] = "65";
+
+            xlWorkSheet.Cells[5, 1] = "Term4";
+            xlWorkSheet.Cells[5, 2] = "75";
+            xlWorkSheet.Cells[5, 3] = "82";
+            xlWorkSheet.Cells[5, 4] = "68";
+
+            Excel.Range chartRange;
+
+            Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlWorkSheet.ChartObjects(Type.Missing);
+            Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(10, 80, 300, 250);
+            Excel.Chart chartPage = myChart.Chart;
+
+            chartRange = xlWorkSheet.get_Range("A1", "d5");
+            chartPage.SetSourceData(chartRange, misValue);
+            chartPage.ChartType = Excel.XlChartType.xlColumnClustered;
+
+            xlWorkBook.SaveAs("csharp.net-informations.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            xlWorkBook.Close(true, misValue, misValue);
+            xlApp.Quit();
+
+            releaseObject(xlWorkSheet);
+            releaseObject(xlWorkBook);
+            releaseObject(xlApp);
+
+            Js.Alert(this, "Excel file created , you can find the file c:\\csharp.net-informations.xls", "");
+        }
+        private void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                Js.Alert(this, "Exception Occured while releasing object " + ex.ToString(), "");
+            }
+            finally
+            {
+                GC.Collect();
+            }
+        }
+
+        private void Header()
+        {
+            System.Text.StringBuilder x = new System.Text.StringBuilder();
+
+            Rpt.Judul(x, comp, judul);
+
+            if (statusA.Checked)
+                Rpt.SubJudul(x, "Status : " + statusA.Text);
+            else if (statusB.Checked)
+                Rpt.SubJudul(x, "Status : " + statusB.Text);
+            else
+                Rpt.SubJudul(x, "Status : " + statusS.Text);
+
+            if (bf1.Checked)
+                Rpt.SubJudul(x, "TTS : " + bf1.Text);
+            else if (bf2.Checked)
+                Rpt.SubJudul(x, "TTS : " + bf2.Text);
+            else
+                Rpt.SubJudul(x, "TTS : " + bfS.Text);
+
+            string tgl = "";
+            if (tglkontrak.Checked) tgl = tglkontrak.Text;
+
+            DateTime Dari = Convert.ToDateTime(dari.Text);
+            DateTime Sampai = Convert.ToDateTime(sampai.Text);
+            Rpt.SubJudul(x
+                , tgl + " : " + Cf.Day(dari.Text) + " s/d " + Cf.Day(sampai.Text)
+                );
+
+            Rpt.SubJudul(x
+                , "Jenis : " + Rpt.inSql(jenis).Replace("'", "")
+                );
+
+            Rpt.SubJudul(x
+                , "Lokasi : " + lokasi.SelectedItem.Text
+                );
+
+            Rpt.SubJudul(x
+                , "Principal : " + agent.SelectedItem.Text
+                );
+
+            Rpt.Header(rpt, x);
+        }
+
+        private void Fill()
+        {
+            string Status = "";
+            if (statusA.Checked) Status = " AND MS_KONTRAK.Status = 'A'";
+            if (statusB.Checked) Status = " AND MS_KONTRAK.Status = 'B'";
+
+            string Lunas = "";
+            if (statusL0.Checked) Lunas = "";
+            if (statusL.Checked) Lunas = " AND MS_KONTRAK.PersenLunas > '0'";
+            if (statusL1.Checked) Lunas = " AND MS_KONTRAK.PersenLunas >= '20'";
+            if (statusL2.Checked) Lunas = " AND MS_KONTRAK.PersenLunas >= '100'";
+
+            string Bf = "";
+            if (bf1.Checked) Bf = " AND (SELECT ISNULL(SUM(NilaiPelunasan),0) FROM MS_PELUNASAN WHERE NoKontrak = MS_KONTRAK.NoKontrak) < 10000000";
+            if (bf2.Checked) Bf = " AND (SELECT ISNULL(SUM(NilaiPelunasan),0) FROM MS_PELUNASAN WHERE NoKontrak = MS_KONTRAK.NoKontrak) >= 10000000";
+
+            string tgl = "";
+            string order = "";
+            if (tglkontrak.Checked)
+            {
+                tgl = "TglKontrak";
+                order = "NoKontrak";
+            }
+
+            DateTime Dari = Convert.ToDateTime(dari.Text);
+            DateTime Sampai = Convert.ToDateTime(sampai.Text);
+            if (Dari > Sampai)
+            {
+                DateTime x = Sampai;
+                Sampai = Dari;
+                Dari = x;
+            }
+
+            string Lokasi = "";
+            if (lokasi.SelectedIndex != 0)
+            {
+                Lokasi = " AND Lokasi = '" + Cf.Str(lokasi.SelectedValue) + "'";
+            }
+
+            string Agent = "";
+            if (agent.SelectedIndex != 0)
+            {
+                Agent = " AND Principal = '" + Cf.Str(agent.SelectedValue) + "'";
+            }
+
+            string aa = "";
+            if (UserAgent() > 0)
+            {
+                aa = " AND MS_KONTRAK.NoAgent = " + UserAgent();
+            }
+
+            string carabayar = "";
+            System.Text.StringBuilder z = new System.Text.StringBuilder();
+            bool isFirst = true;
+            for (int i = 0; i < cblcarabayar.Items.Count; i++)
+            {
+                if (cblcarabayar.Items[i].Selected)
+                {
+                    if (isFirst)
+                    {
+                        z.Append("'" + Cf.Str(cblcarabayar.Items[i].Text) + "'");
+                        isFirst = false;
+                    }
+                    else
+                        z.Append(",'" + Cf.Str(cblcarabayar.Items[i].Text) + "'");
+                }
+            }
+            if (z.ToString() != "")
+                carabayar = " AND MS_KONTRAK.CaraBayar IN (" + z.ToString() + ")";
+
+            decimal t1 = 0;
+            decimal t2 = 0;
+            decimal t3 = 0;
+            decimal t4 = 0;
+            decimal t5 = 0;
+            decimal t6 = 0;
+            decimal tBunga = 0;
+            decimal t7 = 0, t8 = 0;
+
+            decimal tDiskonTambahan = 0;
+            decimal tHargaGimmick = 0;
+            decimal tHargaLainLain = 0;
+
+            string strSql = "SELECT "
+                + " NoKontrak"
+                + ",TglKontrak"
+                + ",MS_KONTRAK.TglInput"
+                + ",Jenis"
+                + ",Lokasi"
+                + ",NoUnit"
+                + ",NUP"
+                + ", Skema"
+                + ",MS_CUSTOMER.Nama AS Cs"
+                + ",MS_AGENT.Nama AS Ag"
+                + ",MS_AGENT.Principal"
+                + ",Luas"
+                + ",Gross"
+                + ",DiskonRupiah"
+                + ",BungaNominal"
+                + ",NilaiKontrak"
+                + ",MS_KONTRAK.Status"
+                + ",NoST"
+                + ",PersenLunas"
+                + ",TglST"
+                + ",TglPPJB"
+                + ",NoPPJB"
+                + ",TglAJB"
+                + ",NoAJB"
+                + ",DiskonTambahan "
+                + ",HargaGimmick "
+                + ",HargaLainLain "
+                + ", CaraBayar "
+                + ",(SELECT ISNULL(SUM(NilaiPelunasan),0) FROM MS_PELUNASAN WHERE NoKontrak = MS_KONTRAK.NoKontrak) AS NilaiTTS"
+                + ", JenisPPN"
+                + " FROM MS_KONTRAK"
+                + " INNER JOIN MS_CUSTOMER ON MS_KONTRAK.NoCustomer = MS_CUSTOMER.NoCustomer"
+                + " INNER JOIN MS_AGENT ON MS_KONTRAK.NoAgent = MS_AGENT.NoAgent "
+                + " WHERE 1=1 "
+                + " AND CONVERT(varchar," + tgl + ",112) >= '" + Cf.Tgl112(Dari) + "'"
+                + " AND CONVERT(varchar," + tgl + ",112) <= '" + Cf.Tgl112(Sampai) + "'"
+                 + " AND Jenis IN (" + Rpt.inSql(jenis) + ")"
+                 + Lokasi
+                 + Lunas
+                //+ " AND MS_KONTRAK.PersenLunas >= '20'"
+                 + Status
+                 + Agent
+                 + Bf
+                 + carabayar
+                 + aa
+                + " ORDER BY " + order;
+
+            DataTable rs = Db.Rs(strSql);
+            for (int i = 0; i < rs.Rows.Count; i++)
+            {
+                if (!Response.IsClientConnected) break;
+
+                TableRow r = new TableRow();
+                TableCell c;
+
+                r.VerticalAlign = VerticalAlign.Top;
+                r.Attributes["ondblclick"] = "popEditKontrak('" + rs.Rows[i]["NoKontrak"] + "')";
+
+                c = new TableCell();
+                c.Text = Cf.Num(i + 1);
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["NoKontrak"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Day(rs.Rows[i]["TglKontrak"]);
+                c.HorizontalAlign = HorizontalAlign.Left;
+                c.Wrap = false;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Day(rs.Rows[i]["TglInput"]);
+                c.HorizontalAlign = HorizontalAlign.Left;
+                c.Wrap = false;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["Status"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["Cs"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["Lokasi"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["Jenis"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["NoUnit"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["NUP"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Num(rs.Rows[i]["Luas"]);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["Skema"].ToString();
+                //rs.Rows[i]["Skema"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["CaraBayar"].ToString();
+                //rs.Rows[i]["Skema"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Num(rs.Rows[i]["Gross"]);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                //				decimal Disc = 0, AfterDisc = 0;
+                //				if(rs.Rows[0]["JenisPPN"].ToString() == "KONSUMEN")
+                //					Disc = ((decimal)1.1 * Convert.ToDecimal(rs.Rows[i]["Gross"]) - Convert.ToDecimal(rs.Rows[i]["NilaiKontrak"])) / (decimal)1.1;
+                //				else
+                //					Disc = Convert.ToDecimal(rs.Rows[i]["Gross"]) - Convert.ToDecimal(rs.Rows[i]["NilaiKontrak"]);
+                //				AfterDisc = Convert.ToDecimal(rs.Rows[i]["Gross"]) - Disc;
+                c.Text = Cf.Num(rs.Rows[i]["DiskonRupiah"]);//Cf.Num(Disc);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Num(rs.Rows[i]["BungaNominal"]);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Num(rs.Rows[i]["DiskonTambahan"]);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Num(rs.Rows[i]["HargaGimmick"]);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Num(rs.Rows[i]["HargaLainLain"]);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Num(rs.Rows[i]["NilaiKontrak"]);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                decimal fo = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan),0) FROM MS_TAGIHAN WHERE NoKontrak = '" + rs.Rows[i]["NoKontrak"].ToString() + "' AND NamaTagihan LIKE '%FITTING OUT%'");
+                c.Text = Cf.Num(fo);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Num(rs.Rows[i]["NilaiTTS"]);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                decimal Sisa = Convert.ToDecimal(rs.Rows[i]["NilaiKontrak"]) - Convert.ToDecimal(rs.Rows[i]["NilaiTTS"]);
+                c.Text = Cf.Num(Sisa);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Num(rs.Rows[i]["PersenLunas"].ToString()) + " %";
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                // if (Convert.ToDecimal(rs.Rows[i]["PersenLunas"]) == 100)
+                // {
+                // c.Text = Cf.Day(Db.SingleTime("SELECT TOP 1 TglPelunasan FROM MS_PELUNASAN WHERE NoKontrak = '" + rs.Rows[i]["NoKontrak"].ToString() + "' ORDER BY TglPelunasan DESC"));
+                // }
+                // else
+                // {
+                c.Text = "";
+                // }
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["Ag"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["Principal"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Day(rs.Rows[i]["TglPPJB"]);
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["NoPPJB"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Day(rs.Rows[i]["TglST"]);
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["NoST"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Day(rs.Rows[i]["TglAJB"]);
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["NoAJB"].ToString();
+                c.HorizontalAlign = HorizontalAlign.Left;
+                r.Cells.Add(c);
+
+                rpt.Rows.Add(r);
+
+                t1 = t1 + (decimal)rs.Rows[i]["Luas"];
+                t2 = t2 + (decimal)rs.Rows[i]["Gross"];
+                t3 += (decimal)rs.Rows[i]["DiskonRupiah"];
+                t4 = t4 + (decimal)rs.Rows[i]["NilaiKontrak"];
+                t5 = t5 + (decimal)rs.Rows[i]["NilaiTTS"];
+                t6 = t6 + Sisa;
+                t7 += fo;
+                tBunga += (decimal)rs.Rows[i]["BungaNominal"];
+
+                tDiskonTambahan += (decimal)rs.Rows[i]["DiskonTambahan"];
+                tHargaGimmick += (decimal)rs.Rows[i]["HargaGimmick"];
+                tHargaLainLain += (decimal)rs.Rows[i]["HargaLainLain"];
+
+                if (i == rs.Rows.Count - 1)
+                    SubTotal("GRAND TOTAL", t1, t2, t3, t4, t5, t6, t7, tBunga, tDiskonTambahan, tHargaGimmick, tHargaLainLain);
+            }
+        }
+
+        private void SubTotal(string txt, decimal t1, decimal t2, decimal t3, decimal t4, decimal t5, decimal t6, decimal t7, decimal tBunga, decimal tDiskonTambahan, decimal tHargaGimmick, decimal tHargaLainLain)
+        {
+            TableRow r = new TableRow();
+            TableCell c;
+
+            c = Rpt.Foot();
+            c.Text = txt;
+            c.ColumnSpan = 10;
+            c.HorizontalAlign = HorizontalAlign.Left;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.Text = Cf.Num(t1);
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.Text = Cf.Num(t2);
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.Text = Cf.Num(t3);
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.Text = Cf.Num(tBunga);
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.Text = Cf.Num(tDiskonTambahan);
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.Text = Cf.Num(tHargaGimmick);
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.Text = Cf.Num(tHargaLainLain);
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.Text = Cf.Num(t4);
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.Text = Cf.Num(t7);
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.Text = Cf.Num(t5);
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            c = Rpt.Foot();
+            c.Text = Cf.Num(t6);
+            c.HorizontalAlign = HorizontalAlign.Right;
+            r.Cells.Add(c);
+
+            rpt.Rows.Add(r);
+        }
+
+        protected void jenisCheck_CheckedChanged(object sender, System.EventArgs e)
+        {
+            for (int i = 0; i < jenis.Items.Count; i++)
+            {
+                jenis.Items[i].Selected = jenisCheck.Checked;
+            }
+
+            Js.Focus(this, jenisCheck);
+            jenisc.Text = "";
+        }
+
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+
+        }
+        #endregion
+
+        protected void cbcarabayar_CheckedChanged(object sender, System.EventArgs e)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                cblcarabayar.Items[i].Selected = cbcarabayar.Checked;
+            }
+        }
+    }
+}

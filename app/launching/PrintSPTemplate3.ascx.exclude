@@ -1,0 +1,408 @@
+﻿<%@ Control Language="c#" Inherits="ISC056.LAUNCHING.PrintSPTemplate3" CodeFile="PrintSPTemplate3.ascx.cs" %>
+<style>
+    td {
+        font-size: 7pt;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: justify;
+    }
+
+    .rpt1 {
+        font-size: 7pt;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+</style>
+<div style="width: 100%;">
+    <div align="center" style="width: 90%; margin: auto;">
+        <div style="height: 28mm; background-color: lightseagreen;"></div>
+        <table style="width: 100%; padding-bottom: 2mm;" cellpadding="2" cellspacing="0">
+            <tr>
+                <td colspan="6" style="text-align: center; font-size: 11pt; height: 9mm;">
+                    <asp:Label ID="nosp" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td colspan="6">Yang bertanda tangan dibawah ini</td>
+            </tr>
+            <tr>
+                <td style="width: 25%;">Nama Pemesan</td>
+                <td style="width: 1%;">:</td>
+                <td colspan="4">
+                    <asp:Label ID="Nama" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>No. KTP</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="ktp" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>No. NPWP</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="npwp" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Alamat sesuai KTP</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="ktp1" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>:</td>
+                <td colspan="2">
+                    <asp:Label ID="ktp2" runat="server"></asp:Label></td>
+                <td style="width: 10%; text-align: right;">Kode Pos : </td>
+                <td style="width: 10%;">
+                    <asp:Label ID="kodepos1" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Alamat sesuai NPWP</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="npwp1" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>:</td>
+                <td colspan="2">
+                    <asp:Label ID="npwp2" runat="server"></asp:Label></td>
+                <td style="text-align: right;">Kode Pos : </td>
+                <td>
+                    <asp:Label ID="kodepos2" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Alamat Koresponden</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="kores1" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>:</td>
+                <td colspan="2">
+                    <asp:Label ID="kores2" runat="server"></asp:Label></td>
+                <td style="text-align: right;">Kode Pos : </td>
+                <td>
+                    <asp:Label ID="kodepos3" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Alamat Email</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="email" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>No. Handphone (1)</td>
+                <td>:</td>
+                <td>
+                    <asp:Label ID="nohp1" runat="server"></asp:Label></td>
+                <td style="width: 18%; text-align: right;">No. Handphone (2) : </td>
+                <td colspan="2">
+                    <asp:Label ID="nohp2" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>No. Tlp Rumah</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="notelp" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td colspan="6">Selanjutnya disebut "PEMESAN"
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">Pemesan dengan ini setuju untuk memesan unit Riverdale Apartemen dari <i>PT Mastertama Adhi Propertindo</i> beralamat di <i>Jalan Pakubuwono VI No. 99 A-B, Kel. Gunung, Kec. Kebayoran Baru - Jakarta Selatan 12120</i> (selanjutnya disebut "Pengembang") sebagaimana diuraikan dibawah ini
+                </td>
+            </tr>
+            <tr>
+                <td>Tower/Blok</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="tower" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Lantai</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="lantai" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Type Unit</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="tipe" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>No. Unit</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="nounit" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Luas (m2) (Semi Gross)</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="luassg" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td colspan="6">Untuk selanjutnya disebut <b>"Unit Apartemen"</b>
+                </td>
+            </tr>
+            <tr>
+                <td>Harga Unit (Termasuk PPN)</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="hargaunit" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Diskon</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="diskon" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Harga Pengikatan (Termasuk PPN)</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="hargaikat" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Jadwal Serah Terima Unit</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="tglst" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Cara bayar</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="carabayar" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>No. Virtual Account</td>
+                <td>:</td>
+                <td colspan="4">
+                    <asp:Label ID="nova" runat="server"></asp:Label></td>
+            </tr>
+        </table>
+        <asp:Table ID="rpt1" Width="80%" CellPadding="2" CellSpacing="0" runat="server">
+            <asp:TableRow>
+                <asp:TableCell Width="10%" Style="border: solid 1px black; background-color: lightgray; text-align: center;">No.</asp:TableCell>
+                <asp:TableCell Width="30%" Style="border: solid 1px black; background-color: lightgray; text-align: center;">Keterangan</asp:TableCell>
+                <asp:TableCell Width="30%" Style="border: solid 1px black; background-color: lightgray; text-align: center;">Tanggal Jatuh Tempo</asp:TableCell>
+                <asp:TableCell Width="30%" Style="border: solid 1px black; background-color: lightgray; text-align: center;">Jumlah (Rp)</asp:TableCell>
+            </asp:TableRow>
+        </asp:Table>
+        <table style="width: 100%; padding-top: 2mm;" cellpadding="2" cellspacing="0">
+            <tr>
+                <td colspan="2">Harga Pengikatan akan dibayarkan sesuai dengan Jadwal Pembayaran yang menjadi lampiran  Surat Pesanan Unit ini.</td>
+            </tr>
+            <tr>
+                <td colspan="2">1. Harga sudah termasuk :</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">a.</td>
+                <td>PPN</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">b.</td>
+                <td>Ijin Mendirikan Bangunan (IMB) induk</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">c.</td>
+                <td>Penyedia Jaringan Listrik</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">d.</td>
+                <td>Penyedia Jaringan Air</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">e.</td>
+                <td>Penyedia Jaringan Telepon</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">f.</td>
+                <td>Pemecahan sertipikat atas nama Pengembang</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">g.</td>
+                <td>Perjanjian Pengikatan Jual Beli (PPJB)</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>(Kecuali yang dibuat dihadapan Notaris)</td>
+            </tr>
+            <tr>
+                <td colspan="2">2. Harga belum termasuk :</td>
+            </tr>
+            <tr>
+                <td style="width: 7%; text-align: right;">a.</td>
+                <td style="width: 93%;">Biaya Akta Jual Beli (AJB) dihadapan Notaris/PPAT</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">b.</td>
+                <td>Biaya Balik Nama Sertifikat Hak Milik atas Satuan Rumah Susun ke atas nama pemesan</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">c.</td>
+                <td>Biaya Bea Perolehan Hak Atas Tanah dan Bangunan (BPHTB)</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">d.</td>
+                <td>Biaya pengurusan KPA/KPR Bank Pemberi Kredit</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">e.</td>
+                <td>Biaya penggunaan dan/atau Biaya Pemeliharaan</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">f.</td>
+                <td>Biaya Pajak Bumi dan Bangunan (PBB)</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">g.</td>
+                <td>Biaya yang timbul atas ketentuan/peraturan dari pemerintah</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">h.</td>
+                <td>Biaya Adminitrasi lainnya</td>
+            </tr>
+            <tr>
+                <td colspan="2">Pemesan telah membaca, mengerti dan menyetujui seluruh ketentuan dalam syarat-syarat dan ketentua-ketentuan pesanan yang tercantum dibelakang halaman dan merupakan satu kesatuan yang tidak terpisahkan dari Surat Pesanan Unit ini.</td>
+            </tr>
+        </table>
+        <table style="width: 100%;" cellpadding="2" cellspacing="0">
+            <tr>
+                <td colspan="5">Bekasi,
+                    <asp:Label ID="tglKontrak" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td style="text-align: center; width: 25%;">Pemesan,</td>
+                <td style="text-align: center; width: 12%;">&nbsp;</td>
+                <td style="text-align: center; width: 25%;">Pengembang,</td>
+                <td style="text-align: center; width: 12%;">&nbsp;</td>
+                <td style="text-align: center; width: 26%;">Disetujui oleh,</td>
+            </tr>
+            <tr>
+                <td colspan="5" style="height: 17mm;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="text-align: center; width: 25%;">
+                    <asp:Label ID="ttdcustomer" runat="server"></asp:Label></td>
+                <td style="text-align: center; width: 12%;">&nbsp;</td>
+                <td style="text-align: center; width: 25%;">
+                    <asp:Label ID="ttdmarketing" runat="server"></asp:Label></td>
+                <td style="text-align: center; width: 12%;">&nbsp;</td>
+                <td style="text-align: center; width: 26%;">
+                    <asp:Label ID="ttdRefSign" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td style="text-align: center; width: 25%;">(Customer)</td>
+                <td style="text-align: center; width: 12%;">&nbsp;</td>
+                <td style="text-align: center; width: 25%;">(Marketing)</td>
+                <td style="text-align: center; width: 12%;">&nbsp;</td>
+                <td style="text-align: center; width: 26%;">
+                    <asp:Label ID="jabatanRefSign" runat="server"></asp:Label></td>
+            </tr>
+        </table>
+    </div>
+    <div align="center" style="width: 90%; margin: auto; page-break-before:always;">
+        <div style="height: 28mm;"></div>
+        <table style="width: 100%; padding-bottom: 2mm;" cellpadding="2" cellspacing="0">
+            <tr style="height:11mm;">
+                <td style="width:16%;">&nbsp;</td>
+                <td style="width:1%;">&nbsp;</td>
+                <td style="width:47%;">&nbsp;</td>
+                <td style="width:23%;">&nbsp;</td>
+                <td style="width:1%;">&nbsp;</td>
+                <td style="width:12%;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Nama Pemesan</td>
+                <td>:</td>
+                <td><asp:Label ID="Nama2" runat="server"></asp:Label></td>
+                <td>Tower/Blok</td>
+                <td>:</td>
+                <td><asp:Label ID="tower2" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>No. KTP</td>
+                <td>:</td>
+                <td><asp:Label ID="noktp" runat="server"></asp:Label></td>
+                <td>Lantai</td>
+                <td>:</td>
+                <td><asp:Label ID="lantai2" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>No. NPWP</td>
+                <td>:</td>
+                <td><asp:Label ID="nonpwp" runat="server"></asp:Label></td>
+                <td>Type Unit</td>
+                <td>:</td>
+                <td><asp:Label ID="tipe2" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Alamat sesuai KTP</td>
+                <td>:</td>
+                <td rowspan="2" style="vertical-align:top;"><asp:Label ID="ktp3" runat="server"></asp:Label></td>
+                <td>No. Unit</td>
+                <td>:</td>
+                <td><asp:Label ID="nounit2" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Luas (m2) (Semi Gross)</td>
+                <td>:</td>
+                <td><asp:Label ID="luassg2" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Alamat sesuai NPWP</td>
+                <td>:</td>
+                <td rowspan="2" style="vertical-align:top;"><asp:Label ID="npwp3" runat="server"></asp:Label></td>
+                <td>Harga Pengikatan (Termasuk PPN)</td>
+                <td>:</td>
+                <td><asp:Label ID="hargaikat2" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Cara Bayar</td>
+                <td>:</td>
+                <td><asp:Label ID="carabayar2" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Alamat Koresponden</td>
+                <td>:</td>
+                <td rowspan="2" style="vertical-align:top;"><asp:Label ID="kores3" runat="server"></asp:Label></td>
+                <td>No. Virtual Account</td>
+                <td>:</td>
+                <td><asp:Label ID="nova2" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>            
+            <tr>
+                <td>No. Surat Pesanan Unit</td>
+                <td>:</td>
+                <td><asp:Label ID="nosp2" runat="server"></asp:Label></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+        <asp:Table ID="rpt2" Width="100%" CellPadding="2" CellSpacing="0" runat="server">
+            <asp:TableRow>
+                <asp:TableCell Width="5%" Style="border: solid 1px black; text-align: center;">No.</asp:TableCell>
+                <asp:TableCell Width="25%" Style="border: solid 1px black; text-align: center;">Keterangan</asp:TableCell>
+                <asp:TableCell Width="20%" Style="border: solid 1px black; text-align: center;">Tanggal Jatuh Tempo</asp:TableCell>
+                <asp:TableCell Width="25%" Style="border: solid 1px black; text-align: center;">Nilai + PPN</asp:TableCell>
+                <asp:TableCell Width="25%" Style="border: solid 1px black; text-align: center;">Outstanding</asp:TableCell>
+            </asp:TableRow>
+        </asp:Table>
+    </div>
+</div>

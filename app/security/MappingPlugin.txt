@@ -1,0 +1,7 @@
+MblAppBatalKontrak;Mobile;Approval Pembatalan Kontrak
+MblAppGantiNama;Mobile;Approval Pengalihan Hak
+MblAppGantiUnit;Mobile;Approval Pindah Unit
+MblDsbBatalKontrak;Mobile;Dashboard Pembatalan Kontrak
+MblDsbDailyReport;Mobile;Dashboard Daily Report
+MblDsbManagementReport;Mobile;Dashboard Management Report
+MblDsbPenjualan;Mobile;Dashboard Penjualan

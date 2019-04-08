@@ -1,0 +1,2 @@
+DiskonTTS;FINANCEAR;Diskon di TTS
+DownloadExcel;ROOT;Download Excel

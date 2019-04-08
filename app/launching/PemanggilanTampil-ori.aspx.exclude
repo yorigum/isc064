@@ -1,0 +1,176 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PemanggilanTampil.aspx.cs" Inherits="ISC034.SECURITY.PemanggilanTampil" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="../Media/Style.css" type="text/css" rel="stylesheet" />
+    <link href="css/Custom.css" type="text/css" rel="stylesheet" />
+    <script src="/Js/JQuery.min.js"></script>
+</head>
+<body style="background: url('/Media/sentraland-medan.jpg');">
+    <form id="form1" runat="server">
+    <div>
+        <div class="row">
+            <div class="col s7">
+                <img src="/Media/logo-perumnas.png" height="100"/>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col s6">
+            <div class="row">
+                <div class="col s8">
+                    <div class="" style="margin-top:100px;">
+                        <div class="blue col s8"><h1 style="color:#FFF!important;">NUP TERPANGGIL</h1></div>
+                        <br style="clear:both;" />
+                        <p style="font-size:30px;">
+                        NUP : <span id="nup" class="big">-</span>
+                        <br />
+                        di : <span id="counter" class="big">-</span>
+                        </p>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="legend grey"></div>
+                                </td>
+                                <td>Tidak Tersedia</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend green"></div>
+                                </td>
+                                <td>NUP sedang dipanggil</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend blue"></div>
+                                </td>
+                                <td>Sedang proses pilih unit</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend red"></div>
+                                </td>
+                                <td>NUP tidak datang</td>
+                            </tr>
+                        </table>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+        <div class="col s6">
+            <div class="row" id="counterlist">
+
+            </div>
+        </div>
+    </div>
+        <div style="display:none;">
+            <audio controls="controls" src="/Media/audio/satu.wav" id="satu" ></audio>
+            <audio controls="controls" src="/Media/audio/dua.wav" id="dua" ></audio>
+            <audio controls="controls" src="/Media/audio/tiga.wav" id="tiga" ></audio>
+            <audio controls="controls" src="/Media/audio/empat.wav" id="empat" ></audio>
+            <audio controls="controls" src="/Media/audio/lima.wav" id="lima" ></audio>
+            <audio controls="controls" src="/Media/audio/enam.wav" id="enam" ></audio>
+            <audio controls="controls" src="/Media/audio/tujuh.wav" id="tujuh" ></audio>
+            <audio controls="controls" src="/Media/audio/delapan.wav" id="delapan" ></audio>
+            <audio controls="controls" src="/Media/audio/sembilan.wav" id="sembilan" ></audio>
+            <audio controls="controls" src="/Media/audio/sepuluh.wav" id="sepuluh" ></audio>
+            <audio controls="controls" src="/Media/audio/sebelas.wav" id="sebelas" ></audio>
+            <audio controls="controls" src="/Media/audio/belas.wav" id="belas" ></audio>
+            <audio controls="controls" src="/Media/audio/puluh.wav" id="puluh" ></audio>
+            <audio controls="controls" src="/Media/audio/seratus.wav" id="seratus" ></audio>
+            <audio controls="controls" src="/Media/audio/ratus.wav" id="ratus" ></audio>
+            <audio controls="controls" src="/Media/audio/seribu.wav" id="seribu" ></audio>
+            <audio controls="controls" src="/Media/audio/ribu.wav" id="ribu" ></audio>
+            <audio controls="controls" src="/Media/audio/loket.wav" id="loket" ></audio>
+            <audio controls="controls" src="/Media/audio/blank.wav" id="blank" ></audio>
+            <audio controls="controls" src="/Media/audio/nomor-urut.wav" id="nomor-urut" ></audio>
+        </div>
+    </div>
+        <script type="text/javascript">
+
+            var adaplaylist = false;
+            var PlayList = undefined;
+
+            $(document).ready(function () {
+                setInterval(function () {
+
+                    $.getJSON("PemanggilanTampil.aspx?act=listcounter", function (data) {
+                        var html = "";
+                        $.each(data, function (i, item) {
+                            html += '<div class="col s2 card" style="text-align:center;">'
+                            html += '<div class="panel-title ' + item['Warna'] + ' text-white">' + item['Nama'] + '</div>'
+                            html += '<div class="panel-content">' + item['Nomor'] + '</div>'
+                            html += '</div>';
+                        });
+                        $('#counterlist').html(html);
+                    });
+
+                    if (!adaplaylist)
+                    {
+                        // biar gak double load
+                        adaplaylist = true;
+
+                        // ambil data dari db
+                        $.getJSON("PemanggilanTampil.aspx?act=calllist", function (data)
+                        {
+                            PlayList = data;
+                            if (PlayList[0] != undefined)
+                                Play(PlayList, 0, PlayList[0]['Text'].split(' ')[0], 0);
+
+                            // jika gak ada data nya lanjut request
+                            else adaplaylist = false;
+                        });
+                    }
+                }, 1000);
+            });
+
+            function Play(tracks, queue, word,index)
+            {
+                var audio = document.getElementById(word);
+                if (audio != undefined) {
+                    $('#nup').html(tracks[queue]['NUPID']);
+                    $('#counter').html(tracks[queue]['Counter']);
+                    try { audio.play(); } catch (e) { adaplaylist = false;}
+                    audio.onended = function () {
+                        // play data per kata
+                        if (index < tracks[queue]['Text'].split(' ').length - 1)
+                        {
+                            index++;
+                            Play(
+                                tracks,
+                                queue,
+                                PlayList[queue]['Text'].split(' ')[index],
+                                index
+                            );
+
+                        } else
+                        {
+                            // update status di db jadi called
+                            $.getJSON("PemanggilanTampil.aspx?act=updatestatus&id=" + PlayList[queue]['ID'], function (data) {});
+                            if (PlayList.length < queue)
+                                Play(
+                                   tracks,
+                                   ++queue,
+                                   PlayList[queue]['Text'].split(' ')[0],
+                                   0
+                               );
+                            // antrian abis load dari db lagi
+                            else adaplaylist = false;
+                            
+                        }
+                    }
+                }
+                
+            }
+           
+        </script>
+    </form>
+</body>
+</html>

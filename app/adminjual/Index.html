@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html lang="en">
+<head>
+    <title>Batavianet Business Application :: Administrasi Jual</title>
+    <meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+    <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+    <link href="/Media/Style.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/fontawesome/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="main-header">
+        <div id="background"></div>
+        <div id="labels">
+            <div class="logo-header">
+                <span class="v-helper"></span>
+                <img src="/Media/logo.png">
+            </div>
+            <div class="user-thumb" onclick="usermenu()">
+                <span class="v-helper"></span>
+                <img src="/Media/user.png">
+                <div class="user-menu" id="usermenu">
+                    <p onclick="OpenGantiPass();"><i class="fa fa-lock user-icon" aria-hidden="true"></i>Ganti Password</p>
+                    <p onclick="if (confirm('Apakah anda ingin melakukan sign-out?\nProgram dan absensi aktif anda akan ditutup.')) {
+                                        location.href = '/SignOut.aspx'
+                                    }"><i class="fa fa-power-off user-icon" aria-hidden="true"></i>Log Out</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <p>ADAM - SUPERADMIN</p>
+                <p>IP Address : 192.168.1.1</p>
+            </div>
+        </div>
+    </div>
+    <div class="content-wrapper">
+        <div class="sidebar-frame">
+            <iframe name="nav" src="Nav.aspx" scrolling="no" noresize style="border:none;width: 100%;height: 100%;"></iframe>
+        </div>
+        <div class="frame-wrapper">
+            <iframe name="content" src="Home.html" scrolling="auto" style="border:none;width: 100%;height: 100%;"></iframe>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="main-footer clear">
+        <div class="copyright">
+            2016 &copy; Batavianet. All Rights Reserved.
+        </div>
+        <div class="contact">
+            <b style="letter-spacing: 1px">CONTACTS</b> Phone: +62 21 29020111, 54356161 (hunting) | Email : support@batavianet.com
+        </div>
+    </div>
+    <style type="text/css">
+        .clear {
+            clear: both;
+        }
+
+        .content-wrapper {
+            display: block;
+            position: relative;
+            /*height: auto;*/
+            /*min-height: 100% !important;*/
+        }
+
+        .frame-wrapper {
+            margin-left: 20%;
+            border: 1px solid transparent;
+            margin-top: 70px;
+            /*height: auto;*/
+            /*min-height: 100% !important;*/
+        }
+
+        .sidebar-frame {
+            /*height: auto;*/
+            width: 19%;
+            border: 1px solid transparent;
+            /*position: fixed;*/
+            z-index: 100;
+            float: left;
+            /*margin-top:54px;*/
+            font-family: 'Open Sans';
+            height: auto;
+            min-height: 100% !important;
+        }
+    </style>
+    <script type="text/javascript">
+        function usermenu() {
+            var submenu = document.getElementById('usermenu');
+            if (submenu) {
+                submenu.style.display = submenu.style.display == "block" ? "" : "block";
+            }
+        }
+    </script>
+</body>
+</html>

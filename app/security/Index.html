@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
+<html>
+	<head>
+		<title>Batavianet Business Application :: Security</title>
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+		<link href="/Media/Style.css" type="text/css" rel="stylesheet">
+    	<link rel="stylesheet" type="text/css" href="/fontawesome/css/font-awesome.min.css">
+	</head>
+	<body>
+		<div class="main-header">
+	        <div id="background"></div>
+	        <div id="labels">
+	            <div class="logo-header">
+	                <span class="v-helper"></span>
+	                <img src="/Media/logo.png" onclick="location.href='../gateway.aspx'">
+	            </div>
+	            <div class="user-thumb" onclick="usermenu()">
+	                <span class="v-helper"></span>
+	                <img src="/Media/user.png">
+	                <div class="user-menu" id="usermenu">
+	                    <p onclick="OpenGantiPass();"><i class="fa fa-lock user-icon" aria-hidden="true"></i>Ganti Password</p>
+	                    <p onclick="if(confirm('Apakah anda ingin melakukan sign-out?\nProgram dan absensi aktif anda akan ditutup.')){location.href='/SignOut.aspx'}"><i class="fa fa-power-off user-icon" aria-hidden="true"></i>Log Out</p>
+	                </div>
+	            </div>
+	            <div class="user-info">
+	                <p>ADAM - SUPERADMIN</p>
+	                <p>IP Address : 192.168.1.1</p>
+	            </div>
+	            <div class="gateway-btn" onclick="location.href='../gateway.aspx'" style="display: none">
+	                <span class="v-helper"></span>
+	                <span style="vertical-align: middle;height: 50px;border-right:2px solid #5c9bd1;display: inline-block;padding-right: 5px;">
+	                	<span class="v-helper"></span>
+	                	<i class="fa fa-home fa-3x" style="vertical-align: middle;"></i>
+	                	<span class="gw-text">GATEWAY</span>
+	                </span>
+	            </div>
+	            <h2 id="comp" runat="server" style="display: none;">
+	            </h2>
+	        </div>
+	    </div>
+	    <div class="content-wrapper">
+	    	<div class="sidebar-frame">
+				<iframe name="nav" src="Nav.aspx" scrolling="auto" noresize style="border:none;width: 100%;height: 100%;"></iframe>    		
+	    	</div>
+			<div class="frame-wrapper">
+				<iframe name="content" src="Home.html" scrolling="auto" style="border:none;width: 100%;height: 100%;"></iframe>
+	    	</div>
+	    	<div class="clear"></div>
+	    </div>
+    	<div class="main-footer clear">
+			<div class="copyright">
+				2016 &copy; Batavianet. All Rights Reserved.
+			</div>
+			<div class="contact">
+				<b style="letter-spacing: 1px">CONTACTS</b> Phone: +62 21 29020111, 54356161 (hunting) | Email : support@batavianet.com
+			</div>
+		</div>
+		 <style type="text/css">
+		 	::-webkit-scrollbar {
+			      width: 5px;
+			}
+		 	.gw-text{
+		 		font-weight: 700;
+		 		font-size: 10pt;
+		 		letter-spacing: 1px;
+		 	}
+		 	.gateway-btn{
+		 		float: right;
+		 		height: 100%;
+		 		text-align: center;
+		 		display: inline-block;
+		 		color: #5c9bd1;
+		 		font-family: 'Open Sans';
+		 		padding-right: 5px;
+		 		cursor: pointer;
+		 	}
+		    .content-wrapper{
+		    	display: block;
+		    	position: relative;
+				/*height: auto;*/
+				/*min-height: 100% !important;*/
+		    }
+		    .frame-wrapper{
+		        margin-left: 20%;
+		        border:1px solid transparent;
+		        margin-top:70px;
+		        /*height: auto;*/
+				/*min-height: 100% !important;*/
+		    }
+		    .sidebar-frame{
+		        /*height: auto;*/
+		        width: 256px;
+		        border:1px solid transparent;
+		        /*position: fixed;*/
+		        z-index: 100;
+		        float:left;
+		        display: block;
+		        /*margin-top:54px;*/
+		        font-family: 'Open Sans';
+		    }
+		</style>
+	<script type="text/javascript">
+		function usermenu(){	
+       		var submenu = document.getElementById('usermenu');
+       		if(submenu){
+       			submenu.style.display = submenu.style.display == "block" ? "" : "block";
+       		}
+       }   
+	</script>
+	</body>
+</html>

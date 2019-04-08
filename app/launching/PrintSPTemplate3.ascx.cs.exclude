@@ -1,0 +1,945 @@
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.UI.WebControls;
+using System.Text;
+
+namespace ISC056.LAUNCHING
+{
+    public partial class PrintSPTemplate3 : System.Web.UI.UserControl
+    {
+        //Passing parameter
+        public string nomor;
+        public string NoKontrak
+        {
+            set { nomor = value; }
+        }
+
+        protected void Page_Load(object sender, System.EventArgs e)
+        {
+            Fill();
+        }
+        private void Fill()
+        {
+            string strSql = "SELECT *, "
+                + " C.Nama AS Agent, "
+                + " C.Principal as Principal, "
+                + " B.SumberData as SumberData, "
+                + " B.NPWP as NPWP, "
+                + " B.NoKTP as NoKTP,"
+                + " B.TglLahir,"
+                + " B.Email, "
+                + " B.Nama AS N,"
+                + " a.NoVa AS NoVA,"
+                + " D.Jenis AS sekema,"
+                + " a.TargetST AS STTTTTTT"
+                + " FROM MS_KONTRAK A"
+                + " INNER JOIN MS_CUSTOMER B ON A.NoCustomer = B.NoCustomer "
+                + " INNER JOIN MS_AGENT C ON A.NoAgent = C.NoAgent "
+                + " INNER JOIN REF_SKEMA D ON A.RefSkema = D.Nomor "
+                + " WHERE NoKontrak = '" + nomor + "'";
+
+            DataTable rs = Db.Rs(strSql);
+            if (rs.Rows.Count != 0)
+            {
+                nosp.Text = nosp2.Text = rs.Rows[0]["NoKontrak"].ToString();
+                tglKontrak.Text = Cf.DayIndo(rs.Rows[0]["TglKontrak"].ToString());
+                Nama.Text = Nama2.Text = rs.Rows[0]["N"].ToString();
+                ktp.Text = noktp.Text = rs.Rows[0]["NoKTP"].ToString();
+                npwp.Text = nonpwp.Text = rs.Rows[0]["NPWP"].ToString();
+
+                ktp1.Text = rs.Rows[0]["KTP1"].ToString() + " " + rs.Rows[0]["KTP2"].ToString();
+                ktp2.Text = rs.Rows[0]["KTP3"].ToString() + " " + rs.Rows[0]["KTP4"].ToString();
+                ktp3.Text = rs.Rows[0]["KTP1"].ToString() + " " + rs.Rows[0]["KTP2"].ToString() + " " + rs.Rows[0]["KTP3"].ToString() + " " + rs.Rows[0]["KTP4"].ToString();
+                npwp1.Text = rs.Rows[0]["NPWPAlamat1"].ToString() + " " + rs.Rows[0]["NPWPAlamat2"].ToString();
+                npwp2.Text = rs.Rows[0]["NPWPAlamat3"].ToString() + " " + rs.Rows[0]["NPWPAlamat4"].ToString();
+                npwp3.Text = rs.Rows[0]["NPWPAlamat1"].ToString() + " " + rs.Rows[0]["NPWPAlamat2"].ToString() + " " + rs.Rows[0]["NPWPAlamat3"].ToString() + " " + rs.Rows[0]["NPWPAlamat4"].ToString();
+                kores1.Text = rs.Rows[0]["Alamat1"].ToString() + " " + rs.Rows[0]["Alamat2"].ToString();
+                kores2.Text = rs.Rows[0]["Alamat3"].ToString() + " " + rs.Rows[0]["Alamat4"].ToString();
+                kores3.Text = rs.Rows[0]["Alamat1"].ToString() + " " + rs.Rows[0]["Alamat2"].ToString() + " " + rs.Rows[0]["Alamat3"].ToString() + " " + rs.Rows[0]["Alamat4"].ToString();
+                kodepos1.Text = rs.Rows[0]["Kodepos"].ToString();
+                kodepos2.Text = rs.Rows[0]["KodeposNPWP"].ToString();
+                kodepos3.Text = rs.Rows[0]["KodeposAlamat"].ToString();
+
+                email.Text = rs.Rows[0]["Email"].ToString();
+                nohp1.Text = rs.Rows[0]["NoHP"].ToString();
+                nohp2.Text = rs.Rows[0]["NoHP2"].ToString();
+                notelp.Text = rs.Rows[0]["NoTelp"].ToString();
+
+                DataTable dt = Db.Rs("SELECT * FROM MS_UNIT WHERE NoStock = '" + rs.Rows[0]["NoStock"].ToString() + "'");
+                if (dt.Rows.Count != 0)
+                {
+                    string Tower = Db.SingleString("Select Nama From REF_LOKASI Where Lokasi = '" + dt.Rows[0]["Lokasi"].ToString() + "'");
+                    tower.Text = tower2.Text = Tower;
+                    string Tipe = Db.SingleString("Select Nama From REF_Jenis Where Jenis = '" + dt.Rows[0]["Jenis"].ToString() + "'");
+                    tipe.Text = tipe2.Text = Tipe;
+                    lantai.Text = lantai2.Text = dt.Rows[0]["Lantai"].ToString();
+                    nounit.Text = nounit2.Text = dt.Rows[0]["NomorUnit"].ToString();
+                    luassg.Text = luassg2.Text = Cf.Num(dt.Rows[0]["LuasSG"]);
+                }
+
+                hargaunit.Text = Cf.Num(rs.Rows[0]["Gross"]);
+                diskon.Text = Cf.Num(rs.Rows[0]["DiskonTambahan"]);
+                hargaikat.Text = hargaikat2.Text = Cf.Num(rs.Rows[0]["NilaiKontrak"]);
+                tglst.Text = Cf.DayIndo(rs.Rows[0]["STTTTTTT"].ToString());
+                carabayar.Text = carabayar2.Text = rs.Rows[0]["sekema"].ToString();
+                nova.Text = nova2.Text = rs.Rows[0]["NoVA"].ToString();
+
+                ttdcustomer.Text = rs.Rows[0]["N"].ToString();
+                ttdmarketing.Text = rs.Rows[0]["Agent"].ToString();
+
+                DataTable ttd = Db.Rs("SELECT * FROM " + Mi.DbPrefix + "SECURITY..REF_SIGN WHERE Dokumen = 'SPU' AND SN = 1");
+                if (ttd.Rows.Count > 0)
+                {
+                    ttdRefSign.Text = ttd.Rows[0]["Nama"].ToString();
+                    if (ttd.Rows[0]["Jabatan"].ToString() != "")
+                    {
+                        jabatanRefSign.Text = "(" + ttd.Rows[0]["Jabatan"].ToString() + ")";
+                    }
+                }
+
+                // Summary Jadwal Tagihan
+                if (rs.Rows[0]["sekema"].ToString() == "CASH KERAS")
+                {
+                    filljadwalCashKeras();
+                }
+                else if (rs.Rows[0]["sekema"].ToString() == "CASH BERTAHAP")
+                {
+                    filljadwalCashBertahap();
+                }
+                else if (rs.Rows[0]["sekema"].ToString() == "KPA")
+                {
+                    filljadwalKPA();
+                }
+
+                fillTable();
+            }
+        }
+        private void filljadwalCashKeras()
+        {
+            //// Jadwal Tagihan
+            int index = 0;
+            DataTable bf = Db.Rs("SELECT * FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'BF'");
+            for (int i = 0; i < bf.Rows.Count; i++)
+            {
+                decimal nilaibf = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'BF'");
+                decimal nilaibf1 = Convert.ToDecimal(bf.Rows[0]["NilaiTagihan"]);
+
+                index++;
+
+                if (i == 0)
+                {
+                    decimal nilaibf2 = nilaibf - nilaibf1;
+
+                    TableRow tr2 = new TableRow();
+                    TableCell c2;
+
+                    if (bf.Rows.Count > 1)
+                    {
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Booking Fee";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(bf.Rows[i]["TglJT"]) + " - " + Cf.Day(bf.Rows[bf.Rows.Count - 1]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+                    else
+                    {
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Booking Fee";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(bf.Rows[i]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+
+                    break;
+                }
+            }
+
+            DataTable dp = Db.Rs("SELECT * FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'DP'");
+            for (int i = 0; i < dp.Rows.Count; i++)
+            {
+                decimal nilaibf = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'DP'");
+                decimal nilaibf1 = Convert.ToDecimal(dp.Rows[0]["NilaiTagihan"]);
+
+                index++;
+                if (i == 0)
+                {
+                    decimal nilaibf2 = nilaibf - nilaibf1;
+
+                    if (dp.Rows.Count > 1)
+                    {
+                        TableRow tr2 = new TableRow();
+                        TableCell c2;
+
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Down Payment";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(dp.Rows[i]["TglJT"]) + " - " + Cf.Day(dp.Rows[dp.Rows.Count - 1]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+                    else
+                    {
+                        TableRow tr2 = new TableRow();
+                        TableCell c2;
+
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Down Payment";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(dp.Rows[i]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+
+                    break;
+                }
+            }
+
+            DataTable ang = Db.Rs("SELECT * FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'ANG'");
+            for (int i = 0; i < ang.Rows.Count; i++)
+            {
+                decimal nilaibf = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'ANG'");
+                decimal nilaibf1 = Convert.ToDecimal(ang.Rows[0]["NilaiTagihan"]);
+
+                index++;
+
+                if (i == 0)
+                {
+                    decimal nilaibf2 = nilaibf - nilaibf1;
+
+                    if (ang.Rows.Count > 1)
+                    {
+                        TableRow tr2 = new TableRow();
+                        TableCell c2;
+
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Pelunasan";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(ang.Rows[i]["TglJT"]) + " - " + Cf.Day(ang.Rows[ang.Rows.Count - 1]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+                    else
+                    {
+                        TableRow tr2 = new TableRow();
+                        TableCell c2;
+
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Pelunasan";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(ang.Rows[i]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+
+                    break;
+                }
+            }
+
+            TableRow tr3 = new TableRow();
+            TableCell c3;
+
+            c3 = new TableCell();
+            c3.Text = "&nbsp;";
+            c3.ColumnSpan = 3;
+            tr3.Cells.Add(c3);
+
+            decimal total = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe IN ('ANG','DP','BF')");
+            c3 = new TableCell();
+            c3.Text = Cf.Num(total);
+            c3.Attributes["style"] = "border: 1px solid black; text-align: right;";
+            tr3.Cells.Add(c3);
+
+            rpt1.Controls.Add(tr3);
+        }
+
+        private void filljadwalCashBertahap()
+        {
+            //// Jadwal Tagihan
+            int index = 0;
+            DataTable bf = Db.Rs("SELECT * FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'BF'");
+            for (int i = 0; i < bf.Rows.Count; i++)
+            {
+                decimal nilaibf = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'BF'");
+                decimal nilaibf1 = Convert.ToDecimal(bf.Rows[0]["NilaiTagihan"]);
+
+                index++;
+
+                if (i == 0)
+                {
+                    decimal nilaibf2 = nilaibf - nilaibf1;
+
+                    TableRow tr2 = new TableRow();
+                    TableCell c2;
+
+                    if (bf.Rows.Count > 1)
+                    {
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Booking Fee";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(bf.Rows[i]["TglJT"]) + " - " + Cf.Day(bf.Rows[bf.Rows.Count - 1]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+                    else
+                    {
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Booking Fee";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(bf.Rows[i]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+
+                    break;
+                }
+            }
+
+            DataTable dp = Db.Rs("SELECT * FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'DP'");
+            for (int i = 0; i < dp.Rows.Count; i++)
+            {
+                decimal nilaibf = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'DP'");
+                decimal nilaibf1 = Convert.ToDecimal(dp.Rows[0]["NilaiTagihan"]);
+
+                index++;
+                if (i == 0)
+                {
+                    decimal nilaibf2 = nilaibf - nilaibf1;
+
+                    if (dp.Rows.Count > 2)
+                    {
+                        TableRow tr2 = new TableRow();
+                        TableCell c2;
+
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Down Payment";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(dp.Rows[i]["TglJT"]) + " - " + Cf.Day(dp.Rows[dp.Rows.Count - 1]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+                    else
+                    {
+                        TableRow tr2 = new TableRow();
+                        TableCell c2;
+
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Down Payment";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(dp.Rows[i]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+
+                    break;
+                }
+            }
+
+            DataTable ang = Db.Rs("SELECT * FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'ANG'");
+            for (int i = 0; i < ang.Rows.Count; i++)
+            {
+                decimal nilaibf = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'ANG'");
+                decimal nilaibf1 = Convert.ToDecimal(ang.Rows[ang.Rows.Count - 1]["NilaiTagihan"]);
+
+                index++;
+
+                if (i == 0)
+                {
+                    decimal nilaibf2 = nilaibf - nilaibf1;
+
+                    if (ang.Rows.Count > 2)
+                    {
+                        TableRow tr2 = new TableRow();
+                        TableCell c2;
+
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Installment 1 - " + (ang.Rows.Count - 1).ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(ang.Rows[i]["TglJT"]) + " - " + Cf.Day(ang.Rows[ang.Rows.Count - 2]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf2);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+
+                        index++;
+
+                        TableRow tr = new TableRow();
+                        TableCell c;
+
+                        c = new TableCell();
+                        c.Text = index.ToString();
+                        c.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr.Cells.Add(c);
+
+                        c = new TableCell();
+                        c.Text = "Installment " + (ang.Rows.Count).ToString();
+                        c.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr.Cells.Add(c);
+
+                        c = new TableCell();
+                        c.Text = Cf.Day(ang.Rows[ang.Rows.Count - 1]["TglJT"]);
+                        c.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr.Cells.Add(c);
+
+                        c = new TableCell();
+                        c.Text = Cf.Num(nilaibf1);
+                        c.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr.Cells.Add(c);
+
+                        rpt1.Controls.Add(tr);
+                    }
+                    else if (ang.Rows.Count == 2)
+                    {
+                        TableRow tr2 = new TableRow();
+                        TableCell c2;
+
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Installment 1";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(ang.Rows[i]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+
+                        index++;
+
+                        TableRow tr = new TableRow();
+                        TableCell c;
+
+                        c = new TableCell();
+                        c.Text = index.ToString();
+                        c.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr.Cells.Add(c);
+
+                        c = new TableCell();
+                        c.Text = "Installment " + (ang.Rows.Count).ToString();
+                        c.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr.Cells.Add(c);
+
+                        c = new TableCell();
+                        c.Text = Cf.Day(ang.Rows[ang.Rows.Count - 1]["TglJT"]);
+                        c.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr.Cells.Add(c);
+
+                        c = new TableCell();
+                        c.Text = Cf.Num(nilaibf1);
+                        c.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr.Cells.Add(c);
+
+                        rpt1.Controls.Add(tr);
+                    }
+                    else
+                    {
+                        TableRow tr2 = new TableRow();
+                        TableCell c2;
+
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Installment";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(ang.Rows[i]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+
+                    break;
+                }
+            }
+
+            TableRow tr3 = new TableRow();
+            TableCell c3;
+
+            c3 = new TableCell();
+            c3.Text = "&nbsp;";
+            c3.ColumnSpan = 3;
+            tr3.Cells.Add(c3);
+
+            decimal total = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe IN ('ANG','DP','BF')");
+            c3 = new TableCell();
+            c3.Text = Cf.Num(total);
+            c3.Attributes["style"] = "border: 1px solid black; text-align: right;";
+            tr3.Cells.Add(c3);
+
+            rpt1.Controls.Add(tr3);
+        }
+
+        private void filljadwalKPA()
+        {
+            //// Jadwal Tagihan
+            int index = 0;
+            DataTable bf = Db.Rs("SELECT * FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'BF'");
+            for (int i = 0; i < bf.Rows.Count; i++)
+            {
+                decimal nilaibf = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'BF'");
+                decimal nilaibf1 = Convert.ToDecimal(bf.Rows[0]["NilaiTagihan"]);
+
+                index++;
+
+                if (i == 0)
+                {
+                    decimal nilaibf2 = nilaibf - nilaibf1;
+
+                    TableRow tr2 = new TableRow();
+                    TableCell c2;
+
+                    if (bf.Rows.Count > 1)
+                    {
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Booking Fee";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(bf.Rows[i]["TglJT"]) + " - " + Cf.Day(bf.Rows[bf.Rows.Count - 1]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+                    else
+                    {
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Booking Fee";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(bf.Rows[i]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+
+                    break;
+                }
+            }
+
+            DataTable dp = Db.Rs("SELECT * FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'DP'");
+            for (int i = 0; i < dp.Rows.Count; i++)
+            {
+                decimal nilaibf = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'DP'");
+                decimal nilaibf1 = Convert.ToDecimal(dp.Rows[0]["NilaiTagihan"]);
+
+                index++;
+                if (i == 0)
+                {
+                    decimal nilaibf2 = nilaibf - nilaibf1;
+
+                    if (dp.Rows.Count > 2)
+                    {
+                        TableRow tr2 = new TableRow();
+                        TableCell c2;
+
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Down Payment";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(dp.Rows[i]["TglJT"]) + " - " + Cf.Day(dp.Rows[dp.Rows.Count - 1]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+                    else
+                    {
+                        TableRow tr2 = new TableRow();
+                        TableCell c2;
+
+                        c2 = new TableCell();
+                        c2.Text = index.ToString();
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = "Down Payment";
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Day(dp.Rows[i]["TglJT"]);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                        tr2.Cells.Add(c2);
+
+                        c2 = new TableCell();
+                        c2.Text = Cf.Num(nilaibf);
+                        c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                        tr2.Cells.Add(c2);
+
+                        rpt1.Controls.Add(tr2);
+                    }
+
+                    break;
+                }
+            }
+
+            DataTable ang = Db.Rs("SELECT * FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'ANG'");
+            for (int i = 0; i < ang.Rows.Count; i++)
+            {
+                decimal nilaibf = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe = 'ANG'");
+                decimal nilaibf1 = Convert.ToDecimal(ang.Rows[ang.Rows.Count - 1]["NilaiTagihan"]);
+
+                index++;
+
+                if (i == 0)
+                {
+                    decimal nilaibf2 = nilaibf - nilaibf1;
+
+
+                    TableRow tr2 = new TableRow();
+                    TableCell c2;
+
+                    c2 = new TableCell();
+                    c2.Text = index.ToString();
+                    c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                    tr2.Cells.Add(c2);
+
+                    c2 = new TableCell();
+                    c2.Text = "Plafon Kredit";
+                    c2.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                    tr2.Cells.Add(c2);
+
+                    c2 = new TableCell();
+                    c2.Text = Cf.Day(ang.Rows[i]["TglJT"]);
+                    c2.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                    tr2.Cells.Add(c2);
+
+                    c2 = new TableCell();
+                    c2.Text = Cf.Num(nilaibf);
+                    c2.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                    tr2.Cells.Add(c2);
+
+                    rpt1.Controls.Add(tr2);
+
+                    break;
+                }
+            }
+
+            TableRow tr3 = new TableRow();
+            TableCell c3;
+
+            c3 = new TableCell();
+            c3.Text = "&nbsp;";
+            c3.ColumnSpan = 3;
+            tr3.Cells.Add(c3);
+
+            decimal total = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe IN ('ANG','DP','BF')");
+            c3 = new TableCell();
+            c3.Text = Cf.Num(total);
+            c3.Attributes["style"] = "border: 1px solid black; text-align: right;";
+            tr3.Cells.Add(c3);
+
+            rpt1.Controls.Add(tr3);
+        }
+
+        private void fillTable()
+        {
+            //// Jadwal Tagihan
+            int index = 0; decimal Outstanding = 0;
+            decimal NilaiKontrak = Db.SingleDecimal("SELECT SUM(NilaiTagihan) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe IN ('BF','DP','ANG')");
+            DataTable rs = Db.Rs("SELECT * FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe IN ('BF','DP','ANG')");
+            for (int i = 0; i < rs.Rows.Count; i++)
+            {
+                index++;
+                Outstanding += Convert.ToDecimal(rs.Rows[i]["NilaiTagihan"]);
+
+                TableRow tr = new TableRow();
+                TableCell c;
+
+                c = new TableCell();
+                c.Text = index.ToString();
+                c.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                tr.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["NamaTagihan"].ToString();
+                c.Attributes["style"] = "border: 1px solid black; text-align: left;";
+                tr.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Day(rs.Rows[i]["TglJT"]);
+                c.Attributes["style"] = "border: 1px solid black; text-align: center;";
+                tr.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = Cf.Num(rs.Rows[i]["NilaiTagihan"]);
+                c.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                tr.Cells.Add(c);
+
+                decimal outpertagihan = NilaiKontrak - Outstanding;
+                c = new TableCell();
+                c.Text = Cf.Num(outpertagihan);
+                c.Attributes["style"] = "border: 1px solid black; text-align: right;";
+                tr.Cells.Add(c);
+
+                rpt2.Controls.Add(tr);
+            }
+
+            TableRow tr3 = new TableRow();
+            TableCell c3;
+
+            c3 = new TableCell();
+            c3.Text = "&nbsp;";
+            c3.ColumnSpan = 2;
+            tr3.Cells.Add(c3);
+
+            c3 = new TableCell();
+            c3.Text = "TOTAL";
+            c3.Attributes["style"] = "border: 1px solid black; text-align: center;";
+            tr3.Cells.Add(c3);
+
+            decimal total = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan), 0) FROM MS_TAGIHAN WHERE NoKontrak = '" + nomor + "' AND Tipe IN ('ANG','DP','BF')");
+            c3 = new TableCell();
+            c3.Text = Cf.Num(total);
+            c3.Attributes["style"] = "border: 1px solid black; text-align: right;";
+            tr3.Cells.Add(c3);
+
+            rpt2.Controls.Add(tr3);
+        }
+
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
+
+        /// <summary>
+        ///		Required method for Designer support - do not modify
+        ///		the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+
+        }
+        #endregion
+    }
+}

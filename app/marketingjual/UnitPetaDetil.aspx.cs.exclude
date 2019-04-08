@@ -1,0 +1,91 @@
+using System;
+using System.Drawing;
+using System.Data;
+using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+
+namespace ISC056A.MARKETINGJUAL
+{
+	public partial class UnitPetaDetil : System.Web.UI.Page
+	{
+	
+		protected void Page_Load(object sender, System.EventArgs e)
+		{
+			Act.Pass();
+			Act.NoCache();
+
+			if(!Page.IsPostBack)
+			{
+				Display();
+			}
+		}
+
+		private void Display()
+		{
+			dasar.ImageUrl = "PetaBesar.aspx?f=FP/"+f+".jpg";
+			
+			AssignCoord();
+		}
+
+		private void AssignCoord()
+		{
+			//Image preparations
+			koordinat.ImageUrl = "/Media/blank_separator.gif";
+
+			System.Drawing.Bitmap bm = new System.Drawing.Bitmap(
+				Request.PhysicalApplicationPath + "FP\\"+f+".jpg");
+			
+			koordinat.Width = bm.Width;
+			koordinat.Height = bm.Height;
+			koordinat.Attributes["usemap"] = "#coordinate";
+
+			//Mapping
+			System.Text.StringBuilder x = new System.Text.StringBuilder();
+			x.Append("<map name='coordinate'>");
+
+			string strSql = "SELECT DISTINCT NoUnit,Koordinat FROM MS_UNIT WHERE "
+				+ " Status = 'A'"
+				+ " AND Peta = '"+f+"'";
+			DataTable rs = Db.Rs(strSql);
+			for(int i=0;i<rs.Rows.Count;i++)
+			{
+				x.Append("<area shape='poly' coords='"+rs.Rows[i]["Koordinat"]+"' style='cursor:auto'"
+					+ " href='ReservasiDaftar.aspx?NoUnit="+rs.Rows[i]["NoUnit"]+"' alt='"+rs.Rows[i]["NoUnit"]+"'"
+					+ ">");
+			}
+
+			x.Append("</map>");
+			coord.Text = x.ToString();
+
+			bm.Dispose();
+		}
+
+		private string f
+		{
+			get
+			{
+				return Cf.Pk(Request.QueryString["f"]);
+			}
+		}
+
+		#region Web Form Designer generated code
+		override protected void OnInit(EventArgs e)
+		{
+			//
+			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
+			//
+			InitializeComponent();
+			base.OnInit(e);
+		}
+		
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{    
+
+		}
+		#endregion
+	}
+}

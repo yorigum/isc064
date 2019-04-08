@@ -1,0 +1,278 @@
+<%@ Control Language="c#" Inherits="ISC056.MARKETINGJUAL.PrintTTSTemplate" CodeFile="PrintTTSTemplate.ascx.cs" %>
+<style>
+    .tt {
+    }
+    
+
+    #title {
+        padding: 5px;
+        color: white;
+        font-weight: bold;
+        width: 450px;
+        height: 25px;
+        text-align: center;
+        font-size: x-large;
+        position: relative;
+        background: #000;
+    }
+
+        #title:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom:;
+            width: 0;
+            height: 0;
+            border-left: 0px solid white;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+        }
+
+        #title:before {
+            content: "";
+            position: absolute;
+            right: -20px;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: 20px solid #000;
+            border-top: 0px solid transparent;
+            border-bottom: 40px solid transparent;
+        }
+
+    .auto-style1 {
+        width: 113px;
+        height: 144px;
+    }
+
+    .auto-style2 {
+        width: 382px;
+        height: 52px;
+    }
+
+    .auto-style3 {
+        height: 28px;
+    }
+</style>
+
+<div style="width: 95%; font-size: 8pt; height: 14cm">
+    <div align="left" runat="server">
+        <table style="width: 100%;" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="40%">
+                    <img src="/Media/logoperum.Jpg" style="height: 80px; width: 80%;" />
+                </td>
+                <td width="60%">&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+        </table>
+        <table style="width: 100%;" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="font-size: 10pt; vertical-align: top; font-weight: bold; text-align: left;">
+                    <b>PROJECT MARGONDA</b>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 10pt; text-align: left">
+                    <b>ASLI</b>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 10pt; text-align: right">
+                    <b>No.
+                        <asp:Label ID="nokwi" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 10pt; text-align: center">
+                    <b>KWITANSI</b>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+        <table cellpadding="4" cellspacing="0" border="0" style="width: 100%">
+            <tr>
+                <td style="font-size: 10pt"; width: 45%>Telah Terima Dari</td>
+                <td style="font-size: 10pt"; width: 1%">:</td>
+                <td style="font-size: 10pt"; width: 39%"><asp:Label ID="namacustomer" runat="server" Text="Nama Customer"></asp:Label></td>
+                <td style="font-size: 10pt"; width: 14%"></td>
+                <td style="font-size: 10pt"; width: 1%"></td>
+                <td style="font-size: 10pt"; width: 10%"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 10pt;">NDR/NDA</td>
+                <td style="font-size: 10pt;">:</td>
+                <td style="font-size: 10pt;"><asp:Label ID="unit" runat="server"></asp:Label></td>
+                <td style="font-size: 10pt;">Tipe Hunian</td>
+                <td style="font-size: 10pt;">:</td>
+                <td style="font-size: 10pt;"><asp:Label ID="typ" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td style="font-size: 10pt;">Tanggal Realisasi</td>
+                <td style="font-size: 10pt;">:</td>
+                <td style="font-size: 10pt;"><asp:Label ID="tglreal" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td style="font-size: 10pt; vertical-align: top;">Alamat</td>
+                <td style="font-size: 10pt; vertical-align: top;">:</td>
+                <td style="font-size: 10pt;" colspan="4"><asp:Label ID="alamat" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td style="font-size: 10pt;">No. HP / WA</td>
+                <td style="font-size: 10pt;">:</td>
+                <td style="font-size: 10pt;"><asp:Label ID="nohp" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td style="font-size: 10pt;">Email</td>
+                <td style="font-size: 10pt;">:</td>
+                <td style="font-size: 10pt;"><asp:Label ID="email" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <td style="font-size: 10pt;">UANG SEJUMLAH</td>
+                <td style="font-size: 10pt;">:</td>
+                <td style="border-bottom: solid 1px black; border-top: solid 1px black; border-left: solid 1px black; border-right: solid 1px black;" colspan="4">
+                    <i>
+                        <asp:Label ID="total" runat="server" Text="Banyaknya Uang"></asp:Label></i>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 10pt; text-align: left">Untuk Pembayaran</td>
+                <td style="font-size: 10px">:</td>
+                <td style="font-size: 10px">&nbsp;</td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" style="width: 80%">
+            <tr>
+                <td style="width: 7%;" rowspan="11"></td>
+                <td style="width: 3%; text-align: left;">1.</td>
+                <td style="width: 45%; text-align: left;">NUP</td>
+                <td style="width: 3%; text-align: left;">Rp.</td>
+                <td style="width: 2%; text-align: left;"></td>
+                <td style="width: 20%; text-align: right;">
+                    <asp:Label ID="NNUP" runat="server">..................</asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">2.</td>
+                <td style="text-align: left;">Booking Fee</td>
+                <td style="text-align: left;">Rp.</td>
+                <td style="text-align: left;"></td>
+                <td style="text-align: right;">
+                    <asp:Label ID="NBF" runat="server">..................</asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">3.</td>
+                <td style="text-align: left;">Uang Muka</td>
+                <td style="text-align: left;">Rp.</td>
+                <td style="text-align: left;"></td>
+                <td style="text-align: right;">
+                    <asp:Label ID="NDP" runat="server">..................</asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">4.</td>
+                <td style="text-align: left;">Biaya Proses KPA</td>
+                <td style="text-align: left;">Rp.</td>
+                <td style="text-align: left;"></td>
+                <td style="text-align: right;">
+                    <asp:Label ID="NKPA" runat="server">..................</asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">5.</td>
+                <td style="text-align: left;">Cash Keras</td>
+                <td style="text-align: left;">Rp.</td>
+                <td style="text-align: left;"></td>
+                <td style="text-align: right;">
+                    <asp:Label ID="NCK" runat="server">..................</asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">6.</td>
+                <td style="text-align: left;">Cash Bertahap/Cicilan Tunai</td>
+                <td style="text-align: left;">Rp.</td>
+                <td style="text-align: left;"></td>
+                <td style="text-align: right;">
+                    <asp:Label ID="NAng" runat="server">..................</asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">7.</td>
+                <td style="text-align: left;">Pendapatan Lain-Lain</td>
+                <td style="text-align: left;">Rp.</td>
+                <td style="text-align: left;"></td>
+                <td style="text-align: right;">
+                    <asp:Label ID="NPLL" runat="server">..................</asp:Label>
+                </td>
+            </tr>
+            <tr id="site" runat="server">
+                <td style="text-align: left;">8.</td>
+                <td style="text-align: left;">
+                    <asp:Label ID="NamaLain" runat="server" />
+                </td>
+                <td style="text-align: left;">Rp.</td>
+                <td style="text-align: left;"></td>
+                <td style="text-align: right;">
+                    <asp:Label ID="NLain" runat="server">..................</asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="6">&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">&nbsp;</td>
+                <td style="text-align: left;">&nbsp;
+                </td>
+                <td style="text-align: left;">Rp.</td>
+                <td style="text-align: left;"></td>
+                <td style="text-align: right;">
+                    <asp:Label ID="NTot" runat="server" />
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <table cellpadding="15" cellspacing="0" border="0" style="width: 95%">
+            <tr>
+                <td style="width: 19%; font-size: 10pt;">Jumlah
+                </td>
+                <td style="width: 1%; font-size: 10pt;">:
+                </td>
+                <td style="width: 80%; border-bottom: solid 1px black; border-top: solid 1px black; border-left: solid 1px black; border-right: solid 1px black;">
+                    <i>
+                        <asp:Label ID="nilaitagihan" runat="server" Text="Nilai Tagihan"></asp:Label></i>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <table cellpadding="0" cellspacng="0" border="0" style="width: 95%">
+            <tr>
+                <td style="width: 65%">&nbsp;
+                </td>
+                <td style="width: 30%; text-align:center">Jakarta,
+                    <asp:Label ID="tanggal" runat="server" Text="tanggal"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td style="height: 130px; text-align: center" valign="bottom">
+                    <b><u>(
+                        <asp:Label ID="kasir" runat="server"></asp:Label>
+                        )</u></b>
+                    <br />
+                    Kasir / Kolektor
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

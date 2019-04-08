@@ -1,0 +1,261 @@
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Data;
+using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+
+namespace ISC056.ADMINJUAL
+{
+	public partial class PetaUploadKoord : System.Web.UI.Page
+	{
+		
+		protected void Page_Load(object sender, System.EventArgs e)
+		{
+			Act.Pass();
+			Act.NoCache();
+
+			Bind();
+
+			Js.Confirm(this,"Lanjutkan proses upload koordinat unit properti?");
+			feed.Text = "";
+		}
+
+		private void Bind()
+		{
+			System.Text.StringBuilder x = new System.Text.StringBuilder();
+
+			string path = Request.PhysicalApplicationPath.Replace("admin","marketing")
+				+ "FP\\Base\\";
+			string[] file = System.IO.Directory.GetFiles(path,"*.jpg");
+			for(int i=0;i<=file.GetUpperBound(0);i++)
+			{
+				if(!Response.IsClientConnected) break;
+
+				string f = System.IO.Path.GetFileNameWithoutExtension(file[i]);
+
+				if(x.Length!=0) x.Append("/");
+				x.Append(f);
+			}
+
+			TableCell c;
+			c = rule.Rows[2].Cells[4]; c.Text = x.ToString();
+		}
+
+		protected void upload_Click(object sender, System.EventArgs e)
+		{
+			if(!file.PostedFile.FileName.EndsWith(".xls"))
+			{
+				Js.Alert(
+					this
+					, "Proses Upload Gagal.\\n"
+					+ "File yang boleh di-upload adalah file dengan extension .xls saja."
+					, ""
+					);
+			}
+			else
+			{
+				string path = Request.PhysicalApplicationPath
+					+ "Template\\Koordinat_" + Session.SessionID + ".xls";
+				
+				Dfc.UploadFile(".xls",path,file);
+
+				Cek(path);
+				
+				//Hapus file sementara tersebut dari hard-disk server
+				Dfc.DeleteFile(path);
+				
+			}
+		}
+
+		private void Cek(string path)
+		{
+			string strSql = "SELECT * FROM [Koordinat$]";
+			DataTable rs = new DataTable();
+
+			try
+			{
+				rs = Db.xls(strSql,path);
+			}
+			catch {}
+
+			if(Rpt.ValidateXls(rs, rule, gagal))
+				Save(path);
+		}
+
+		private void Save(string path)
+		{
+			System.Text.StringBuilder log = new System.Text.StringBuilder();
+			int total = 0;
+
+			string strSql = "SELECT * FROM [Koordinat$]";
+			DataTable rs = Db.xls(strSql,path);
+
+			for(int i=0;i<rs.Rows.Count;i++)
+			{
+				if(!Response.IsClientConnected) break;
+
+				if(Save(rs,i))
+				{
+					total++;
+					log.Append(
+						Cf.Str(rs.Rows[i][0])
+						+ " ; " + Cf.Str(rs.Rows[i][1])
+						+ " ; " + Cf.Str(rs.Rows[i][2])
+						+ "<br>");
+				}
+			}
+
+			Redraw(); //floor plan
+
+			string Ket = "***UPLOAD KOORDINAT" + "<br><br>" + log.ToString();
+			Db.Execute("EXEC spLogUnit"
+				+ " 'FP'"
+				+ ",'" + Act.UserID + "'"
+				+ ",'" + Act.IP + "'"
+				+ ",'" + Ket + "'"
+				+ ",''"
+				);
+
+			feed.Text = "<img src='/Media/db.gif' align=absmiddle> "
+				+ "Upload Berhasil  : " + total + " baris data";
+		}
+
+		private bool Save(DataTable rs, int i)
+		{
+			string Unit = Cf.Str(rs.Rows[i][0]);
+			if(Db.SingleInteger("SELECT COUNT(*) FROM MS_UNIT WHERE NoUnit = '"+Unit+"'")!=0)
+			{
+				string Peta = Cf.Str(rs.Rows[i][1]);
+				string Koordinat = Cf.Str(rs.Rows[i][2]);
+				
+				//Jika data NA maka diisi dengan string kosong saja di dalam database
+				Db.Execute("EXEC spUnitEditKoordinat "
+					+ " '" + Unit + "'"
+					+ ",'" + Peta + "'"
+					+ ",'" + Koordinat + "'"
+					);
+
+				GenerateBlink(Unit, Peta, Koordinat);
+				GenerateLokasi(Unit, Peta, Koordinat);
+
+				return true;
+			}
+			else
+				return false;
+		}
+
+		private void GenerateBlink(string NoUnit, string Peta, string Koordinat)
+		{
+			string loc = Request.PhysicalApplicationPath.Replace("admin","marketing")
+				+ "FP\\";
+
+			string Src = loc + "Base\\" + Peta + ".jpg";
+			string Target = loc + "UnitBlink\\" + Cf.FileSafe(NoUnit) + ".gif";
+			
+			if(System.IO.File.Exists(Src))
+			{
+				Bitmap objBitmap;
+				objBitmap = new Bitmap(Src);
+				
+				Graphics objGraphics = Graphics.FromImage(objBitmap);
+	
+				string Coordinate = Koordinat;
+				string[] arrCoordinate = Coordinate.Split(new char[] {','});
+
+				System.Collections.ArrayList myPointList = new System.Collections.ArrayList();
+			
+				for(int i = 0;i < arrCoordinate.GetUpperBound(0);i=i+2)
+				{
+					myPointList.Add(new Point(Convert.ToInt32(arrCoordinate[i]), Convert.ToInt32(arrCoordinate[i+1])));
+				}
+
+				Point[] ArrPoint = new Point[myPointList.Count];
+
+				for (int j=0;j<myPointList.Count;j++)
+				{
+					ArrPoint[j] = (Point) myPointList[j];
+				}
+
+				objGraphics.Clear(System.Drawing.Color.White);
+
+				try
+				{
+					objGraphics.DrawPolygon(new Pen(new SolidBrush(Color.Black),2),ArrPoint);
+				}
+				catch{}
+
+				objBitmap.Save(Target,System.Drawing.Imaging.ImageFormat.Gif);
+				objGraphics.Dispose();
+				objBitmap.Dispose();
+			}
+		}
+
+		private void GenerateLokasi(string NoUnit, string Peta, string Koordinat)
+		{
+			string loc = Request.PhysicalApplicationPath.Replace("admin","marketing")
+				+ "FP\\";
+
+			string Src = loc + "Base\\" + Peta + ".jpg";
+			string Target = loc + "UnitLokasi\\" + Cf.FileSafe(NoUnit) + ".jpg";
+			
+			if(System.IO.File.Exists(Src))
+			{
+				Bitmap objBitmap;
+				objBitmap = new Bitmap(Src);
+				
+				Graphics objGraphics = Graphics.FromImage(objBitmap);
+	
+				string Coordinate = Koordinat;
+				string[] arrCoordinate = Coordinate.Split(new char[] {','});
+
+				System.Collections.ArrayList myPointList = new System.Collections.ArrayList();
+			
+				for(int i = 0;i < arrCoordinate.GetUpperBound(0);i=i+2)
+				{
+					myPointList.Add(new Point(Convert.ToInt32(arrCoordinate[i]), Convert.ToInt32(arrCoordinate[i+1])));
+				}
+
+				Point[] ArrPoint = new Point[myPointList.Count];
+
+				for (int j=0;j<myPointList.Count;j++)
+				{
+					ArrPoint[j] = (Point) myPointList[j];
+				}
+
+				objGraphics.FillPolygon(new SolidBrush(Color.Red),ArrPoint);
+
+				objBitmap.Save(Target,System.Drawing.Imaging.ImageFormat.Jpeg);
+				objGraphics.Dispose();
+				objBitmap.Dispose();
+			}
+		}
+
+		private void Redraw()
+		{
+			DataTable rs = Db.Rs("SELECT DISTINCT Peta FROM MS_UNIT");
+			for(int i=0;i<rs.Rows.Count;i++)
+				Func.GenerateFP(rs.Rows[i]["Peta"].ToString());
+		}
+
+		#region Web Form Designer generated code
+		override protected void OnInit(EventArgs e)
+		{
+			//
+			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
+			//
+			InitializeComponent();
+			base.OnInit(e);
+		}
+		
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{    
+
+		}
+		#endregion
+	}
+}

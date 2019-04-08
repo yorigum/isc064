@@ -1,0 +1,144 @@
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.UI.WebControls;
+using System.Text;
+
+namespace ISC056.LAUNCHING
+{
+    public partial class PrintSPTemplate2 : System.Web.UI.UserControl
+    {
+        //Passing parameter
+        public string nomor;
+        public int index = 0, index2 = 0;
+        public string NoKontrak
+        {
+            set { nomor = value; }
+        }
+
+        protected void Page_Load(object sender, System.EventArgs e)
+        {
+            Fill();
+        }
+
+        private void Fill()
+        {
+            string strSql = " SELECT *, MS_AGENT.Nama AS Agent, MS_AGENT.Principal as Principal, MS_CUSTOMER.SumberData as SumberData, MS_CUSTOMER.NPWP as NPWP"
+                            + ", MS_CUSTOMER.NoKTP as NoKTP, MS_CUSTOMER.TglLahir, MS_CUSTOMER.Email"
+                            + " FROM MS_KONTRAK INNER JOIN MS_CUSTOMER ON MS_KONTRAK.NoCustomer = MS_CUSTOMER.NoCustomer"
+                            + " INNER JOIN MS_AGENT ON MS_KONTRAK.NoAgent = MS_AGENT.NoAgent"
+                            + " WHERE NoKontrak = '" + nomor + "'";
+
+            DataTable rs = Db.Rs(strSql);
+            if (rs.Rows.Count != 0)
+            {
+                namacs.Text = pembeli.Text = rs.Rows[0]["Nama"].ToString();
+
+                unit2.Text = rs.Rows[0]["NoUnit"].ToString();
+                alamat.Text = rs.Rows[0]["KTP1"].ToString();
+                alamat2.Text = rs.Rows[0]["KTP2"].ToString();
+                alamat3.Text = rs.Rows[0]["KTP3"].ToString();
+                alamat4.Text = rs.Rows[0]["KTP4"].ToString();
+                NoKontrak1.Text = nomor;
+                //alamat.Text = ktpx;
+                //AlmtSrt.Text = alamatkoresx;
+                AlmtSrt.Text = rs.Rows[0]["Alamat1"].ToString();
+                AlmtSrt2.Text = rs.Rows[0]["Alamat2"].ToString();
+                AlmtSrt3.Text = rs.Rows[0]["Alamat3"].ToString();
+                noktp.Text = rs.Rows[0]["NoKTP"].ToString();
+                telp.Text = rs.Rows[0]["NoTelp"].ToString();
+                hp.Text = rs.Rows[0]["NoHp"].ToString();
+                fax.Text = rs.Rows[0]["NoFax"].ToString();
+                if (rs.Rows[0]["CaraBayar"].ToString() == "CASH KERAS")
+                { kotak1.InnerHtml = "X"; kotak2.InnerHtml = "&nbsp;"; kotak3.InnerHtml = "&nbsp;"; }
+                else if (rs.Rows[0]["CaraBayar"].ToString() == "CASH BERTAHAP")
+                { kotak1.InnerHtml = "&nbsp;"; kotak2.InnerHtml = "X"; kotak3.InnerHtml = "&nbsp;"; }
+                else
+                { kotak1.InnerHtml = "&nbsp;"; kotak2.InnerHtml = "&nbsp;"; kotak3.InnerHtml = "X"; }
+                hargajual.Text = Cf.Num(rs.Rows[0]["NilaiKontrak"]);
+                terbilang1.Text = Money.Str(Convert.ToDecimal(rs.Rows[0]["NilaiKontrak"]));
+                agent.Text = rs.Rows[0]["Agent"].ToString();
+                penjual.Text = Mi.Pt;
+                int Skema1 = Db.SingleInteger("SELECT REFSKEMA from ms_kontrak where nokontrak = '" + nomor + "'");
+                string Skm = Db.SingleString("Select Jenis from Ref_SKEMA where Nomor = '" +Skema1+ "'");
+                string nokontrak1 = rs.Rows[0]["NoKontrak"].ToString();
+
+                DataTable rs1 = Db.Rs("SELECT * FROM MS_UNIT WHERE NoUnit='" + rs.Rows[0]["NoUnit"].ToString() + "'");
+                string Lokasi = "";
+                if (rs1.Rows.Count > 0)
+                { 
+                    if(rs.Rows[0]["NoUnit"].ToString().Length == 4)
+                    Lokasi = Db.SingleString("SELECT Nama FROM REF_LOKASI WHERE Lokasi ='" + rs1.Rows[0]["Lokasi"].ToString() + "'");
+                    string[] x = Cf.SplitByString(rs.Rows[0]["NoUnit"].ToString(), rs1.Rows[0]["Lokasi"].ToString());
+                    tower1.Text = "Tower " + rs1.Rows[0]["Lokasi"].ToString(); ;
+                    unit1.Text = x[1].Substring(2,2);
+                    lantai1.Text = x[1].Substring(0,2);
+                    lgross.Text = Cf.Num(rs1.Rows[0]["LuasSG"]) + " M<sup>2</sup>";
+                    nett.Text = Cf.Num(rs1.Rows[0]["LuasNett"]) + " M<sup>2</sup>";
+                    
+                }
+
+                string strSql1 = ("Select MS_TTS.Acc as Acc, REF_ACC.Rekening As Rekening, REF_ACC.Bank as Bank, REF_ACC.Cabang as Cabang"
+                                + " From "+ Mi.DbPrefix +"Financear..MS_TTS inner join "+ Mi.DbPrefix +"Financear..REF_ACC on MS_TTS.Acc = REF_ACC.Acc"
+                                + " where MS_TTS.Ref = '" + nokontrak1 + "'");
+
+                DataTable rs2 = Db.Rs(strSql1);
+                if (rs2.Rows.Count != 0)
+                {
+                    //bank.Text = 
+                    //cabang.Text = rs2.Rows[0]["Cabang"].ToString();
+                    //rek.Text = 
+                    //bank2.Text = rs2.Rows[0]["Bank"].ToString();
+                    //rek2.Text = rs2.Rows[0]["Rekening"].ToString();
+                }
+
+                tglnow.Text = Cf.Day(rs.Rows[0]["TglKontrak"]);
+                user.Text = "AGUS SUSILO";// Db.SingleString("SELECT Nama FROM " + Mi.DbPrefix + "SECURITY..REF_SIGN WHERE Dokumen = 'Surat Pesanan' AND SN = 1");
+                jabatan.Text = Db.SingleString("SELECT Jabatan FROM " + Mi.DbPrefix + "SECURITY..REF_SIGN WHERE Dokumen = 'Surat Pesanan' AND SN = 1");
+
+            }
+        }
+
+        private void SubTotal(decimal t)
+        {
+
+            TableRow r1 = new TableRow();
+            TableCell c1;
+
+            c1 = new TableCell();
+            c1.Text = "TOTAL";
+            c1.ColumnSpan = 2;
+            c1.Attributes["Style"] = "Font-Weight:bold;";
+            c1.HorizontalAlign = HorizontalAlign.Left;
+            r1.Cells.Add(c1);
+
+            c1 = new TableCell();
+            c1.HorizontalAlign = HorizontalAlign.Right;
+            c1.Attributes["Style"] = "Font-Weight:bold;";
+            c1.Text = "Rp. " + Cf.Num(t);
+            r1.Cells.Add(c1);
+
+            //rpt.Rows.Add(r1);
+        }
+
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
+
+        /// <summary>
+        ///		Required method for Designer support - do not modify
+        ///		the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+
+        }
+        #endregion
+    }
+}

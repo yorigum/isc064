@@ -1,0 +1,808 @@
+<%@ Control Language="c#" Inherits="ISC056.LAUNCHING.PrintSPTemplate2" CodeFile="PrintSPTemplate2.ascx.cs" %>
+<link href="/Media/Style.css" type="text/css" rel="stylesheet">
+<style type="text/css">
+    table, tr {
+        font-size: 8pt;
+        font-family: Arial;
+    }
+
+    td {
+        font-size: 20pt;
+        font-family: Arial;
+    }
+
+    batas-after {
+        page-break-after: always;
+        float: inherit;
+        padding-left: 70px;
+        padding-right: 50px;
+        width: 100%;
+        margin-bottom: 260px;
+    }
+
+    batas-before {
+        page-break-before: always;
+        float: inherit;
+    }
+
+    .kotak {
+        width: 10px;
+        height: 10px;
+        border: solid black 1px;
+        text-align: center;
+    }
+</style>
+
+<div align="center">
+    <table style="width: 90%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="font-size: 10pt; vertical-align: top; font-weight: bold; text-align: center">SURAT PESANAN UNIT
+                <asp:Label ID="unit2" runat="server" />
+                ("UNIT APARTEMEN")</td>
+        </tr>
+        <tr>
+            <td style="font-size: 10pt; vertical-align: top; font-weight: bold; text-align: center;"><u>No.
+                <asp:Label ID="NoKontrak1" runat="server" /></u></td>
+        </tr>
+    </table>
+    <table style="width: 90%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; text-align: left">Yang bertanda tangan dibawah ini : </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 20%; font-size: 8pt; text-align: left">
+                            <b>Nama</b>
+                        </td>
+                        <td style="width: 80%; font-size: 8pt; border-bottom-style: solid; border-bottom-width: 1px; text-align: left">
+                            <asp:Label ID="namacs" runat="server" /></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 8pt; text-align: left"><b>Alamat Identitas</b></td>
+                        <td style="font-size: 8pt; border-bottom-style: solid; border-bottom-width: 1px; text-align: left">
+                            <asp:Label ID="alamat" runat="server"></asp:Label>
+                            <asp:Label ID="alamat2" runat="server"></asp:Label></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 8pt; color: #FFFFFF; text-align: left"></td>
+                        <td style="font-size: 8pt; border-bottom-style: solid; border-bottom-width: 1px; text-align: left">
+                            <asp:Label ID="alamat3" runat="server"></asp:Label>
+                            <asp:Label ID="alamat4" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 8pt; text-align: left"><b>No. Identitas</b></td>
+                        <td style="font-size: 8pt; border-bottom-style: solid; border-bottom-width: 1px; text-align: left">
+                            <asp:Label ID="noktp" runat="server"></asp:Label></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 8pt; text-align: left"><b>Telepon</b></td>
+                        <td style="font-size: 8pt; border-bottom-style: solid; border-bottom-width: 1px; text-align: left">
+                            <asp:Label ID="telp" runat="server" /></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 8pt; text-align: left"><b>Hand Phone</b></td>
+                        <td style="font-size: 8pt; border-bottom-style: solid; border-bottom-width: 1px; text-align: left">
+                            <asp:Label ID="hp" runat="server" /></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 8pt; text-align: left"><b>Facsimile</b></td>
+                        <td style="font-size: 8pt; border-bottom-style: solid; border-bottom-width: 1px; text-align: left">
+                            <asp:Label ID="fax" runat="server" /></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 8pt; text-align: left"><b>Alamat Surat</b></td>
+                        <td style="font-size: 8pt; border-bottom-style: solid; border-bottom-width: 1px; text-align: left">
+                            <asp:Label ID="AlmtSrt" runat="server" /></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 8pt; color: #FFFFFF; text-align: left"></td>
+                        <td style="font-size: 8pt; border-bottom-style: solid; border-bottom-width: 1px; text-align: left">
+                            <asp:Label ID="AlmtSrt2" runat="server"></asp:Label>
+                            <asp:Label ID="AlmtSrt3" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; text-align: left">(Selanjunya disebut <b>"PEMBELI")</b></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: justify; font-size: 8pt;">dengan ini menyatakan sepakat dan setuju untuk memesan UNIT APARTEMEN di CIMANGGIS 
+                CITY (selanjutnya disebut <b>“UNIT APARTEMEN”</b>) dari PT. Permata Sakti Mandiri yang berkedudukan di Tangerang Selatan (<b>“PENJUAL”</b>) 
+               dan PEMBELI wajib tunduk pada Syarat-syarat dan ketentuan - ketentuan Pembelian sebagaimana ketentuan SURAT PESANAN (terlampir).
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; text-align: left">UNIT APARTEMEN yang dipesan oleh PEMBELI terletak di Kel. Mekarsari, Kec. Cimanggis, 
+                Kota Jakarta dengan uraian sebagai berikut :</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 20%; font-size: 8pt; text-align: left">Peruntukan</td>
+                        <td style="font-size: 8pt;">:</td>
+                        <td style="width: 90%; font-size: 8pt; padding-left: 10px; text-align: left">HUNIAN</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 8pt; text-align: left">Tower / Unit</td>
+                        <td style="font-size: 8pt;">:</td>
+                        <td style="font-size: 8pt; padding-left: 10px; text-align: left">
+                            <asp:Label ID="tower1" runat="server" />&nbsp;/&nbsp;Lantai&nbsp;<asp:Label ID="lantai1" runat="server" />&nbsp;Unit&nbsp;<asp:Label ID="unit1" runat="server" /></td>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; text-align: left">Luas Unit</td>
+            <td style="font-size: 8pt;">:</td>
+            <td style="font-size: 8pt; padding-left: 10px; text-align: left">Semi Gross&nbsp;<asp:Label ID="lgross" runat="server" />&nbsp;/&nbsp;NETT&nbsp;<asp:Label ID="nett" runat="server" /></td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; text-align: left">HARGA JUAL (termasuk PPN)</td>
+            <td style="font-size: 8pt;">:</td>
+            <td style="font-size: 8pt; padding-left: 10px; text-align: left">Rp.&nbsp;<asp:Label ID="hargajual" runat="server" />,-&nbsp;(<asp:Label ID="terbilang1" runat="server" />&nbsp;Rupiah)</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; text-align: left">Cara Pembayaran</td>
+            <td style="font-size: 8pt;">:</td>
+            <td style="font-size: 8pt; padding-left: 10px; text-align: left">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>
+                            <div id="kotak1" class="kotak" runat="server" />
+                        </td>
+                        <td style="font-size: 8pt;">Tunai
+                        </td>
+                        <td>
+                            <div id="kotak2" class="kotak" runat="server" />
+                        </td>
+                        <td style="font-size: 8pt;">Bertahap
+                        </td>
+                        <td>
+                            <div id="kotak3" class="kotak" runat="server" />
+                        </td>
+                        <td style="font-size: 8pt;">Kredit Lembaga Keuangan
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    <tr>
+        <td style="font-size: 8pt; text-align: left">PEMBELI berkewajiban untuk membayar HARGA JUAL dengan cara pembayaran sesuai tabel 
+                pembayaran terlampir, dan seluruh pembayaran dianggap sah apabila disetorkan ke rekening No
+                <asp:Label ID="rek2" runat="server" />
+            Bank
+                <asp:Label ID="bank2" runat="server" />
+            atas nama PT. Permata Sakti Mandiri
+                atau ke bagian Finance PT. Permata Sakti Mandiri dengan bukti tanda terima yang sah, apabila pembayaran dilakukan diluar cara
+                pembayaran tersebut, maka Pihak PT. Permata Sakti Mandiri tidak bertanggung jawab atas pembayaran yang sudah dilakukan.</td>
+    </tr>
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td style="width: 15%; font-size: 8pt; text-align: left">REKENING BANK PENJUAL</td>
+                    <td style="width: 5%; font-size: 8pt;">:&nbsp;</td>
+                    <td style="width: 25%; font-size: 8pt; text-align: left">Bank</td>
+                    <td style="width: 50%; font-size: 8pt; text-align: left">:<b>
+                        <%--<asp:Label ID="bank" runat="server" />--%>BUKOPIN
+                    </b></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="font-size: 8pt; text-align: left">Cabang</td>
+                    <td style="font-size: 8pt; text-align: left">:<b>
+                        <%--<asp:Label ID="cabang" runat="server" />--%>SAHARJO
+                    </b></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="font-size: 8pt; text-align: left">No. Rekening</td>
+                    <td style="font-size: 8pt; text-align: left">:<b>
+                        <%--<asp:Label ID="rek" runat="server" />--%>1001892-42-4
+                    </b></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td style="font-size: 8pt; text-align: left">HARGA JUAL atas UNIT APARTEMEN termasuk :</td>
+    </tr>
+    <tr>
+        <td>
+            <table style="width: inherit">
+                <tr>
+                    <td style="width: 2%">-</td>
+                    <td style="font-size: 8pt; width: 40%;">Pajak Pertambahan Nilai ("<b>PPN</b>")</td>
+                    <td style="width: 1%"></td>
+                    <td style="width: 2%">-</td>
+                    <td style="font-size: 8pt">Pemecahan Setipikat Hak Milik Atas Satuan Rumah Susun (<b>"SHMSRS"</b>)</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td style="font-size: 8pt">Ijin Mendirikan Bangunan ("<b>IMB</b>")</td>
+                    <td></td>
+                    <td>-</td>
+                    <td style="font-size: 8pt">Jaringan Listrik</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td style="font-size: 8pt">Sertipikat Laik Fungsi ("<b>SLF</b>")</td>
+                    <td></td>
+                    <td>-</td>
+                    <td style="font-size: 8pt">Jaringan air bersih</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td style="font-size: 8pt; text-align: left">HARGA JUAL atas UNIT APARTEMEN belum termasuk :</td>
+    </tr>
+    <tr>
+        <td>
+            <table style="width: inherit">
+                <tr>
+                    <td style="width: 2%">-</td>
+                    <td style="font-size: 8pt; width: 40%">Perjanjian Pengikatan Jual Beli ("<b>PPJB</b>") yang dibuat dihadapan Notaris</td>
+                    <td style="width: 7%"></td>
+                    <td style="width: 2%">-</td>
+                    <td style="font-size: 8pt">Pengecekan <b>SHMSRS</b></td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td style="font-size: 8pt">Bea Perolehan Hak atas Tanah dan Bangunan ("<b>BPHTB</b>")</td>
+                    <td></td>
+                    <td>-</td>
+                    <td style="font-size: 8pt">Pajak-pajak yang ditentukan oleh pemerintah Republik Indonesia</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td style="font-size: 8pt">Akta Jual Beli ("<b>AJB</b>") yang dibuat dihadapan Notaris/PPAT</td>
+                    <td></td>
+                    <td>-</td>
+                    <td style="font-size: 8pt">Biaya-biaya lain yang ditentukan di dalam PPJB</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td style="font-size: 8pt">Biaya balik nama HGB ke atas nama PEMBELI</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td style="font-size: 8pt">Pajak Bumi dan Bangunan ("<b>PBB</b>")</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr style="height: 5px;"></tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 8pt; text-align: left">Dengan ditandatangani SURAT PESANAN ini, maka PEMBELI mengakui dan menyetujui segala 
+                Syarat-syarat dan Ketentuan-ketentuan sebagaimana terlampir dalam SURAT PESANAN ini.
+        </td>
+    </tr>
+    </table>
+    <br />
+    <table style="width: 90%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="font-size: 8pt; text-align: left">Jakarta,&nbsp;<asp:Label ID="tglnow" runat="server"></asp:Label></td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 20%;">PENJUAL,</td>
+            <td style="font-size: 8pt; width: 5%;">&nbsp;</td>
+            <td style="font-size: 8pt; width: 20%; text-align: center;">PEMBELI,</td>
+            <td style="font-size: 8pt; width: 20%;">&nbsp;</td>
+            <td style="font-size: 8pt; width: 20%; text-align: center;">SALES,</td>
+            <td style="font-size: 8pt; width: 5%;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 20%;"><b>
+                <asp:Label ID="penjual" runat="server"></asp:Label></b></td>
+            <td style="font-size: 8pt; width: 5%;">&nbsp;</td>
+            <td style="font-size: 8pt; width: 20%;">&nbsp;</td>
+            <td style="font-size: 8pt; width: 20%;">&nbsp;</td>
+            <td style="font-size: 8pt; width: 20%;">&nbsp;</td>
+            <td style="font-size: 8pt; width: 5%;">&nbsp;</td>
+        </tr>
+        <tr style="height: 100px;"></tr>
+        <tr>
+            <td style="font-size: 8pt; width: 20%; text-align: center; border-bottom-style: solid; border-bottom-width: 1px">
+                <b>
+                    <asp:Label ID="user" runat="server"></asp:Label></b></td>
+            <td style="font-size: 8pt; width: 5%;"></td>
+            <td style="font-size: 8pt; width: 20%; text-align: center; border-bottom-style: solid; border-bottom-width: 1px">
+                <b>
+                    <asp:Label ID="pembeli" runat="server"></asp:Label></b></td>
+            <td style="font-size: 8pt; width: 5%;"></td>
+            <td style="font-size: 8pt; width: 20%; text-align: center; border-bottom-style: solid; border-bottom-width: 1px">
+                <b>
+                    <asp:Label ID="agent" runat="server"></asp:Label></b></td>
+            <td style="font-size: 8pt; width: 5%;"></td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 20%; text-align: center;">Direktur<asp:Label ID="jabatan" runat="server" Visible="false"></asp:Label></td>
+            <td style="font-size: 8pt; width: 20%;"></td>
+            <td style="font-size: 8pt; width: 20%;"></td>
+        </tr>
+    </table>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <table style="width: 90%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="font-size: 8pt; text-align: left">Syarat-syarat dan Ketentuan Pembelian terlampir sebagai kesatuan dan bagian integral
+                yang tidak bisa dipisahkan dari SURAT PESANAN ini.
+            </td>
+        </tr>
+    </table>
+</div><div align="center" style="page-break-before: always;">
+</div>
+<div align="center">
+    <table width="90%" align="center">
+        <tr>
+            <td colspan="2" style="font-size: 8pt; text-align: justify;">
+                <b><u>SYARAT - SYARAT & KETENTUAN-KETENTUAN PEMBELIAN</u></b>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">1. </td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Besarnya HARGA JUAL dan tahapan pembayaran yang wajib dilakukan oleh PEMBELI kepada PENJUAL adalah sebagaimana ketentuan 
+                SURAT PESANAN.
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">2. </td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">PEMBELI wajib melunasi setiap pembayaran dengan jumlah yang telah ditentukan (tidak kurang dan tanpa potongan apapun) dan 
+                tepat waktu, baik untuk pembelian secara tunai, bertahap maupun melalui pihak ketiga termasuk LEMBAGA KEUANGAN.
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">3. </td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila PEMBELI telah membayar Uang Tanda Jadi sebelum menandatangani PPJB, PEMBELI ternyata tidak atau terlambat melaksanakan 
+                kewajiban pembayaran berikutnya karena sebab atau alasan apapun juga, maka dengan lampaunya waktu saja sudah cukup membuktikan 
+                bahwa PEMBELI atas kehendaknya sendiri mengundurkan diri sebagai PEMBELI. Dengan demikian SURAT PESANAN berakhir tanpa diperlukan 
+                pemberitahuan terlebih dahulu serta seluruh pembayaran yang telah dibayar oleh PEMBELI tidak dapat ditarik kembali (dikembalikan) 
+                karena sebab atau alasan apapun sehingga menjadi hak PENJUAL sepenuhnya.
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">4. </td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Semua pembayaran yang dilakukan oleh PEMBELI kepada PENJUAL berdasarkan SURAT PESANAN harus dibayarkan ke REKENING BANK PENJUAL 
+                sebagaimana ketentuan SURAT PESANAN atau ke rekening lainnya sebagaimana yang ditentukan dan diberitahukan oleh PENJUAL kemudian. 
+                Bukti transfer wajib dikirim langsung atau melalui faksimili kepada PENJUAL, keterlambatan pembayaran ataupun akibat lainnya 
+                yang mungkin timbul disebabkan karena kesalahan transfer melalui bank menjadi tanggung jawab PEMBELI. 
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">5. </td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Bila terdapat penolakan cek atau bilyet giro dari bank yang bersangkutan, maka PEMBELI dikenakan denda sebesar Rp. 100.000,- 
+                (seratus ribu rupiah) setiap kali penolakan dan wajib segera dibayarkan kepada PENJUAL.
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%;">6.</td>
+            <td style="font-size: 8pt; width: 97%;">
+                <b><u>Mengenai penggunaan fasilitas kredit dari LEMBAGA KEUANGAN :</u></b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 3%; font-size: 8pt; vertical-align: top">a.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">PEMBELI wajib membayar Uang Muka lunas sekaligus kepada PENJUAL dalam jumlah dan cara pembayaran sebagaimana ketentuan 
+                            SURAT PESANAN sekalipun PEMBELI belum memperoleh persetujuan atas permohonan fasilitas kredit dari LEMBAGA KEUANGAN;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">b.</td>
+                        <td style="font-size: 8pt; text-align: justify;">PEMBELI wajib menyerahkan seluruh dokumen-dokumen/data-data yang diperlukan untuk keperluan proses Kredit Pemilikan 
+                            Apartemen (KPA) dari LEMBAGA KEUANGAN dalam jangka waktu 14 (empat belas) hari kerja sejak tanggal booking fee kepada 
+                            PENJUAL dan Apabila PEMBELI tidak menyerahkan seluruh dokumen-dokumen/data-data yang diperlukan untuk keperluan 
+                            proses Kredit Pemilikan Apartemen (KPA), maka PENJUAL berhak untuk melakukan pembatalan secara sepihak dan PEMBELI 
+                            tidak akan mempermasalahkan serta menuntut baik secara pidana maupun perdata akibat pembatalan secara sepihak tersebut 
+                            dikemudian hari. 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">c.</td>
+                        <td style="font-size: 8pt; text-align: justify;">PEMBELI bertanggung jawab penuh atas seluruh proses, persyaratan, dan administrasi yang disyaratkan oleh LEMBAGA 
+                            KEUANGAN sehingga segala akibat dan resiko yang berkaitan dengan penolakan permohonan fasilitas kredit kepada 
+                            PEMBELI merupakan beban tanggung jawab PEMBELI sepenuhnya serta tidak dapat dikaitkan dan dibebankan kepada PENJUAL 
+                            karena sebab atau alasan apapun;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">d.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Pembayaran sisa HARGA JUAL sebagaimana ketentuan SURAT PESANAN wajib dibayarkan oleh PEMBELI sesuai dengan ketentuan 
+                            yang disepakati oleh dan antara LEMBAGA KEUANGAN dan PENJUAL;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">e.</td>
+                        <td style="font-size: 8pt; text-align: justify;">PEMBELI wajib memberitahukan PENJUAL mengenai perolehan persetujuan fasilitas kredit dari LEMBAGA KEUANGAN dan 
+                            pelaksanaan akad kredit antara PEMBELI dan LEMBAGA KEUANGAN sehubungan dengan pembelian UNIT APARTEMEN ;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">f.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Apabila LEMBAGA KEUANGAN tidak memberikan persetujuan fasilitas kredit kepada PEMBELI, atau PEMBELI dan LEMBAGA 
+                            KEUANGAN tidak menandatangani akad kredit selambat-lambatnya 15 (lima belas) hari kalender terhitung sejak pembayaran 
+                            Uang Muka sebagaimana ketentuan SURAT PESANAN, maka PEMBELI diberikan kesempatan dalam jangka waktu 15 (lima belas) 
+                            hari kalender sejak diterbitkannya surat penolakan fasilitas kredit untuk melakukan pelunasan sendiri atas sisa HARGA 
+                            JUAL secara tunai keras dan apabila dalam jangka waktu tersebut, PEMBELI tidak melunasi HARGA JUAL, maka PENJUAL 
+                            berhak mengakhiri SURAT PESANAN, serta seluruh pembayaran yang telah dibayar oleh PEMBELI tidak dapat ditarik kembali 
+                            (dikembalikan) karena sebab atau alasan apapun dan menjadi hak PENJUAL sepenuhnya.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">g.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Apabila pemberian fasilitas kredit yang diberikan oleh LEMBAGA KEUANGAN kepada PEMBELI tidak sesuai dengan jumlah 
+                            pelunasan sisa HARGA JUAL sebagaimana ketentuan SURAT PESANAN, maka PEMBELI wajib menambah Uang Muka kepada PENJUAL 
+                            secara tunai keras;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<div align="center">
+    <table width="90%" align="center">
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%;">7.</td>
+            <td style="font-size: 8pt; width: 97%;">
+                <b><u>Mengenai Denda Keterlambatan :</u></b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 3%; font-size: 8pt; vertical-align: top">a.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">Apabila PEMBELI dengan alasan apapun terlambat atau kurang membayar sisa HARGA JUAL sebagaimana ketentuan SURAT 
+                                PESANAN, maupun pembayaran lainnya berdasarkan SURAT PESANAN, pada tanggal jatuh tempo yang telah ditentukan 
+                                sebagaimana ketentuan SURAT PESANAN, maka PEMBELI dikenakan denda keterlambatan pembayaran sebesar 1‰ (satu permil) 
+                                per/-hari dari jumlah yang harus dibayar, denda mana wajib dibayar oleh PEMBELI terhitung 1 (satu) hari kalender 
+                                sejak jatuh temponya pembayaran sampai dengan tanggal seluruh jumlah pembayaran tersebut beserta dendanya dibayar 
+                                lunas (selanjutnya disebut “<b>DENDA PEMBELI</b>”).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 3%; font-size: 8pt; vertical-align: top">b.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">Perhitungan DENDA PEMBELI akan dikenakan secara pro-rata sesuai dengan jumlah hari terlambat membayar dengan 
+                                perhitungan 30 (tiga puluh) hari kalender untuk setiap bulan.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 3%; font-size: 8pt; vertical-align: top">c.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">Apabila PEMBELI lalai memenuhi kewajiban pembayaran HARGA JUAL dan/atau DENDA PEMBELI sampai dengan 30 (tiga 
+                                puluh) hari kalender terhitung dari tanggal yang seharusnya dibayarkan, maka PENJUAL berhak memutuskan SURAT 
+                                PESANAN ini, serta setiap dan seluruh pembayaran yang telah diterima oleh PENJUAL adalah menjadi hak PENJUAL, 
+                                tanpa adanya kewajiban pengembalian kepada PEMBELI. Dalam hal ini berlaku pula ketentuan mengenai TANGGAL 
+                                SELESAI PEMBANGUNAN dan TANGGAL SERAH TERIMA beserta segala akibat hukumnya menjadi tidak berlaku lagi dan 
+                                dengan demikian maka TANGGAL SELESAI PEMBANGUNAN dan TANGGAL SERAH TERIMA ditentukan sepenuhnya oleh PENJUAL.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 3%; font-size: 8pt; vertical-align: top">d.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">Ketentuan mengenai denda keterlambatan penyelesaian pembangunan dan penyerahan fisik UNIT APARTEMEN  akan 
+                                diatur lebih lanjut dalam PPJB.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;<br />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%;">8.</td>
+            <td style="font-size: 8pt; width: 97%;">
+                <b><u>Mengenai Pemutusan :</u></b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 90%; font-size: 8pt; vertical-align: top; text-align: justify;">Dalam hal pemutusan SURAT PESANAN karena alasan dan sebab apapun, PENJUAL dan PEMBELI sepakat untuk tidak 
+                                memberlakukan ketentuan Pasal 1266 dan Pasal 1267 Kitab Undang-undang Hukum Perdata.</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%;">9.</td>
+            <td style="font-size: 8pt; width: 97%;">
+                <b><u>Mengenai Pengalihan :</u></b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 3%; font-size: 8pt; vertical-align: top">a.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">Sebelum penandatanganan AJB, PEMBELI dapat mengalihkan seluruh atau sebagian hak atas UNIT APARTEMEN dengan 
+                                terlebih dahulu mendapat persetujuan secara tertulis dari PENJUAL dan telah melakukan pembayaran atas HARGA 
+                                JUAL sekurang-kurangnya sebesar 35 % (tiga puluh lima persen). Dalam hal pembayaran sisa HARGA JUAL menggunakan 
+                                fasilitas kredit dari LEMBAGA KEUANGAN, maka PIHAK KEDUA wajib meminta persetujuan secara tertulis dari LEMBAGA 
+                                KEUANGAN tersebut.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 3%; font-size: 8pt; vertical-align: top">b.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">Apabila hal tersebut dilanggar, maka untuk setiap pengalihan hak dan kewajiban dianggap tidak sah dan segala 
+                                akibat (konsekuensi hukum) yang timbul, termasuk namun tidak terbatas karena ketentuan perpajakan, sepenuhnya 
+                                menjadi beban dan tanggung jawab PEMBELI.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 3%; font-size: 8pt; vertical-align: top">c.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">Pengalihan hak dan kewajiban untuk yang pertama kalinya, PEMBELI dikenakan biaya administrasi sebesar Rp. 5.000.000,- 
+                                (lima juta rupiah), untuk pengalihan dari PEMBELI kepada ayah, ibu, anak, suami dan istri atau pengalihan karena 
+                                pewarisan dikenakan biaya administrasi sebesar Rp. 1.000.000,- (satu juta rupiah).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 3%; font-size: 8pt; vertical-align: top">d.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">Biaya-biaya dan pajak-pajak yang timbul sehubungan dengan pengalihan hak dan kewajiban kepada pihak ketiga 
+                                sepenuhnya menjadi tanggungan PEMBELI yang wajib dibayarkan sebelum atau pada saat pengalihan hak dan kewajiban 
+                                tersebut dilaksanakan.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%;">10.</td>
+            <td style="font-size: 8pt; width: 97%;">
+                <b><u>Mengenai Serah Terima :</u></b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 3%; font-size: 8pt; vertical-align: top">a.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">PENJUAL dengan ini berjanji dan mengikatkan diri untuk menyelesaikan pembangunan UNIT APARTEMEN <b>terhitung 36 
+                                (tiga puluh enam) bulan sejak tanggal penandatanganan SURAT PESANAN (“TANGGAL SELESAI PEMBANGUNAN”)</b>. 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">b.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Yang dimaksud dengan penyelesaian pembangunan UNIT APARTEMEN adalah bahwa UNIT APARTEMEN secara teknis telah 
+                            diselesaikan pembangunannya, berada dalam keadaan baik dan layak huni. 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">c.</td>
+                        <td style="font-size: 8pt; text-align: justify;">PENJUAL akan menyerahkan fisik UNIT APARTEMEN kepada PEMBELI selambat-lambatnya 180 (seratus delapan puluh) hari 
+                            kerja terhitung sejak TANGGAL SELESAI PEMBANGUNAN (<b>“PERKIRAAN TANGGAL SERAH TERIMA”</b>), dengan ketentuan PEMBELI 
+                            tidak lalai dalam memenuhi kewajiban-kewajibannya berdasarkan SURAT PESANAN dan telah melunasi seluruh HARGA JUAL.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">d.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Bilamana oleh sebab apapun, kecuali oleh sebab-sebab sebagaimana ketentuan Force Majeure dalam PPJB ternyata PENJUAL 
+                            tidak dapat menyerahkan UNIT APARTEMEN setelah PERKIRAAN TANGGAL SERAH TERIMA, maka PENJUAL dikenakan denda keterlambatan 
+                            sebesar 1‰ (satu permil) per/-hari dari  sisa nilai keterlambatan dengan jumlah denda maksimal sebesar 3% (tiga 
+                            persen) dari pembayaran HARGA JUAL  diluar PPN yang telah diterima oleh PENJUAL (<b>“DENDA PENJUAL”</b>). DENDA PENJUAL 
+                            dibayarkan setelah PEMBELI melunasi seluruh pembayaran HARGA JUAL.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">e.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Apabila dalam jangka waktu 14 (empat belas) hari kalender setelah tanggal Pemberitahuan Serah Terima dikirimkan, 
+                            tetapi PEMBELI tidak menandatangani Berita Acara Serah Terima atas UNIT APARTEMEN (<b>"BAST”</b>) karena sebab/alasan 
+                            apapun, maka PEMBELI menyetujui bahwa penyerahan UNIT APARTEMEN telah dilakukan terhitung pada hari kalender ke-15 
+                            (lima belas) setelah tanggal Pemberitahuan Serah Terima dikirimkan kepada PEMBELI, dan dalam hal demikian bukti 
+                            pengiriman surat Pemberitahuan Serah Terima sudah merupakan bukti sah dilakukannya serah terima atas UNIT APARTEMEN, 
+                            maka resiko-resiko atas UNIT APARTEMEN beralih kepada PEMBELI, dan PENJUAL tidak mempunyai tanggung jawab lagi 
+                            terhadap UNIT APARTEMEN.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">f.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Penilaian dari PENJUAL bahwa fisik APARTEMEN telah selesai dibangun dalam keadaan baik, layak huni dan layak 
+                            diserahterimakan adalah mengikat bagi PEMBELI.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<div align="center">
+    <table width="90%" align="center">
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">11.</td>
+            <td>
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 2%;"></td>
+                        <td style="width: 3.5%; font-size: 8pt; vertical-align: top">a.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">UNIT APARTEMEN yang telah dipesan tidak dapat ditukar dengan UNIT APARTEMEN lain, kecuali mendapat persetujuan 
+                            tertulis dari PENJUAL.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 2%;"></td>
+                        <td style="font-size: 8pt; vertical-align: top">b.</td>
+                        <td style="font-size: 8pt; text-align: justify;">PENJUAL bertanggung jawab menyelesaikan UNIT APARTEMEN dalam kondisi baik dan layak huni.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">c.</td>
+                        <td style="font-size: 8pt; text-align: justify;">PEMBELI wajib menggunakan/memanfaatkan UNIT APARTEMEN sesuai dengan peruntukannya, yakni untuk tempat tinggal/hunian.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%;">12.</td>
+            <td style="font-size: 8pt; width: 97%;">
+                <b><u>Perubahan Konstruksi, Tata Letak dan Design :</u></b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 5%;"></td>
+                        <td style="width: 3%; font-size: 8pt; vertical-align: top">a.</td>
+                        <td style="width: 91%; font-size: 8pt; text-align: justify;">Dalam hal sepanjang masa pembangunan, bilamana terjadi perubahan pada UNIT APARTEMEN yang menyebabkan tata letak, 
+                            desain dan/atau luas UNIT APARTEMEN berubah atau ditiadakan, termasuk dalam hal perubahan rencana UNIT APARTEMEN 
+                            itu mengakibatkan perubahan letak, misalnya lift dan escalator yang semula berada di muka atau disamping UNIT APARTEMEN 
+                            atau untuk kepentingan bersama lainnya, maka PENJUAL akan memberitahukan kepada PEMBELI dan PEMBELI diberikan pilihan 
+                            untuk tetap pada UNIT APARTEMEN semula atau menerima unit pengganti lainnya sebagai pengganti (jika unit pengganti masih 
+                            tersedia), serta PEMBELI dan PENJUAL sepakat untuk memperhitungkan kemudian dan/atau menyesuaikan HARGA JUAL UNIT 
+                            APARTEMEN atau unit pengganti. 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">b.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Apabila PEMBELI tidak menyetujui untuk tetap pada UNIT APARTEMEN semula atau penggantinya, maka PENJUAL akan mengembalikan 
+                            pembayaran HARGA JUAL yang telah diterima oleh PENJUAL tanpa disertai bunga, denda maupun segala bentuk ganti rugi lainnya, 
+                            setelah dikurangi dengan pajak–pajak dan kewajiban lain (apabila ada).
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">13. </td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">PEMBELI wajib menandatangani PPJB selambat-lambatnya 60 (enam puluh) hari kalender terhitung sejak tanggal SURAT PESANAN, 
+                apabila dengan alasan apapun juga PEMBELI tidak/belum menandatangani PPJB, maka PEMBELI tidak diperkenankan melakukan serah 
+                terima fisik UNIT APARTEMEN, mengalihkan hak dan kewajiban kepada pihak lain dan menandatangani AJB atas UNIT APARTEMEN. 
+                Dalam hal ini PEMBELI menyatakan setuju dan sepakat untuk terikat pada semua ketentuan yang ada di PPJB.
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">14. </td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Hal-hal yang tidak atau belum cukup diatur dalam SURAT PESANAN ini akan diatur lebih lanjut dalam PPJB dan perjanjian-perjanjian 
+                lain yang dibuat sehubungan dengan UNIT APARTEMEN.
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="font-size: 8pt; text-align: justify;">Demikianlah dengan maksud untuk terikat oleh hukum setelah SURAT PESANAN ini dibaca dengan seksama dan dimengerti serta disetujui 
+                isinya, maka PEMBELI dan PENJUAL menandatangani SURAT PESANAN ini.
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</div>
+

@@ -1,0 +1,930 @@
+<%@ Control Language="c#" Inherits="ISC056.LAUNCHING.PrintSPTemplate" CodeFile="PrintSPTemplate.ascx.cs" %>
+<link href="/Media/Style.css" type="text/css" rel="stylesheet">
+<style type="text/css">
+    table, tr {
+        font-size: 10pt;
+        font-family: Arial;
+    }
+
+    td {
+        font-size: 20pt;
+        font-family: Arial;
+    }
+
+    .nomor {
+        font-size: 10pt;
+        width: 3%;
+        vertical-align: top;
+    }
+
+    .isi {
+        font-size: 10pt;
+        width: 97%;
+        vertical-align: top;
+        text-align: justify;
+    }
+
+    .subkosong {
+        width: 3%;
+    }
+
+    .subnomor {
+        font-size: 10pt;
+        vertical-align: central;
+        width: 2%;
+    }
+
+    .subisi {
+        font-size: 10pt;
+        text-align: justify;
+    }
+</style>
+
+<div>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="right">
+                <img src="/Media/LogoPerum.Jpg" style="height: 68px; width: 25%;" />
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 11pt">Lembar Untuk Perumnas</td>
+        </tr>
+        <tr>
+            <td style="font-size: 10pt; text-align: center">
+                <b>SURAT PESANAN UNIT</b>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 10pt; vertical-align: top; font-weight: bold; text-align: center;">
+                <b>
+                    <asp:Label ID="nosp" runat="server"></asp:Label><br />
+                    <asp:Label ID="tglKontrak" runat="server"></asp:Label>
+                </b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+    </table>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="font-size: 10pt; text-align: left">
+                <b>DATA PEMESAN</b>:
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="width: 20%; font-size: 11px">Nama</td>
+            <td style="width: 1%; font-size: 11px">:</td>
+            <td style="width: 79%; font-size: 11px">
+                <asp:Label ID="Nama" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 20%; font-size: 11px">No.KTP/SIM</td>
+            <td style="width: 1%; font-size: 11px">:</td>
+            <td style="width: 79%; font-size: 11px">
+                <asp:Label ID="ktp" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Alamat</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="alamat" runat="server"></asp:Label>
+                <asp:Label ID="alamat2" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px"></td>
+            <td style="font-size: 11px"></td>
+            <td style="font-size: 11px">
+                <asp:Label ID="alamat3" runat="server"></asp:Label>
+                <asp:Label ID="alamat4" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Email</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="email" runat="server" /></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">No Hp</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="hp" runat="server" /></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="font-size: 10pt; text-align: left">
+                <b>UNIT YANG DIPESAN</b>:
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="width: 20%; font-size: 11px">Lokasi</td>
+            <td style="width: 1%; font-size: 11px">:</td>
+            <td style="width: 79%; font-size: 11px">TANJUNG BARAT
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Tower</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="tower" runat="server" /></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Type</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="typ" runat="server"></asp:Label></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">NDA</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="nda" runat="server"></asp:Label></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Luas SGA</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">&#177;
+                <asp:Label ID="sga" runat="server"></asp:Label></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Harga Jual</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="totalharga2" runat="server"></asp:Label>
+                (<i>Sebelum PPN dan Biaya Lainnya</i>)</td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Cara Pembayaran</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="cb" runat="server"></asp:Label></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="2" style="font-size: 10pt; text-align: justify;">
+                <b>Ketentuan Pembelian :</b>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 1%; vertical-align: top">1.</td>
+            <td style="font-size: 8pt; width: 99%; vertical-align: top; text-align: justify">Pemesan membayar <i>Booking Fee</i> sebesar Rp.
+                <asp:Label ID="bookingfee" runat="server"></asp:Label>&nbsp;(
+                <asp:Label ID="terbilang" runat="server"></asp:Label>
+                ).
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 1%; vertical-align: top">2.</td>
+            <td style="font-size: 8pt; width: 99%; vertical-align: top; text-align: justify">Harga Jual sudah termasuk:
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 3%;"></td>
+                        <td style="width: 2%; font-size: 8pt; vertical-align: central">a.</td>
+                        <td style="width: 95%; font-size: 8pt; text-align: justify;">Penyediaan Jaringan Air
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">b.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Pemasangan Instalasi Listrik :
+                            <table>
+                                <tr>
+                                    <td style="font-size: 8pt; text-align: justify;">- 1300 W (Studio, 1 BR)</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 8pt; text-align: justify;">- 2200 W (2 BR)</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">c.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Ijin Mendirikan Bangunan (IMB)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">d.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya pertelaan
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 1%; vertical-align: top">3.</td>
+            <td style="font-size: 8pt; width: 99%; vertical-align: top; text-align: justify">Harga Jual belum termasuk:
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 3%;"></td>
+                        <td style="width: 2%; font-size: 8pt; vertical-align: central">a.</td>
+                        <td style="width: 95%; font-size: 8pt; text-align: justify;">Pajak Pertambahan Nilai (PPN) 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">b.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya Perolehan Hak Atas Tanah & Bangunan
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">c.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya Pembuatan Akta Jual Beli dan Balik Nama Sertipikat
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">d.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya Penggunaan (termasuk tetapi tidak terbatas pada tagihan-tagihan air, listrik, dan tempat parkir)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 3%;"></td>
+                        <td style="width: 2%; font-size: 8pt; vertical-align: central">e.</td>
+                        <td style="width: 95%; font-size: 8pt; text-align: justify;">Biaya Balik Nama listrik & air
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">f.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya Balik Nama Pajak Bumi Bangunan (PBB)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">g.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Retribusi Pajak Bumi dan Bangunan (PBB)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">h.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya PPJB Notarial
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 3%;"></td>
+                        <td style="width: 2%; font-size: 8pt; vertical-align: central">i.</td>
+                        <td style="width: 95%; font-size: 8pt; text-align: justify;">Biaya pengurusan KPA (jika menggunakan KPA)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">j.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Kewajiban pembayaran lain (termasuk pajak lain) yang timbul (jika ada) sehubungan dengan ketentuan perundang-undangan yang berlaku/ peraturan dari pemerintah
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">4. </td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Dalam pembayaran atas unit yang dibeli, pemesan wajib mengikuti jumlah dan jadwal pembayaran sesuai pada <b>Lampiran 1</b> Surat Pesanan ini.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">5. </td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila pemesan mengundurkan diri dengan alasan apapun maka :
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: central; width: 2%">a.</td>
+                        <td style="font-size: 8pt; text-align: justify">NUP <i>refundable</i> 100%</td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: central; width: 2%">b.</td>
+                        <td style="font-size: 8pt; text-align: justify"><i>Booking fee</i> hangus</td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: central; width: 2%">c.</td>
+                        <td style="font-size: 8pt; text-align: justify">Pajak yang telah dibayarkan hangus
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: central; width: 2%">d.</td>
+                        <td style="font-size: 8pt; text-align: justify">Angsuran atau Uang Muka (setelah dikurangi NUP, <i>Booking Fee</i>, Pajak) yang telah dibayarkan <i>refundable</i> 75%
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">6.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila Pemesan melakukan pembelian Rumah Susun dengan cara Kredit Pemilikan Apartemen (KPA), maka :
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">a.</td>
+                        <td style="font-size: 8pt; text-align: justify">Pemesan harus mengikuti semua persyaratan kelengkapan dokumen dan perhitungan pembayaran yang ditetapkan oleh Bank pemberi kredit maupun peraturan dan ketentuan mengenai permohonan kredit.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">b.</td>
+                        <td style="font-size: 8pt; text-align: justify">Pemesan bertanggungjawab terhadap segala kelengkapan dan persetujuan dalam proses permohonan Kredit.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">c.</td>
+                        <td style="font-size: 8pt; text-align: justify">Berkas permohonan Kredit harus dilengkapi dalam waktu 14 (empat belas) hari kalender sejak penandatanganan Surat Pesanan ini. Keterlambatan penyerahan dokumen menjadi tanggung jawab pemesan sendiri. Apabila Pemesan tidak melengkapi berkas permohonan kredit tersebut, maka Pemesan dianggap membatalkan/mengundurkan diri.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">d.</td>
+                        <td style="font-size: 8pt; text-align: justify">Dalam hal penggunaan fasilitas kredit Bank, pemesan menyadari dan mengakui bahwa <b>Perumnas</b> hanya perantara pemesan, sehingga segala akibat dan risiko yang berkaitan dengan permohonan fasilitas kredit dan/atau pemesanan Unit Rumah Susun merupakan beban dan tanggung jawab pemesan sepenuhnya, serta tidak dapat dikaitkan dan di bebankan kepada <b>Perumnas</b> karena sebab atau alasan apapun. Misalnya: apabila proses permohonan kredit (KPA) ditolak oleh Bank karena kesalahan atau kelalaian pemesan atau karena sebab/alasan apapun berdasarkan pertimbangan Bank pemberi kredit, maka dalam waktu 7 (tujuh) hari sejak penolakan KPA tersebut pemesan harus memutuskan perubahan cara pembayaran. Dan dengan lewatnya waktu tersebut <b>Perumnas</b> dapat menganggap pemesan mengundurkan diri.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="page-break-before: always">&nbsp;</div>
+<div>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="font-size: 8pt; width: 3%;"></td>
+            <td style="font-size: 8pt; width: 97%;">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">e.</td>
+                        <td style="font-size: 8pt; text-align: justify">Biaya-biaya Proses KPA yang ditentukan oleh Bank pemberi kredit harus dibayar oleh Pemesan.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">f.</td>
+                        <td style="font-size: 8pt; text-align: justify">Sebelum pelaksanaan Akad Kredit, Pemesan wajib melunasi uang muka berikut seluruh denda-denda, biaya-biaya dan kewajibannya pembayaran lain yang terhutang (apabila ada).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">g.</td>
+                        <td style="font-size: 8pt; text-align: justify">Apabila terjadi perubahan cara bayar dari KPA ke Tunai Keras/ Tunai Bertahap, maka  Pemesan wajib memberitahukan hal ini kepada <b>Perumnas</b>.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top;">7.</td>
+            <td style="font-size: 8pt; width: 97%; text-align: justify">Apabila Pemesan terlambat melakukan pembayaran sesuai dengan jumlah dan jadwal pada <b>Lampiran 1</b>, maka Pemesan dikenakan 
+                Denda Keterlambatan Pembayaran sebesar 1 &permil; (satu per mil)   per hari dari Harga Jual dan apabila jumlah denda telah 
+                lebih dari 5 % maka <b>Perumnas</b> berhak membatalkan pesanan ini setelah diberikan Surat Peringatan terlebih dahulu.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">8.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Pemesan wajib membayar <i>service charge</i> bulanan setelah serah terima kunci dari pengembang ke konsumen.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">9.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Sebelum Perhimpunan Penghuni Satuan Rumah Susun (PPSRS) terbentuk, <i>Service charge</i>  Hunian ditentukan oleh pengembang 
+                atau perusahaan pengelola gedung yang ditunjuk oleh pengembang sesuai dengan ketentuan yang berlaku.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">10.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">pabila terdapat perubahan pada data Pemesan, maka Pihak Pemesan wajib memberitahukan kepada <b>Perumnas</b>.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">11.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Dalam rangka standarisasi kualitas, renovasi dalam bentuk apapun (pengecatan, instalasi <i>mechanical & electrical,</i>
+                pergantian material, penambahan sekat, <i>furnish</i> dll) yang dilakukan terhadap masing-masing unit Hunian harus dilakukan 
+                atas seijin dan ketentuan pengembang.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">12.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila Pemesan melakukan pembelian Rumah Susun dengan cara Kredit Pemilikan Apartemen (KPA) dan telah melunasi seluruh pembayaran uang muka, maka Pemesan wajib menandatangani Perjanjian Pengikatan Jual Beli (PPJB).
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">13.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila Pemesan melakukan pembelian Rumah Susun dengan cara cash bertahap dan telah membayar 20% dari Harga Jual dan PPN, maka Pemesan wajib menandatangani Perjanjian Pengikatan Jual Beli (PPJB).
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">14.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila Pemesan melakukan pembelian Rumah Susun dengan cara cash keras dan telah melunasi seluruh Harga Jual dan PPN, maka Pemesan wajib menandatangani Perjanjian Pengikatan Jual Beli (PPJB).
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">15.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Dengan ditandatanganinya PPJB, maka ketentuan yang berlaku adalah ketentuan dalam PPJB. Apabila Pemesan tidak mau menandatangani PPJB, maka Pemesan dianggap membatalkan pembelian Unit Rumah Susun.
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="font-size: 11px; text-align: center; width: 33%"></td>
+            <td style="font-size: 11px; text-align: center; width: 33%">Menyetujui,</td>
+            <td style="font-size: 11px; text-align: left; width: 33%"></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px; text-align: center; width: 33%;">MANAGER PEMASARAN</td>
+            <td style="font-size: 11px; text-align: center; width: 33%"></td>
+            <td style="font-size: 11px; text-align: center; width: 33%">PEMESAN</td>
+        </tr>
+        <tr>
+            <td style="height: 100px;" align="center">
+                <br />
+                <br />
+                <br />
+                <img src="/Media/ttdpakdidin.png" />
+            </td>
+            <td></td>
+            <td style="font-size: 11px; text-align: center; width: 33%">Materai 6000</td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px; text-align: center; width: 33%; padding-left: 2em"><b>&nbsp;&nbsp;&nbsp;( Fakhruddin Tsany )<img src="/Media/parafbupima.png" /></b></td>
+            <td style="font-size: 11px; text-align: center; width: 33%"></td>
+            <td style="font-size: 11px; text-align: center; width: 33%; vertical-align: bottom">(<asp:Label ID="nama2" runat="server"></asp:Label>)</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</div>
+
+<%--lembar untuk konsumen--%>
+<div style="page-break-after: always"></div>
+<div>
+    <br />
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="right">
+                <img src="/Media/LogoPerum.Jpg" style="height: 68px; width: 25%;" />
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 11pt">Lembar Untuk Konsumen</td>
+        </tr>
+        <tr>
+            <td style="font-size: 10pt; text-align: center">
+                <b>SURAT PESANAN UNIT</b>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 10pt; vertical-align: top; font-weight: bold; text-align: center;">
+                <b>
+                    <asp:Label ID="Label1" runat="server"></asp:Label><br />
+                    <asp:Label ID="Label2" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+    </table>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="font-size: 10pt; text-align: left">
+                <b>DATA PEMESAN</b>:
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="width: 20%; font-size: 11px">Nama</td>
+            <td style="width: 1%; font-size: 11px">:</td>
+            <td style="width: 79%; font-size: 11px">
+                <asp:Label ID="Nama1" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 20%; font-size: 11px">No.KTP/SIM</td>
+            <td style="width: 1%; font-size: 11px">:</td>
+            <td style="width: 79%; font-size: 11px">
+                <asp:Label ID="ktp2" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Alamat</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="alamatk" runat="server"></asp:Label>
+                <asp:Label ID="alamatk2" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px"></td>
+            <td style="font-size: 11px"></td>
+            <td style="font-size: 11px">
+                <asp:Label ID="alamatk3" runat="server"></asp:Label>
+                <asp:Label ID="alamatk4" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Email</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="emailk" runat="server" /></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">No Hp</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="hpk" runat="server" /></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="font-size: 10pt; text-align: left">
+                <b>UNIT YANG DIPESAN</b>:
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="width: 20%; font-size: 11px">Lokasi</td>
+            <td style="width: 1%; font-size: 11px">:</td>
+            <td style="width: 79%; font-size: 11px">TANJUNG BARAT
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Tower</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="towerk" runat="server" /></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Type</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="typk" runat="server"></asp:Label></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">NDA</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="ndak" runat="server"></asp:Label></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Luas SGA</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">&#177;
+                <asp:Label ID="sgak" runat="server"></asp:Label></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Harga Jual</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="totalhargak" runat="server"></asp:Label>
+                (<i>Sebelum PPN dan Biaya Lainnya</i>)</td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px">Cara Pembayaran</td>
+            <td style="font-size: 11px">:</td>
+            <td style="font-size: 11px">
+                <asp:Label ID="cbk" runat="server"></asp:Label></td>
+        </tr>
+        <tr>
+            <td>&nbsp;
+                <asp:Label ID="Label16" runat="server" /></td>
+        </tr>
+    </table>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="2" style="font-size: 10pt; text-align: justify;">
+                <b>Ketentuan Pembelian :</b>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 1%; vertical-align: top">1.</td>
+            <td style="font-size: 8pt; width: 99%; vertical-align: top; text-align: justify">Pemesan membayar <i>Booking Fee</i> sebesar Rp.
+                <asp:Label ID="bookingfeek" runat="server"></asp:Label>&nbsp;(
+                <asp:Label ID="terbilangk" runat="server"></asp:Label>
+                ).
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 1%; vertical-align: top">2.</td>
+            <td style="font-size: 8pt; width: 99%; vertical-align: top; text-align: justify">Harga Jual sudah termasuk:
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 3%;"></td>
+                        <td style="width: 2%; font-size: 8pt; vertical-align: central">a.</td>
+                        <td style="width: 95%; font-size: 8pt; text-align: justify;">Penyediaan Jaringan Air
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: top">b.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Pemasangan Instalasi Listrik :
+                            <table>
+                                <tr>
+                                    <td style="font-size: 8pt; text-align: justify;">- 1300 W (Studio, 1 BR)</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 8pt; text-align: justify;">- 2200 W (2 BR)</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">c.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Ijin Mendirikan Bangunan (IMB)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">d.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya pertelaan
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 1%; vertical-align: top">3.</td>
+            <td style="font-size: 8pt; width: 99%; vertical-align: top; text-align: justify">Harga Jual belum termasuk:
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 3%;"></td>
+                        <td style="width: 2%; font-size: 8pt; vertical-align: central">a.</td>
+                        <td style="width: 95%; font-size: 8pt; text-align: justify;">Pajak Pertambahan Nilai (PPN) 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">b.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya Perolehan Hak Atas Tanah & Bangunan
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">c.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya Pembuatan Akta Jual Beli dan Balik Nama Sertipikat
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">d.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya Penggunaan (termasuk tetapi tidak terbatas pada tagihan-tagihan air, listrik, dan tempat parkir)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 3%;"></td>
+                        <td style="width: 2%; font-size: 8pt; vertical-align: central">e.</td>
+                        <td style="width: 95%; font-size: 8pt; text-align: justify;">Biaya Balik Nama listrik & air
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">f.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya Balik Nama Pajak Bumi Bangunan (PBB)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">g.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Retribusi Pajak Bumi dan Bangunan (PBB)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">h.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Biaya PPJB Notarial
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 3%;"></td>
+                        <td style="width: 2%; font-size: 8pt; vertical-align: central">i.</td>
+                        <td style="width: 95%; font-size: 8pt; text-align: justify;">Biaya pengurusan KPA (jika menggunakan KPA)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 8pt; vertical-align: central">j.</td>
+                        <td style="font-size: 8pt; text-align: justify;">Kewajiban pembayaran lain (termasuk pajak lain) yang timbul (jika ada) sehubungan dengan ketentuan perundang-undangan yang berlaku/ peraturan dari pemerintah
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">4. </td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Dalam pembayaran atas unit yang dibeli, pemesan wajib mengikuti jumlah dan jadwal pembayaran sesuai pada <b>Lampiran 1</b> Surat Pesanan ini.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">5. </td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila pemesan mengundurkan diri dengan alasan apapun maka :
+                <table>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: central; width: 2%">a.</td>
+                        <td style="font-size: 8pt; text-align: justify">NUP <i>refundable</i> 100%</td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: central; width: 2%">b.</td>
+                        <td style="font-size: 8pt; text-align: justify"><i>Booking fee</i> hangus</td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: central; width: 2%">c.</td>
+                        <td style="font-size: 8pt; text-align: justify">Pajak yang telah dibayarkan hangus
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: central; width: 2%">d.</td>
+                        <td style="font-size: 8pt; text-align: justify">Angsuran atau Uang Muka (setelah dikurangi NUP, <i>Booking Fee</i>, Pajak) yang telah dibayarkan <i>refundable</i> 75%
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">6.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila Pemesan melakukan pembelian Rumah Susun dengan cara Kredit Pemilikan Apartemen (KPA), maka :
+                <table>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">a.</td>
+                        <td style="font-size: 8pt; text-align: justify">Pemesan harus mengikuti semua persyaratan kelengkapan dokumen dan perhitungan pembayaran yang ditetapkan oleh Bank pemberi kredit maupun peraturan dan ketentuan mengenai permohonan kredit.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">b.</td>
+                        <td style="font-size: 8pt; text-align: justify">Pemesan bertanggungjawab terhadap segala kelengkapan dan persetujuan dalam proses permohonan Kredit.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">c.</td>
+                        <td style="font-size: 8pt; text-align: justify">Berkas permohonan Kredit harus dilengkapi dalam waktu 14 (empat belas) hari kalender sejak penandatanganan Surat Pesanan ini. Keterlambatan penyerahan dokumen menjadi tanggung jawab pemesan sendiri. Apabila Pemesan tidak melengkapi berkas permohonan kredit tersebut, maka Pemesan dianggap membatalkan/mengundurkan diri.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">d.</td>
+                        <td style="font-size: 8pt; text-align: justify">Dalam hal penggunaan fasilitas kredit Bank, pemesan menyadari dan mengakui bahwa <b>Perumnas</b> hanya perantara pemesan, sehingga segala akibat dan risiko yang berkaitan dengan permohonan fasilitas kredit dan/atau pemesanan Unit Rumah Susun merupakan beban dan tanggung jawab pemesan sepenuhnya, serta tidak dapat dikaitkan dan di bebankan kepada <b>Perumnas</b> karena sebab atau alasan apapun. Misalnya: apabila proses permohonan kredit (KPA) ditolak oleh Bank karena kesalahan atau kelalaian pemesan atau karena sebab/alasan apapun berdasarkan pertimbangan Bank pemberi kredit, maka dalam waktu 7 (tujuh) hari sejak penolakan KPA tersebut pemesan harus memutuskan perubahan cara pembayaran. Dan dengan lewatnya waktu tersebut <b>Perumnas</b> dapat menganggap pemesan mengundurkan diri.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="page-break-before: always">&nbsp;</div>
+<div>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top"></td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">
+                <table>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">e.</td>
+                        <td style="font-size: 8pt; text-align: justify">Biaya-biaya Proses KPA yang ditentukan oleh Bank pemberi kredit harus dibayar oleh Pemesan.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">f.</td>
+                        <td style="font-size: 8pt; text-align: justify">Sebelum pelaksanaan Akad Kredit, Pemesan wajib melunasi uang muka berikut seluruh denda-denda, biaya-biaya dan kewajibannya pembayaran lain yang terhutang (apabila ada).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subkosong"></td>
+                        <td style="font-size: 8pt; vertical-align: top; width: 2%">g.</td>
+                        <td style="font-size: 8pt; text-align: justify">Apabila terjadi perubahan cara bayar dari KPA ke Tunai Keras/ Tunai Bertahap, maka  Pemesan wajib memberitahukan hal ini kepada <b>Perumnas</b>.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">7.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila Pemesan terlambat melakukan pembayaran sesuai dengan jumlah dan jadwal pada <b>Lampiran 1</b>, maka Pemesan dikenakan 
+                Denda Keterlambatan Pembayaran sebesar 1 &permil; (satu per mil)   per hari dari Harga Jual dan apabila jumlah denda telah 
+                lebih dari 5 % maka <b>Perumnas</b> berhak membatalkan pesanan ini setelah diberikan Surat Peringatan terlebih dahulu.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">8.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Pemesan wajib membayar <i>service charge</i> bulanan setelah serah terima kunci dari pengembang ke konsumen.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">9.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Sebelum Perhimpunan Penghuni Satuan Rumah Susun (PPSRS) terbentuk, <i>Service charge</i>  Hunian ditentukan oleh pengembang 
+                atau perusahaan pengelola gedung yang ditunjuk oleh pengembang sesuai dengan ketentuan yang berlaku.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">10.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila terdapat perubahan pada data Pemesan, maka Pihak Pemesan wajib memberitahukan kepada <b>Perumnas</b>.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">11.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Dalam rangka standarisasi kualitas, renovasi dalam bentuk apapun (pengecatan, instalasi <i>mechanical & electrical,</i>
+                pergantian material, penambahan sekat, <i>furnish</i> dll) yang dilakukan terhadap masing-masing unit Hunian harus dilakukan 
+                atas seijin dan ketentuan pengembang.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">12.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila Pemesan melakukan pembelian Rumah Susun dengan cara Kredit Pemilikan Apartemen (KPA) dan telah melunasi seluruh pembayaran uang muka, maka Pemesan wajib menandatangani Perjanjian Pengikatan Jual Beli (PPJB).
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">13.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila Pemesan melakukan pembelian Rumah Susun dengan cara cash bertahap dan telah membayar 20% dari Harga Jual dan PPN, maka Pemesan wajib menandatangani Perjanjian Pengikatan Jual Beli (PPJB).
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">14.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Apabila Pemesan melakukan pembelian Rumah Susun dengan cara cash keras dan telah melunasi seluruh Harga Jual dan PPN, maka Pemesan wajib menandatangani Perjanjian Pengikatan Jual Beli (PPJB).
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt; width: 3%; vertical-align: top">15.</td>
+            <td style="font-size: 8pt; width: 97%; vertical-align: top; text-align: justify">Dengan ditandatanganinya PPJB, maka ketentuan yang berlaku adalah ketentuan dalam PPJB. Apabila Pemesan tidak mau menandatangani PPJB, maka Pemesan dianggap membatalkan pembelian Unit Rumah Susun.
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%">
+        <tr>
+            <td style="font-size: 11px; text-align: center; width: 33%"></td>
+            <td style="font-size: 11px; text-align: center; width: 33%">Menyetujui,</td>
+            <td style="font-size: 11px; text-align: left; width: 33%"></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px; text-align: center; width: 33%">MANAGER PEMASARAN</td>
+            <td style="font-size: 11px; text-align: center; width: 33%"></td>
+            <td style="font-size: 11px; text-align: center; width: 33%">PEMESAN</td>
+        </tr>
+        <tr>
+            <td style="height: 100px;" align="center">
+                <br />
+                <br />
+                <br />
+                <img src="/Media/ttdpakdidin.png" />
+            </td>
+            <td></td>
+            <td style="font-size: 11px; text-align: center; width: 33%"></td>
+        </tr>
+        <tr>
+            <td style="font-size: 11px; text-align: center; width: 33%; padding-left: 2em"><b>( Fakhruddin Tsany )<img src="/Media/parafbupima.png" /></b></td>
+            <td style="font-size: 11px; text-align: center; width: 33%"></td>
+            <td style="font-size: 11px; text-align: center; width: 33%; vertical-align: bottom">(<asp:Label ID="namak" runat="server"></asp:Label>)</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</div>
+
+

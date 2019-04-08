@@ -1,0 +1,10 @@
+﻿<asp:gridview runat="server" skinid="pager" cssclass="tb blue-skin"
+	gridlines="None" autogeneratecolumns="False"
+	emptydatarowstyle-cssclass="Data tidak ditemukan."
+	pagersettings-firstpagetext="First"
+	pagersettings-lastpagetext="Last"
+	pagerstyle-cssclass="pager"
+	allowpaging="true"
+	pagersettings-position="TopAndBottom"
+    borderstyle="none"
+	/>

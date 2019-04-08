@@ -1,0 +1,10 @@
+diff a/app/adminjual/Lap.aspx b/app/adminjual/Lap.aspx	(rejected hunks)
+@@ -35,7 +35,7 @@
+ 			<br>
+ 			<div>
+ 				<div class="box-list">
+-					<a show-modal='#ModalPopUp' modal-title='Laporan' modal-url='Laporan/MasterAgent.aspx'>
++					<a href='javascript:openLaporan("Laporan/MasterAgent.aspx")'>
+ 						<div class="box-content">
+ 							<span>Laporan</span>
+ 							<p>Laporan Master Sales</p>

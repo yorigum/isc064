@@ -1,0 +1,72 @@
+using System;
+using System.Drawing;
+using System.Data;
+using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+
+namespace ISC056.ADMINJUAL
+{
+	public partial class PetaHapus : System.Web.UI.Page
+	{
+		protected void Page_Load(object sender, System.EventArgs e)
+		{
+			Act.Pass();
+			Act.NoCache();
+
+			string p1 = Request.PhysicalApplicationPath.Replace("admin","marketing")
+				+ "FP\\Base\\" + f + ".jpg"; //file dasar
+			string p2 = Request.PhysicalApplicationPath.Replace("admin","marketing")
+				+ "FP\\" + f + ".jpg"; //file status
+			string p3 = Request.PhysicalApplicationPath.Replace("admin","marketing")
+				+ "FP\\" + f + ".gif"; //file index
+
+			Dfc.DeleteFile(p1);
+			Dfc.DeleteFile(p2);
+			Dfc.DeleteFile(p3);
+
+			//clean-up data koordinat di tabel unit
+			Db.Execute("EXEC spFPDel '"+f+"'");
+
+			//Logfile
+			string Ket = "---DELETE FLOOR PLAN---<br>"
+				+ f;
+
+			Db.Execute("EXEC spLogUnit"
+				+ " 'FP'"
+				+ ",'" + Act.UserID + "'"
+				+ ",'" + Act.IP + "'"
+				+ ",'" + Ket + "'"
+				+ ",''"
+				);
+
+			Response.Redirect("Peta.aspx?done=" + f);
+		}
+
+		private string f
+		{	
+			get
+			{
+				return Cf.Pk(Request.QueryString["f"]);
+			}
+		}
+
+		#region Web Form Designer generated code
+		override protected void OnInit(EventArgs e)
+		{
+			//
+			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
+			//
+			InitializeComponent();
+			base.OnInit(e);
+		}
+		
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{    
+		}
+		#endregion
+	}
+}

@@ -1,0 +1,131 @@
+﻿<%@ Register TagPrefix="uc1" TagName="Head" Src="../Head.ascx" %>
+<%@ Page language="c#" Inherits="ISC056A.MARKETINGJUAL.Laporan.tes" CodeFile="tes.aspx.cs" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html>
+	<head>
+		<title>Laporan Master Kontrak</title>
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" content="C#">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<link href="/Media/Report.css" type="text/css" rel="stylesheet">
+		<meta name="ctrl" content="1">
+		<meta name="sec" content="Laporan Master Kontrak">
+	</head>
+	<body onkeyup="if(event.keyCode==27&amp;&amp;confirm('Apakah anda ingin menutup laporan ini?'))window.close()">
+		<form id="Form1" method="post" runat="server">
+			<div style="DISPLAY: none"><uc1:head id="Head1" runat="server"></uc1:head></div>
+			<table id="param" cellspacing="3" width="100%" runat="server">
+				<tr>
+					<td>
+						<p class="comp" id="comp" runat="server"></p>
+						<h1 id="judul" runat="server">Laporan Master Kontrak
+						</h1>
+						<table cellspacing="0" cellpadding="0">
+							<tr valign="top">
+								<td>
+									<p class="pparam"><b>Lokasi :</b>
+										<br>
+										<asp:listbox id="lokasi" runat="server" rows="10" cssclass="ddl" width="200">
+											<asp:listitem>SEMUA</asp:listitem>
+										</asp:listbox></p>
+									<p class="pparam"><b>Principal :</b>
+										<br>
+										<asp:listbox id="agent" runat="server" rows="10" cssclass="ddl" width="200">
+											<asp:listitem>SEMUA</asp:listitem>
+										</asp:listbox></p>
+								</td>
+								<td width="20"></td>
+								<td>
+									<p class="pparam"><b>Status :</b>
+										<asp:radiobutton id="statusS" runat="server" text="SEMUA" font-size="14" groupname="status"></asp:radiobutton><asp:radiobutton id="statusA" runat="server" text="AKTIF" font-size="14" groupname="status" checked="True"></asp:radiobutton><asp:radiobutton id="statusB" runat="server" text="BATAL" font-size="14" groupname="status"></asp:radiobutton></p>
+									<p class="pparam"><b>TTS :</b>
+										<asp:radiobutton id="bfS" runat="server" text="Semua" groupname="bf" checked="True"></asp:radiobutton><asp:radiobutton id="bf1" runat="server" text="< 10 Juta" groupname="bf"></asp:radiobutton><asp:radiobutton id="bf2" runat="server" text="> 10 Juta" groupname="bf"></asp:radiobutton></p>
+									<p class="pparam"><b>Pelunasan :</b>
+									    <asp:radiobutton id="statusL0" runat="server" text="Lunas 0%" font-size="12" groupname="LN" checked="True"></asp:radiobutton>
+										<asp:radiobutton id="statusL" runat="server" text="Lunas >0%" font-size="12" groupname="LN"></asp:radiobutton>
+										<asp:radiobutton id="statusL1" runat="server" text="Lunas >20%" font-size="12" groupname="LN" ></asp:radiobutton>
+										<asp:radiobutton id="statusL2" runat="server" text="Lunas" font-size="12" groupname="LN" ></asp:radiobutton>
+								    </p>
+									
+									<p class="pparam"><asp:radiobutton id="tglkontrak" runat="server" text="Tanggal Kontrak" font-size="10" groupname="tgl"
+											checked="True" font-bold="True"></asp:radiobutton>:
+									</p>
+									
+									<table>
+										<tr>
+											<td>dari</td>
+											<td><asp:textbox id="dari" runat="server" cssclass="txt_center" width="85"></asp:textbox><label for="dari" class="btn btn-cal"><i class="fa fa-calendar"></i></label>
+											</td>
+											<td rowspan="2">&nbsp;&nbsp;</td>
+											<td>sampai</td>
+											<td><asp:textbox id="sampai" runat="server" cssclass="txt_center" width="85"></asp:textbox><label for="sampai" class="btn btn-cal"><i class="fa fa-calendar"></i></label>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3"><asp:label id="daric" runat="server" cssclass="err"></asp:label></td>
+											<td colspan="3"><asp:label id="sampaic" runat="server" cssclass="err"></asp:label></td>
+										</tr>
+									</table>
+									<p class="pparam"><asp:checkbox id="jenisCheck" runat="server" text="<b>Jenis :</b>" checked="True" autopostback="True" oncheckedchanged="jenisCheck_CheckedChanged"></asp:checkbox><asp:label id="jenisc" runat="server" cssclass="err"></asp:label></p>
+									<asp:checkboxlist id="jenis" runat="server"></asp:checkboxlist>
+									<p class="pparam"><asp:checkbox id="cbcarabayar" runat="server" text="<b>Cara Bayar :</b>" checked="True" autopostback="True" oncheckedchanged="cbcarabayar_CheckedChanged"></asp:checkbox><asp:label id="errcarabayar" runat="server" cssclass="err"></asp:label><asp:checkboxlist id="cblcarabayar" runat="server"></asp:checkboxlist></p>
+								</td>
+							</tr>
+						</table>
+						<br>
+						<div class="ins">
+							<table>
+								<tr>
+									<td><asp:button id="scr" accesskey="s" runat="server" cssclass="btn" width="100" text="Screen Preview" onclick="scr_Click"></asp:button><asp:button id="xls" accesskey="e" runat="server" cssclass="btn" width="100" text="Download Excel" onclick="xls_Click"></asp:button></td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<asp:table id="rpt" runat="server" cssclass="tb" cellspacing="3">
+				<asp:tablerow>
+					<asp:tablecell columnspan="23" font-size="8pt">
+						Status : A = Aktif / B = Batal.<br>
+						Luas dalam meter persegi. Gross adalah harga sebelum diskon.
+					</asp:tablecell>
+				</asp:tablerow>
+				<asp:tablerow verticalalign="Bottom">
+				<asp:tableheadercell horizontalalign="Left">No. Urut</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">No. Kontrak</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Tgl. Kontrak</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Tgl. Input</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Status</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Customer</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Lokasi</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Tipe</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">No. Unit</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">NUP</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Right">Luas (M2)</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Skema Cara Bayar</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Cara Bayar</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Right">Price List</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Right">Diskon</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Right">Bunga</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Right">Diskon Tambahan</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Right">Tambahan Harga Gimmick</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Right">Tambahan Harga Lain - Lain</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Right">Nilai Kontrak</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Right">Fitting Out</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Right">Nominal Bayar</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Right">Sisa Belum Bayar</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Persentase Lunas</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Tgl. Pelunasan</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Sales</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Principal</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Tgl. PPJB</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">No. PPJB</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Tgl. BAST</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">No. BAST</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">Tgl. AJB</asp:tableheadercell>
+					<asp:tableheadercell horizontalalign="Left">No. AJB</asp:tableheadercell>
+				</asp:tablerow>
+			</asp:table></form>
+	</body>
+</html>

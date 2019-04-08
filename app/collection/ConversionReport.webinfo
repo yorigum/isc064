@@ -1,0 +1,262 @@
+﻿This report shows the steps taken to convert your Web application from ASP.NET 1.1 to ASP.NET 2.0. 
+There may be some unresolved conversion issues you will need to manually fix. 
+For more information, please refer to http://go.microsoft.com/fwlink/?LinkId=46995 or search for the help topic "Converting from Visual Studio .NET 2002 or 2003".
+Conversion Started on project file ISC056A.COLLECTION.csproj at November 17 2011, 12:56:04.
+
+=========================ERRORS===================
+Error: Unable to convert project reference ISC056A.
+
+=========================WARNINGS=================
+Warning: If the base class of any of the code-behind classes declares page fields please add the 'CodeFileBaseClass' attribute in the corresponding Page.
+Warning: This web project was converted as a file-based web application. If your site contained any IIS meta-information, e.g. sub-folders marked as virtual directories, it is recommended that you close this web site and re-open it using the Open Web Site command and selecting the Local IIS tab.
+
+=========================COMMENTS=================
+Web.Config: Added 'xhtmlConformance' attribute.
+Removed attribute AutoEventWireup from file Customer.aspx.
+Removed attribute Codebehind from file Customer.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Customer.aspx.cs (Line 12).
+Access level of 'search_Click' changed to 'protected' in file Customer.aspx.cs (Line 20).
+Removed attribute AutoEventWireup from file CustomerInfo.aspx.
+Removed attribute Codebehind from file CustomerInfo.aspx.
+Access level of 'Page_Load' changed to 'protected' in file CustomerInfo.aspx.cs (Line 13).
+Removed attribute AutoEventWireup from file CustomerPJT.aspx.
+Removed attribute Codebehind from file CustomerPJT.aspx.
+Access level of 'Page_Load' changed to 'protected' in file CustomerPJT.aspx.cs (Line 12).
+Removed attribute AutoEventWireup from file CustomerTunggakan.aspx.
+Removed attribute Codebehind from file CustomerTunggakan.aspx.
+Access level of 'Page_Load' changed to 'protected' in file CustomerTunggakan.aspx.cs (Line 12).
+Removed attribute AutoEventWireup from file DaftarKontrak.aspx.
+Removed attribute Codebehind from file DaftarKontrak.aspx.
+Access level of 'Page_Load' changed to 'protected' in file DaftarKontrak.aspx.cs (Line 12).
+Access level of 'search_Click' changed to 'protected' in file DaftarKontrak.aspx.cs (Line 32).
+Removed attribute AutoEventWireup from file DaftarPJT.aspx.
+Removed attribute Codebehind from file DaftarPJT.aspx.
+Access level of 'Page_Load' changed to 'protected' in file DaftarPJT.aspx.cs (Line 12).
+Access level of 'search_Click' changed to 'protected' in file DaftarPJT.aspx.cs (Line 20).
+Removed attribute AutoEventWireup from file DaftarTunggakan.aspx.
+Removed attribute Codebehind from file DaftarTunggakan.aspx.
+Access level of 'Page_Load' changed to 'protected' in file DaftarTunggakan.aspx.cs (Line 12).
+Access level of 'search_Click' changed to 'protected' in file DaftarTunggakan.aspx.cs (Line 20).
+Removed attribute AutoEventWireup from file Default.aspx.
+Removed attribute Codebehind from file Default.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Default.aspx.cs (Line 11).
+Removed attribute TargetSchema from file Head.ascx.
+Removed attribute AutoEventWireup from file Head.ascx.
+Removed attribute Codebehind from file Head.ascx.
+Access level of 'Page_Load' changed to 'protected' in file Head.ascx.cs (Line 11).
+Removed attribute TargetSchema from file HeadCIF.ascx.
+Removed attribute AutoEventWireup from file HeadCIF.ascx.
+Removed attribute Codebehind from file HeadCIF.ascx.
+Access level of 'Page_Load' changed to 'protected' in file HeadCIF.ascx.cs (Line 12).
+Removed attribute TargetSchema from file HeadPJT.ascx.
+Removed attribute AutoEventWireup from file HeadPJT.ascx.
+Removed attribute Codebehind from file HeadPJT.ascx.
+Access level of 'Page_Load' changed to 'protected' in file HeadPJT.ascx.cs (Line 12).
+Removed attribute TargetSchema from file HeadTunggakan.ascx.
+Removed attribute AutoEventWireup from file HeadTunggakan.ascx.
+Removed attribute Codebehind from file HeadTunggakan.ascx.
+Access level of 'Page_Load' changed to 'protected' in file HeadTunggakan.ascx.cs (Line 12).
+Removed attribute AutoEventWireup from file JurnalPJT.aspx.
+Removed attribute Codebehind from file JurnalPJT.aspx.
+Access level of 'Page_Load' changed to 'protected' in file JurnalPJT.aspx.cs (Line 12).
+Access level of 'save_Click' changed to 'protected' in file JurnalPJT.aspx.cs (Line 89).
+Removed attribute AutoEventWireup from file JurnalTunggakan.aspx.
+Removed attribute Codebehind from file JurnalTunggakan.aspx.
+Access level of 'Page_Load' changed to 'protected' in file JurnalTunggakan.aspx.cs (Line 12).
+Access level of 'save_Click' changed to 'protected' in file JurnalTunggakan.aspx.cs (Line 89).
+Removed attribute AutoEventWireup from file Lap.aspx.
+Removed attribute Codebehind from file Lap.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Lap.aspx.cs (Line 11).
+Removed attribute AutoEventWireup from file Log.aspx.
+Removed attribute Codebehind from file Log.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Log.aspx.cs (Line 12).
+Access level of 'display_Click' changed to 'protected' in file Log.aspx.cs (Line 79).
+Removed attribute AutoEventWireup from file LogDetil.aspx.
+Removed attribute Codebehind from file LogDetil.aspx.
+Access level of 'Page_Load' changed to 'protected' in file LogDetil.aspx.cs (Line 12).
+Access level of 'ok_Click' changed to 'protected' in file LogDetil.aspx.cs (Line 89).
+Removed attribute AutoEventWireup from file LogPk.aspx.
+Removed attribute Codebehind from file LogPk.aspx.
+Access level of 'Page_Load' changed to 'protected' in file LogPk.aspx.cs (Line 12).
+Removed attribute AutoEventWireup from file Nav.aspx.
+Removed attribute Codebehind from file Nav.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Nav.aspx.cs (Line 12).
+Removed attribute TargetSchema from file NavCIF.ascx.
+Removed attribute AutoEventWireup from file NavCIF.ascx.
+Removed attribute Codebehind from file NavCIF.ascx.
+Access level of 'Page_Load' changed to 'protected' in file NavCIF.ascx.cs (Line 18).
+Removed attribute TargetSchema from file NavPJT.ascx.
+Removed attribute AutoEventWireup from file NavPJT.ascx.
+Removed attribute Codebehind from file NavPJT.ascx.
+Access level of 'Page_Load' changed to 'protected' in file NavPJT.ascx.cs (Line 18).
+Removed attribute TargetSchema from file NavTunggakan.ascx.
+Removed attribute AutoEventWireup from file NavTunggakan.ascx.
+Removed attribute Codebehind from file NavTunggakan.ascx.
+Access level of 'Page_Load' changed to 'protected' in file NavTunggakan.ascx.cs (Line 18).
+Removed attribute AutoEventWireup from file PJT.aspx.
+Removed attribute Codebehind from file PJT.aspx.
+Access level of 'Page_Load' changed to 'protected' in file PJT.aspx.cs (Line 12).
+Access level of 'display_Click' changed to 'protected' in file PJT.aspx.cs (Line 69).
+Removed attribute AutoEventWireup from file PJTEdit.aspx.
+Removed attribute Codebehind from file PJTEdit.aspx.
+Access level of 'Page_Load' changed to 'protected' in file PJTEdit.aspx.cs (Line 12).
+'Reference' tag with reference to '~/Customer.aspx' added to file PJTEdit.aspx.
+Access level of 'ok_Click' changed to 'protected' in file PJTEdit.aspx.cs (Line 196).
+Access level of 'save_Click' changed to 'protected' in file PJTEdit.aspx.cs (Line 201).
+Removed attribute AutoEventWireup from file PJTRegistrasi.aspx.
+Removed attribute Codebehind from file PJTRegistrasi.aspx.
+Access level of 'Page_Load' changed to 'protected' in file PJTRegistrasi.aspx.cs (Line 12).
+Access level of 'search_Click' changed to 'protected' in file PJTRegistrasi.aspx.cs (Line 36).
+Removed attribute AutoEventWireup from file PJTRegistrasiMarketing.aspx.
+Removed attribute Codebehind from file PJTRegistrasiMarketing.aspx.
+Access level of 'Page_Load' changed to 'protected' in file PJTRegistrasiMarketing.aspx.cs (Line 13).
+Access level of 'save_Click' changed to 'protected' in file PJTRegistrasiMarketing.aspx.cs (Line 141).
+'Reference' tag with reference to '~/Customer.aspx' added to file PJTRegistrasiMarketing.aspx.
+Removed attribute AutoEventWireup from file PJTRegistrasiPenghuni.aspx.
+Removed attribute Codebehind from file PJTRegistrasiPenghuni.aspx.
+Access level of 'Page_Load' changed to 'protected' in file PJTRegistrasiPenghuni.aspx.cs (Line 13).
+Access level of 'save_Click' changed to 'protected' in file PJTRegistrasiPenghuni.aspx.cs (Line 135).
+'Reference' tag with reference to '~/Customer.aspx' added to file PJTRegistrasiPenghuni.aspx.
+Removed attribute AutoEventWireup from file PrintPJT.aspx.
+Removed attribute Codebehind from file PrintPJT.aspx.
+Access level of 'Page_Load' changed to 'protected' in file PrintPJT.aspx.cs (Line 12).
+'Reference' tag with reference to '~/PrintPJTTemplate.ascx' added to file PrintPJT.aspx.
+Access level of 'btn_Click' changed to 'protected' in file PrintPJT.aspx.cs (Line 98).
+Removed attribute AutoEventWireup from file PrintPJTBatch.aspx.
+Removed attribute Codebehind from file PrintPJTBatch.aspx.
+Access level of 'Page_Load' changed to 'protected' in file PrintPJTBatch.aspx.cs (Line 12).
+Access level of 'print_Click' changed to 'protected' in file PrintPJTBatch.aspx.cs (Line 93).
+'Reference' tag with reference to '~/PrintPJTTemplate.ascx' added to file PrintPJTBatch.aspx.
+Removed attribute TargetSchema from file PrintPJTTemplate.ascx.
+Removed attribute AutoEventWireup from file PrintPJTTemplate.ascx.
+Removed attribute Codebehind from file PrintPJTTemplate.ascx.
+Access level of 'Page_Load' changed to 'protected' in file PrintPJTTemplate.ascx.cs (Line 18).
+Removed attribute AutoEventWireup from file PrintST.aspx.
+Removed attribute Codebehind from file PrintST.aspx.
+Access level of 'Page_Load' changed to 'protected' in file PrintST.aspx.cs (Line 12).
+'Reference' tag with reference to '~/PrintSTTemplate.ascx' added to file PrintST.aspx.
+Access level of 'btn_Click' changed to 'protected' in file PrintST.aspx.cs (Line 99).
+Removed attribute AutoEventWireup from file PrintSTBatch.aspx.
+Removed attribute Codebehind from file PrintSTBatch.aspx.
+Access level of 'Page_Load' changed to 'protected' in file PrintSTBatch.aspx.cs (Line 12).
+Access level of 'print_Click' changed to 'protected' in file PrintSTBatch.aspx.cs (Line 93).
+'Reference' tag with reference to '~/PrintSTTemplate.ascx' added to file PrintSTBatch.aspx.
+Removed attribute TargetSchema from file PrintSTTemplate.ascx.
+Removed attribute AutoEventWireup from file PrintSTTemplate.ascx.
+Removed attribute Codebehind from file PrintSTTemplate.ascx.
+Access level of 'Page_Load' changed to 'protected' in file PrintSTTemplate.ascx.cs (Line 21).
+Removed attribute AutoEventWireup from file Reminder.aspx.
+Removed attribute Codebehind from file Reminder.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Reminder.aspx.cs (Line 12).
+Removed attribute AutoEventWireup from file ReminderBelumSettle.aspx.
+Removed attribute Codebehind from file ReminderBelumSettle.aspx.
+Access level of 'Page_Load' changed to 'protected' in file ReminderBelumSettle.aspx.cs (Line 12).
+Removed attribute AutoEventWireup from file ReminderKurang.aspx.
+Removed attribute Codebehind from file ReminderKurang.aspx.
+Access level of 'Page_Load' changed to 'protected' in file ReminderKurang.aspx.cs (Line 12).
+Removed attribute AutoEventWireup from file ReminderPJTBaru.aspx.
+Removed attribute Codebehind from file ReminderPJTBaru.aspx.
+Access level of 'Page_Load' changed to 'protected' in file ReminderPJTBaru.aspx.cs (Line 12).
+Removed attribute AutoEventWireup from file ReminderSTBaru.aspx.
+Removed attribute Codebehind from file ReminderSTBaru.aspx.
+Access level of 'Page_Load' changed to 'protected' in file ReminderSTBaru.aspx.cs (Line 12).
+Removed attribute AutoEventWireup from file SignOut.aspx.
+Removed attribute Codebehind from file SignOut.aspx.
+Access level of 'Page_Load' changed to 'protected' in file SignOut.aspx.cs (Line 11).
+Removed attribute AutoEventWireup from file STRegistrasi.aspx.
+Removed attribute Codebehind from file STRegistrasi.aspx.
+Access level of 'Page_Load' changed to 'protected' in file STRegistrasi.aspx.cs (Line 12).
+Access level of 'search_Click' changed to 'protected' in file STRegistrasi.aspx.cs (Line 36).
+Removed attribute AutoEventWireup from file STRegistrasiMarketing.aspx.
+Removed attribute Codebehind from file STRegistrasiMarketing.aspx.
+Access level of 'Page_Load' changed to 'protected' in file STRegistrasiMarketing.aspx.cs (Line 13).
+Access level of 'save_Click' changed to 'protected' in file STRegistrasiMarketing.aspx.cs (Line 141).
+'Reference' tag with reference to '~/Customer.aspx' added to file STRegistrasiMarketing.aspx.
+Removed attribute AutoEventWireup from file STRegistrasiPenghuni.aspx.
+Removed attribute Codebehind from file STRegistrasiPenghuni.aspx.
+Access level of 'Page_Load' changed to 'protected' in file STRegistrasiPenghuni.aspx.cs (Line 13).
+Access level of 'save_Click' changed to 'protected' in file STRegistrasiPenghuni.aspx.cs (Line 135).
+'Reference' tag with reference to '~/Customer.aspx' added to file STRegistrasiPenghuni.aspx.
+Removed attribute AutoEventWireup from file Tunggakan.aspx.
+Removed attribute Codebehind from file Tunggakan.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Tunggakan.aspx.cs (Line 12).
+Access level of 'display_Click' changed to 'protected' in file Tunggakan.aspx.cs (Line 69).
+Removed attribute AutoEventWireup from file TunggakanEdit.aspx.
+Removed attribute Codebehind from file TunggakanEdit.aspx.
+Access level of 'Page_Load' changed to 'protected' in file TunggakanEdit.aspx.cs (Line 12).
+'Reference' tag with reference to '~/Customer.aspx' added to file TunggakanEdit.aspx.
+Access level of 'ok_Click' changed to 'protected' in file TunggakanEdit.aspx.cs (Line 232).
+Access level of 'save_Click' changed to 'protected' in file TunggakanEdit.aspx.cs (Line 237).
+Removed attribute AutoEventWireup from file TunggakanSettle.aspx.
+Removed attribute Codebehind from file TunggakanSettle.aspx.
+Access level of 'Page_Load' changed to 'protected' in file TunggakanSettle.aspx.cs (Line 12).
+Removed attribute AutoEventWireup from file TunggakanTagihan.aspx.
+Removed attribute Codebehind from file TunggakanTagihan.aspx.
+Access level of 'Page_Load' changed to 'protected' in file TunggakanTagihan.aspx.cs (Line 12).
+Removed attribute AutoEventWireup from file Laporan\AgingPiutang.aspx.
+Removed attribute Codebehind from file Laporan\AgingPiutang.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\AgingPiutang.aspx.cs (Line 12).
+Access level of 'scr_Click' changed to 'protected' in file Laporan\AgingPiutang.aspx.cs (Line 516).
+Access level of 'xls_Click' changed to 'protected' in file Laporan\AgingPiutang.aspx.cs (Line 522).
+Access level of 'cbPrincipal_CheckedChanged' changed to 'protected' in file Laporan\AgingPiutang.aspx.cs (Line 531).
+Removed attribute AutoEventWireup from file Laporan\KartuPiutang.aspx.
+Removed attribute Codebehind from file Laporan\KartuPiutang.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\KartuPiutang.aspx.cs (Line 23).
+Access level of 'scr_Click' changed to 'protected' in file Laporan\KartuPiutang.aspx.cs (Line 457).
+Access level of 'xls_Click' changed to 'protected' in file Laporan\KartuPiutang.aspx.cs (Line 465).
+Removed attribute AutoEventWireup from file Laporan\KartuPiutangv2.aspx.
+Removed attribute Codebehind from file Laporan\KartuPiutangv2.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\KartuPiutangv2.aspx.cs (Line 19).
+Access level of 'scr_Click' changed to 'protected' in file Laporan\KartuPiutangv2.aspx.cs (Line 453).
+Access level of 'xls_Click' changed to 'protected' in file Laporan\KartuPiutangv2.aspx.cs (Line 461).
+Removed attribute AutoEventWireup from file Laporan\LapJT.aspx.
+Removed attribute Codebehind from file Laporan\LapJT.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\LapJT.aspx.cs (Line 18).
+Access level of 'scr_Click' changed to 'protected' in file Laporan\LapJT.aspx.cs (Line 60).
+Access level of 'xls_Click' changed to 'protected' in file Laporan\LapJT.aspx.cs (Line 67).
+Removed attribute AutoEventWireup from file Laporan\LaporanKartuPiutang.aspx.
+Removed attribute Codebehind from file Laporan\LaporanKartuPiutang.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\LaporanKartuPiutang.aspx.cs (Line 12).
+Access level of 'scr_Click' changed to 'protected' in file Laporan\LaporanKartuPiutang.aspx.cs (Line 835).
+Access level of 'xls_Click' changed to 'protected' in file Laporan\LaporanKartuPiutang.aspx.cs (Line 843).
+Removed attribute AutoEventWireup from file Laporan\LaporanKartuPiutang2.aspx.
+Removed attribute Codebehind from file Laporan\LaporanKartuPiutang2.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\LaporanKartuPiutang2.aspx.cs (Line 20).
+'Reference' tag with reference to '~/Laporan/LaporanKartuPiutang.aspx' added to file Laporan\LaporanKartuPiutang2.aspx.
+Removed attribute AutoEventWireup from file Laporan\LapTunggakan.aspx.
+Removed attribute Codebehind from file Laporan\LapTunggakan.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\LapTunggakan.aspx.cs (Line 13).
+Access level of 'scr_Click' changed to 'protected' in file Laporan\LapTunggakan.aspx.cs (Line 55).
+Access level of 'xls_Click' changed to 'protected' in file Laporan\LapTunggakan.aspx.cs (Line 62).
+Removed attribute AutoEventWireup from file Laporan\MasterTagihan.aspx.
+Removed attribute Codebehind from file Laporan\MasterTagihan.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\MasterTagihan.aspx.cs (Line 12).
+Access level of 'scr_Click' changed to 'protected' in file Laporan\MasterTagihan.aspx.cs (Line 72).
+Access level of 'xls_Click' changed to 'protected' in file Laporan\MasterTagihan.aspx.cs (Line 79).
+Access level of 'tipeCheck_CheckedChanged' changed to 'protected' in file Laporan\MasterTagihan.aspx.cs (Line 310).
+Removed attribute AutoEventWireup from file Laporan\OutstandingTagihan.aspx.
+Removed attribute Codebehind from file Laporan\OutstandingTagihan.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\OutstandingTagihan.aspx.cs (Line 20).
+Access level of 'scr_Click' changed to 'protected' in file Laporan\OutstandingTagihan.aspx.cs (Line 79).
+Access level of 'xls_Click' changed to 'protected' in file Laporan\OutstandingTagihan.aspx.cs (Line 86).
+Removed attribute AutoEventWireup from file Laporan\PenerimaanCustomer.aspx.
+Removed attribute Codebehind from file Laporan\PenerimaanCustomer.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\PenerimaanCustomer.aspx.cs (Line 21).
+Access level of 'scr_Click' changed to 'protected' in file Laporan\PenerimaanCustomer.aspx.cs (Line 63).
+Access level of 'xls_Click' changed to 'protected' in file Laporan\PenerimaanCustomer.aspx.cs (Line 70).
+Removed attribute AutoEventWireup from file Laporan\PJT.aspx.
+Removed attribute Codebehind from file Laporan\PJT.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\PJT.aspx.cs (Line 12).
+Access level of 'scr_Click' changed to 'protected' in file Laporan\PJT.aspx.cs (Line 81).
+Access level of 'xls_Click' changed to 'protected' in file Laporan\PJT.aspx.cs (Line 88).
+Access level of 'tipeCheck_CheckedChanged' changed to 'protected' in file Laporan\PJT.aspx.cs (Line 306).
+Removed attribute AutoEventWireup from file Laporan\Tunggakan.aspx.
+Removed attribute Codebehind from file Laporan\Tunggakan.aspx.
+Access level of 'Page_Load' changed to 'protected' in file Laporan\Tunggakan.aspx.cs (Line 12).
+Access level of 'scr_Click' changed to 'protected' in file Laporan\Tunggakan.aspx.cs (Line 89).
+Access level of 'xls_Click' changed to 'protected' in file Laporan\Tunggakan.aspx.cs (Line 96).
+Access level of 'tipeCheck_CheckedChanged' changed to 'protected' in file Laporan\Tunggakan.aspx.cs (Line 348).
+Access level of 'levelCheck_CheckedChanged' changed to 'protected' in file Laporan\Tunggakan.aspx.cs (Line 359).
+Removed file ISC056A.COLLECTION.csproj.
+Removed file ISC056A.COLLECTION.csproj.webinfo.
+Project ISC056A.COLLECTION.csproj has been converted successfully at November 17 2011, 12:56:13.

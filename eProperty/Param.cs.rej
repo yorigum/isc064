@@ -1,0 +1,10 @@
+diff a/eProperty/Param.cs b/eProperty/Param.cs	(rejected hunks)
+@@ -1,6 +1,8 @@
+ using System;
+ using System.Data;
+ using System.Web.UI.WebControls;
++using System.Configuration;
++using System.Web.Configuration;
+ 
+ namespace ISC028
+ {
