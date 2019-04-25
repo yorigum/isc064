@@ -27,9 +27,9 @@ namespace ISC064.MARKETINGJUAL
 
         protected void Fill()
         {
-            string strSql = "SELECT B.NoAgent,A.Status,A.NoStock, A.NoReservasi,A.TglInput,B.Nama AS [NamaCs],C.Nama AS [NamaSales],A.NoUnit,A.NoSkema,A.Harga FROM [NUP02]..CustomerReservasi A"
-                            + " INNER JOIN [NUP02]..CustomerData B ON A.NoCustomer = B.NoCustomer"
-                            + " INNER JOIN [NUP02]..AgentData C ON B.NoAgent = C.NoAgent"
+            string strSql = "SELECT B.NoAgent,A.Status,A.NoStock, A.NoReservasi,A.TglInput,B.Nama AS [NamaCs],C.Nama AS [NamaSales],A.NoUnit,A.NoSkema,A.Harga FROM [NUP03]..CustomerReservasi A"
+                            + " INNER JOIN [NUP03]..CustomerData B ON A.NoCustomer = B.NoCustomer"
+                            + " INNER JOIN [NUP03]..AgentData C ON B.NoAgent = C.NoAgent"
                             + " ORDER BY A.NoReservasi";
 
             DataTable rs = Db.Rs(strSql);

@@ -25,13 +25,12 @@ namespace ISC064.MARKETINGJUAL
             }
             else
             {
+                reprint.Visible = false;
                 alertbf.Visible = false;
-                string Lokasi = Db.SingleString("SELECT Lokasi FROM MS_KONTRAK WHERE NoKontrak='" + NoKontrak + "'");
-                if (Lokasi != "S")
-                    SetTemplate();//CondoVilla
-                else
-                    SetTemplate2();//Shophouse
-
+                //string Lokasi = Db.SingleString("SELECT Lokasi FROM MS_KONTRAK WHERE NoKontrak='" + NoKontrak + "'");
+                //if (Lokasi != "S")
+                    SetTemplate();
+               
                 if (!Page.IsPostBack)
                 {
                     Fill();
@@ -76,19 +75,19 @@ namespace ISC064.MARKETINGJUAL
                 count.Text = rs.Rows[0]["PrintSP"].ToString();
                 if ((int)rs.Rows[0]["PrintSP"] == 0)
                 {
-                    if (Request.QueryString["Priview"].ToString() == "1")
-                    {
-                        Tampil();
+                    //if (Request.QueryString["Priview"].ToString() == "1")
+                    //{
+                    //    Tampil();
 
-                        Db.Execute("UPDATE MS_KONTRAK SET PrintSP = (PrintSP - 1) WHERE NoKontrak = '" + NoKontrak + "'");
-                        Response.Write("<style media='print'>body{display : none;visibility : hidden;}</style>");
-                    }
-                    else
-                    {
-                        Tampil(); //langsung tampil
-                                  //ConvertPdf();
-                                  //Response.Redirect(Param.PathLinkFilePDFMarketingJual + NoKontrak.Replace("/", "_").Replace("\\", "_") + Project + "_SP.pdf");
-                    }
+                    //    Db.Execute("UPDATE MS_KONTRAK SET PrintSP = (PrintSP - 1) WHERE NoKontrak = '" + NoKontrak + "'");
+                    //    Response.Write("<style media='print'>body{display : none;visibility : hidden;}</style>");
+                    //}
+                    //else
+                    //{
+                    //    Tampil(); //langsung tampil
+                    //              //ConvertPdf();
+                    //              //Response.Redirect(Param.PathLinkFilePDFMarketingJual + NoKontrak.Replace("/", "_").Replace("\\", "_") + Project + "_SP.pdf");
+                    //}
                 }
                 else
                 {

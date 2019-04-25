@@ -1,10 +1,10 @@
 ﻿This report shows the steps taken to convert your Web application from ASP.NET 1.1 to ASP.NET 2.0. 
 There may be some unresolved conversion issues you will need to manually fix. 
 For more information, please refer to http://go.microsoft.com/fwlink/?LinkId=46995 or search for the help topic "Converting from Visual Studio .NET 2002 or 2003".
-Conversion Started on project file ISC056A.MARKETINGJUAL.csproj at November 17 2011, 12:58:41.
+Conversion Started on project file ISC064A.MARKETINGJUAL.csproj at November 17 2011, 12:58:41.
 
 =========================ERRORS===================
-Error: Unable to convert project reference ISC056A.
+Error: Unable to convert project reference ISC064A.
 
 =========================WARNINGS=================
 Warning: If the base class of any of the code-behind classes declares page fields please add the 'CodeFileBaseClass' attribute in the corresponding Page.
@@ -821,10 +821,10 @@ Access level of 'xls_Click' changed to 'protected' in file Laporan\SummaryPenjua
 'Reference' tag with reference to '~/Unit.aspx' added to file Laporan\SummaryPenjualanPerLantai.aspx.
 Added folder App_Code.
 Moved file Func.cs to the App_Code\ directory.
-Updated the attribute 'Inherits' with value 'ISC056A.MARKETINGJUAL.Migrated_TabelStok2' in the file 'TabelStok2.aspx'.
-Code file 'App_Code\Migrated\Stub_TabelStok2_aspx_cs.cs' was created and contains an abstract class 'Migrated_TabelStok2' used as a base class for the class 'ISC056A.MARKETINGJUAL.TabelStok2'.    TabelStok2.aspx.cs
-Removed file ISC056A.MARKETINGJUAL.csproj.
-Removed file ISC056A.MARKETINGJUAL.csproj.webinfo.
+Updated the attribute 'Inherits' with value 'ISC064A.MARKETINGJUAL.Migrated_TabelStok2' in the file 'TabelStok2.aspx'.
+Code file 'App_Code\Migrated\Stub_TabelStok2_aspx_cs.cs' was created and contains an abstract class 'Migrated_TabelStok2' used as a base class for the class 'ISC064A.MARKETINGJUAL.TabelStok2'.    TabelStok2.aspx.cs
+Removed file ISC064A.MARKETINGJUAL.csproj.
+Removed file ISC064A.MARKETINGJUAL.csproj.webinfo.
 Renamed file printsptemplatev2.ascx to file printsptemplatev2.ascx.exclude.
 Renamed file _bak\printsptemplate.ascx to file printsptemplate.ascx.exclude.
-Project ISC056A.MARKETINGJUAL.csproj has been converted successfully at November 17 2011, 12:59:11.
+Project ISC064A.MARKETINGJUAL.csproj has been converted successfully at November 17 2011, 12:59:11.

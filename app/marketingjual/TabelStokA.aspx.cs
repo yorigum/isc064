@@ -344,9 +344,9 @@ namespace ISC064.MARKETINGJUAL
                 string Status = rs.Rows[0]["Status"].ToString();
                 Color color = new Color();
                 int Count = 0;
-                Count = Db.SingleInteger("SELECT ISNULL(COUNT(*),0) FROM [NUP02]..CustomerNupDetail WHERE NoUnit= '" + unit + "'");
+                Count = Db.SingleInteger("SELECT ISNULL(COUNT(*),0) FROM [NUP03]..CustomerNupDetail WHERE NoUnit= '" + unit + "'");
                 int Count2 = 0;
-                Count2 = Db.SingleInteger("SELECT ISNULL(COUNT(*),0) FROM [NUP02]..CustomerNUPDetail WHERE NoUnit='" + unit + "'");
+                Count2 = Db.SingleInteger("SELECT ISNULL(COUNT(*),0) FROM [NUP03]..CustomerNUPDetail WHERE NoUnit='" + unit + "'");
                 if (Count == 1 || Count2 != 0)
                 {
                     color = System.Drawing.ColorTranslator.FromHtml("#ff0000");

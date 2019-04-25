@@ -1,4 +1,4 @@
-<%@ Page language="c#" Inherits="ISC056A.MARKETINGJUAL.UnitPeta" CodeFile="UnitPeta.aspx.cs" %>
+<%@ Page language="c#" Inherits="ISC064A.MARKETINGJUAL.UnitPeta" CodeFile="UnitPeta.aspx.cs" %>
 <%@ Register TagPrefix="uc1" TagName="Head" Src="Head.ascx" %>
 <!DOCTYPE html>
 <html>

@@ -43,12 +43,16 @@ namespace ISC064.FINANCEAR
             if (rs.Rows.Count != 0)
             {
                 namacs.Text = Cf.Str(rs.Rows[0]["Customer"]);
+                Customer.Text = Cf.Str(rs.Rows[0]["Customer"]);
                 //req nomor panahome (reset perbulan)
                 nobkm.Text = rs.Rows[0]["NoTTS2"].ToString();
 
                 tglbkm.Text = Cf.DayIndo(rs.Rows[0]["Tgltts"]);
                 nosp.Text = rs.Rows[0]["Ref"].ToString();
                 nilainup.Text = Cf.Num(rs.Rows[0]["Total"]);
+                int temp = Convert.ToInt16(Cf.Num(rs.Rows[0]["Total"]));
+                jumlahUnit.Text = Cf.Num(rs.Rows[0]["Total"]);
+
                 terbilangnilainup.Text = Money.Str(Convert.ToDecimal(rs.Rows[0]["Total"])) + " RUPIAH";
 
                 if (rs.Rows[0]["Acc"].ToString() != "-")

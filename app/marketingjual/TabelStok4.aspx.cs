@@ -24,7 +24,7 @@ namespace ISC064.MARKETINGJUAL
 		private void Fill()
 		{
 			Func.KontrakHeader(NoKontrak, nokontrakl, unit, customer, agent);
-            lanjutan.Visible = false;            
+            //lanjutan.Visible = false;            
             DataTable rs = Db.Rs("SELECT Project,RefSkema FROM MS_KONTRAK WHERE NoKontrak = '" + NoKontrak + "'");
 
 			asp.HRef = "javascript:openPopUp('PrintSP.aspx?NoKontrak=" + NoKontrak+"&project="+rs.Rows[0]["Project"]+"','920','650')";
@@ -34,14 +34,14 @@ namespace ISC064.MARKETINGJUAL
             else
                 atts.HRef = "javascript:openPopUp('PrintTTS.aspx?NoTTS=" + NoTTS + "&project=" + rs.Rows[0]["Project"] + "','920','650')";
             
-            aDiskon.HRef = "KontrakDiskon.aspx?NoKontrak=" + NoKontrak;
-            if(rs.Rows[0]["RefSkema"].ToString() == "0")
-            {
-                lanjutan.Visible = true;
-            }
-            aReset.HRef = "TagihanReset.aspx?NoKontrak=" + NoKontrak;
-            aCustom.HRef = "TagihanCustom.aspx?NoKontrak=" + NoKontrak;
-            //aTagihan.HRef = "TagihanCustom.aspx?NoKontrak=" + NoKontrak;
+           //// aDiskon.HRef = "KontrakDiskon.aspx?NoKontrak=" + NoKontrak;
+           // if(rs.Rows[0]["RefSkema"].ToString() == "0")
+           // {
+           //     lanjutan.Visible = true;
+           // }
+           // aReset.HRef = "TagihanReset.aspx?NoKontrak=" + NoKontrak;
+           // aCustom.HRef = "TagihanCustom.aspx?NoKontrak=" + NoKontrak;
+           // //aTagihan.HRef = "TagihanCustom.aspx?NoKontrak=" + NoKontrak;
         }
 
 		private string NoKontrak

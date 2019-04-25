@@ -27,10 +27,10 @@ namespace ISC064.MARKETINGJUAL
 
         protected void Fill()
         {
-            string strSql = "SELECT D.NoSkema,A.NoAgent,A.NoNup,D.NoStock,D.NoUnit,A.Status,D.TglInput,D.NoSkema,B.Nama AS [NamaCs],C.Nama AS [NamaSales] FROM [NUP02]..CustomerNUP A"
-                            + " INNER JOIN [NUP02]..CustomerNUPDetail D ON A.NoNUP = D.NoNUP"
-                            + " INNER JOIN [NUP02]..CustomerData B ON A.NoCustomer = B.NoCustomer"
-                            + " INNER JOIN [NUP02]..AgentData C ON B.NoAgent = C.NoAgent"
+            string strSql = "SELECT D.NoSkema,A.NoAgent,A.NoNup,D.NoStock,D.NoUnit,A.Status,D.TglInput,D.NoSkema,B.Nama AS [NamaCs],C.Nama AS [NamaSales] FROM [NUP03]..CustomerNUP A"
+                            + " INNER JOIN [NUP03]..CustomerNUPDetail D ON A.NoNUP = D.NoNUP"
+                            + " INNER JOIN [NUP03]..CustomerData B ON A.NoCustomer = B.NoCustomer"
+                            + " INNER JOIN [NUP03]..AgentData C ON B.NoAgent = C.NoAgent"
                             + " ORDER BY A.NoNUP";
 
             DataTable rs = Db.Rs(strSql);

@@ -1,45 +1,169 @@
 ﻿<%@ Control Language="c#" Inherits="ISC064.NUP.PrintTTSTemplate2" CodeFile="PrintTTSTemplate2.ascx.cs" %>
 
 <style>
-    .fontheader
-    {
-        font-size:18pt;
-        font-family:'Times New Roman', Times, serif;
+    .fontheader {
+        font-size: 18pt;
+        font-family: 'Times New Roman', Times, serif;
     }
 
-    .fontisi
-    {
-        font-size:11pt;
-        font-family:'Times New Roman', Times, serif;
+    .fontisi {
+        font-size: 11pt;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .auto-style1 {
+        height: 23px;
     }
 </style>
 
 <div style="width: 100%">
-    <table style="width:100%">
+    <table style="width: 100%">
         <tr>
-            <td style="text-align:left"><img src="/Media/logo_svs_tts.jpg" style="width:200px; height:150px" /></td>
-            <td class="fontheader" style="text-align:center"><b>TANDA TERIMA SEMENTARA</b></td>
+            <td rowspan="3">
+                <img src="/Media/logo_svs_tts.jpg" style="width: 200px; height: 150px" /></td>
+            <td style="text-align:center"><b>PT. SERPONG BANGUN CIPTA</b><br />
+                </td>
+            <td style="vertical-align: middle;text-align:center"><b>No. Faktur</b></td>
+        </tr>
+        <tr>
+            <td style="text-align:center">
+                Jl. BSD RAYA UTAMA RUKO MENDRISIO III BLOK B NO.11, GADING SERPONG
+                 </td>
+            <td rowspan="2" style="vertical-align: bottom"><b></b></td>
+        </tr>
+        <tr>
+            <td style="text-align:center"> 
+                TELP (021) 2222-0080 FAX (021) 2222-0081</td>
+        </tr>
+        <tr>
+
+            <td></td>
+
+        </tr>
+
+        <tr>
+            <td></td>
+            <td class="fontheader" style="text-align: center; vertical-align: central"><b>TANDA TERIMA SEMENTARA</b></td>
+            <td></td>
         </tr>
     </table>
 
     <br />
+    <table style="width:100%">
+        <tr>
+            <td style="width:40%" >Telah Terima dari<br /></td>
+            <td style="width:5%">&nbsp:</td>
+            <td colspan="3">
+                <asp:Label ID="namacs" runat="server"></asp:Label></td>
+        </tr>
+        <tr><td></td></tr>
+                <tr><td></td></tr>
+        <tr><td></td></tr>
+
+        <tr>
+            <td style="width:40%" >Sejumlah Uang</td>
+            <td style="width:5%">&nbsp:</td>
+            <td colspan="3">
+                <asp:Label ID="nilainup" runat="server"> ,-</asp:Label>
+            </td>
+        </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+        <tr><td></td></tr>
+
+    </table>
+    <table style="width:100%">
+        <tr>
+            <td style="width:40%" >Untuk Pembayaran NUP Marchand<br /></td>
+            <td style="width:5%">&nbsp:</td>
+            <td colspan="3">&nbsp&nbsp<b>Unit</b></td>
+        </tr>
+        <tr><td></td></tr>
+                <tr><td></td></tr>
+        <tr><td></td></tr>
+
+    </table>
+    <br />
+    <table style="width:100%">
+        <tr>
+            <td rowspan="2" class="fontisi">Rp.
+                <asp:Label ID="Label1" runat="server"> ,-</asp:Label></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="text-align:right">Tangerang, </td>
+
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td  colspan="5" style="text-align:right">Diberikan Oleh,</td>
+            <td></td>
+        </tr>
+    </table>
+    <br />
+<b>Data Rekening Pemilik NUP</b>
+    <table style="width:60%;">
+       
+        <tr>
+            <td style="width:20%">Nama bank</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="width:20%">Cabang</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="width:20%">No. Account</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="width:20%">Nama Pemilik</td>
+            <td></td>
+        </tr>
+
+    </table>
+    <table style="width:100%">
+        <tr>
+            <td ></td>
+            <td style="text-align:right">________________</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+           <td style="text-align:right"><b>Admin PT. SBC</b></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <b>NOTE	:</b>
+    <br />
+    Tanda Terima Sementara harap di serahkan kembali	pada saat pengambilan	Kwitansi asli dan	nomor urut NUP.&nbsp;
+
     <table style="width: 100%">
         <tr>
-            <td class="fontisi" colspan="3">Terima dari :</td>
-            <td class="fontisi" style="width: 20%">&nbsp;</td>
+            <td class="fontisi" colspan="3">Telah Terima dari :</td>
+            <td class="fontisi" style="width: 20%">
+                &nbsp;</td>
             <td class="fontisi" style="width: 5%">Nomor</td>
             <td class="fontisi" style="width: 2%">:</td>
             <td class="fontisi">
                 <asp:Label ID="nobkm" runat="server"></asp:Label></td>
         </tr>
         <tr>
-            <td class="fontisi" colspan="3">
-                <asp:Label ID="namacs" runat="server"></asp:Label></td>
+            <td class="fontisi" colspan="3">&nbsp;</td>
             <td>&nbsp;</td>
             <td class="fontisi">Tanggal</td>
             <td class="fontisi">:</td>
             <td class="fontisi">
                 <asp:Label ID="tglbkm" runat="server"></asp:Label></td>
+        </tr>
+        <tr>
+            <td class="fontisi" style="width: 13%">Uang Sejumlah</td>
+            <td class="fontisi" style="width: 2%">:</td>
+            <td class="fontisi" style="width: 30%">Rp.
+
         </tr>
         <tr>
             <td class="fontisi" colspan="3">
@@ -61,12 +185,7 @@
         <tr>
             <td class="fontisi" colspan="3">&nbsp;</td>
         </tr>
-        <tr>
-            <td class="fontisi" style="width: 13%">Uang Sejumlah</td>
-            <td class="fontisi" style="width: 2%">:</td>
-            <td class="fontisi" style="width: 30%">
-                Rp. <asp:Label ID="nilainup" runat="server"> ,-</asp:Label></td>
-        </tr>
+
         <tr>
             <td class="fontisi">Terbilang</td>
             <td class="fontisi">:</td>
@@ -74,6 +193,7 @@
                 <asp:Label ID="terbilangnilainup" runat="server"></asp:Label></td>
         </tr>
     </table>
+
 
     <hr />
 
@@ -87,7 +207,7 @@
             <td class="fontisi" colspan="3"><b>Uang Tanda Jadi</b></td>
             <td class="fontisi" style="width: 30%">&nbsp;</td>
             <td class="fontisi" style="width: 7%">Rp.</td>
-            <td class="fontisi" style="text-align:right;">
+            <td class="fontisi" style="text-align: right;">
                 <asp:Label ID="dppnup" runat="server"></asp:Label></td>
         </tr>
         <tr id="hide1" runat="server">
@@ -112,7 +232,7 @@
             <td class="fontisi" colspan="3"><b>PPN</b></td>
             <td class="fontisi">&nbsp;</td>
             <td class="fontisi">Rp.</td>
-            <td class="fontisi" style="text-align:right;">
+            <td class="fontisi" style="text-align: right;">
                 <asp:Label ID="ppnnup" runat="server"></asp:Label></td>
         </tr>
     </table>
@@ -135,7 +255,7 @@
                 <asp:Label ID="tglbankacc" runat="server"></asp:Label></td>
         </tr>
         <tr>
-            <td class="fontisi" colspan="4" style="height:90px;">&nbsp;</td>
+            <td class="fontisi" colspan="4" style="height: 90px;">&nbsp;</td>
         </tr>
         <tr>
             <td class="fontisi" colspan="3">&nbsp;</td>

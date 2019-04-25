@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Diagnostics;
 
-namespace ISC056.FINANCEAR
+namespace .FINANCEAR
 {
 	public partial class PrintBKMBatch : System.Web.UI.Page
 	{
@@ -99,12 +99,12 @@ namespace ISC056.FINANCEAR
                 Dari = x;
             }
 
-            string Project = " AND ISC056_MARKETINGJUAL..MS_UNIT.Project = '" + project.SelectedValue + "'";
+            string Project = " AND _MARKETINGJUAL..MS_UNIT.Project = '" + project.SelectedValue + "'";
 
             DataTable rs = Db.Rs("SELECT "
                 + " *"
                 + " FROM MS_TTS"
-                + " INNER JOIN ISC056_MARKETINGJUAL..MS_UNIT on MS_TTS.Unit = MS_UNIT.NoUnit"
+                + " INNER JOIN _MARKETINGJUAL..MS_UNIT on MS_TTS.Unit = MS_UNIT.NoUnit"
                 + " WHERE MS_TTS.Status = 'POST'"
                 + " AND CONVERT(varchar,TglBKM,112) >= '" + Cf.Tgl112(Dari) + "'"
                 + " AND CONVERT(varchar,TglBKM,112) <= '" + Cf.Tgl112(Sampai) + "'"

@@ -1,4 +1,4 @@
-<%@ Page language="c#" Inherits="ISC056.ADMINJUAL.PetaUpload" CodeFile="PetaUpload.aspx.cs" %>
+<%@ Page language="c#" Inherits=".ADMINJUAL.PetaUpload" CodeFile="PetaUpload.aspx.cs" %>
 <%@ Register TagPrefix="uc1" TagName="Head" Src="Head.ascx" %>
 <!DOCTYPE html>
 <html lang="en">

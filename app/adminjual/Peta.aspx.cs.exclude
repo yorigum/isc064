@@ -13,7 +13,7 @@ using System.Data;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 
-namespace ISC056.ADMINJUAL
+namespace .ADMINJUAL
 {
 	public partial class Migrated_Peta : Peta
 	{

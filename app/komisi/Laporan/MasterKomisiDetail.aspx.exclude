@@ -1,6 +1,6 @@
 ﻿<%@ Register TagPrefix="uc1" TagName="Head" Src="../Head.ascx" %>
 
-<%@ Page Language="C#" CodeFile="MasterKomisiDetail.aspx.cs" Inherits="ISC056A.KOMISI.Laporan.MasterKomisiDetail" %>
+<%@ Page Language="C#" CodeFile="MasterKomisiDetail.aspx.cs" Inherits="A.KOMISI.Laporan.MasterKomisiDetail" %>
 
 <!DOCTYPE html>
 <html>

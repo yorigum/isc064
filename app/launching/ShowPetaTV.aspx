@@ -39,7 +39,10 @@
                             <h5>Hold</h5>
                         </div>
                     </div>
-                    <asp:PlaceHolder ID="list" runat="server"></asp:PlaceHolder>
+                    <div>
+                        <asp:PlaceHolder ID="list" runat="server"></asp:PlaceHolder>
+                    </div>
+                    
                 </div>
                 <div class="col s6" style="margin-left: 950px; margin-top: 20px">
                     <div class="container">

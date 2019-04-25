@@ -26,7 +26,7 @@
                     <p>
                         <b>Terbaru :</b>
                     </p>
-                    <asp:ListBox ID="baru" Rows="25" runat="server" Width="200" CssClass="ddl"></asp:ListBox>
+                    <asp:ListBox ID="baru" Rows="25" Enabled="false" runat="server" Width="200" CssClass="ddl"></asp:ListBox>
                     <p class="feed">
                         <asp:Label ID="feed" runat="server"></asp:Label>
                     </p>

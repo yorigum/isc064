@@ -1023,7 +1023,7 @@ namespace ISC064.MARKETINGJUAL
                 DateTime TglKontrak = Convert.ToDateTime(tglKontrak.Text);
                 string Skema = Cf.Str(skema.SelectedItem.Text);
                 int NoAgent = Convert.ToInt32(agent.SelectedValue);
-                DateTime TargetST = TglKontrak.AddMonths(36);
+                DateTime TargetST = TglKontrak.AddMonths(36);//??
                 decimal surcharge = Convert.ToDecimal(Surcharge.Text);
                 decimal pl = Convert.ToDecimal(Pricelist.Text);
 

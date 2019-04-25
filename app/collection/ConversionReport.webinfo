@@ -1,10 +1,10 @@
 ﻿This report shows the steps taken to convert your Web application from ASP.NET 1.1 to ASP.NET 2.0. 
 There may be some unresolved conversion issues you will need to manually fix. 
 For more information, please refer to http://go.microsoft.com/fwlink/?LinkId=46995 or search for the help topic "Converting from Visual Studio .NET 2002 or 2003".
-Conversion Started on project file ISC056A.COLLECTION.csproj at November 17 2011, 12:56:04.
+Conversion Started on project file A.COLLECTION.csproj at November 17 2011, 12:56:04.
 
 =========================ERRORS===================
-Error: Unable to convert project reference ISC056A.
+Error: Unable to convert project reference A.
 
 =========================WARNINGS=================
 Warning: If the base class of any of the code-behind classes declares page fields please add the 'CodeFileBaseClass' attribute in the corresponding Page.
@@ -257,6 +257,6 @@ Access level of 'scr_Click' changed to 'protected' in file Laporan\Tunggakan.asp
 Access level of 'xls_Click' changed to 'protected' in file Laporan\Tunggakan.aspx.cs (Line 96).
 Access level of 'tipeCheck_CheckedChanged' changed to 'protected' in file Laporan\Tunggakan.aspx.cs (Line 348).
 Access level of 'levelCheck_CheckedChanged' changed to 'protected' in file Laporan\Tunggakan.aspx.cs (Line 359).
-Removed file ISC056A.COLLECTION.csproj.
-Removed file ISC056A.COLLECTION.csproj.webinfo.
-Project ISC056A.COLLECTION.csproj has been converted successfully at November 17 2011, 12:56:13.
+Removed file A.COLLECTION.csproj.
+Removed file A.COLLECTION.csproj.webinfo.
+Project A.COLLECTION.csproj has been converted successfully at November 17 2011, 12:56:13.

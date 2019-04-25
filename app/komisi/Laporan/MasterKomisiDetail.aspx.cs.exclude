@@ -16,7 +16,7 @@ using System.Drawing;
 using System.Diagnostics;
 
 
-namespace ISC056A.KOMISI.Laporan
+namespace A.KOMISI.Laporan
 {
     public partial class MasterKomisiDetail : System.Web.UI.Page
     {
@@ -122,13 +122,13 @@ namespace ISC056A.KOMISI.Laporan
             int NoAttachment = Db.SingleInteger(
                 "SELECT TOP 1 AttachmentID FROM LapPDF ORDER BY AttachmentID DESC");
 
-            string strSql = "SELECT * FROM ISC056A_MARKETINGJUAL..LapPDF WHERE AttachmentID  = '" + NoAttachment + "'";
+            string strSql = "SELECT * FROM A_MARKETINGJUAL..LapPDF WHERE AttachmentID  = '" + NoAttachment + "'";
             DataTable rs = Db.Rs(strSql);
 
             string nfilename = "MasterKomisiDetail" + NoAttachment + ".pdf";
 
             //update filename
-            Db.Execute("UPDATE ISC056A_MARKETINGJUAL..LapPDF SET FileName= '" + nfilename + "' WHERE AttachmentID = " + NoAttachment);
+            Db.Execute("UPDATE A_MARKETINGJUAL..LapPDF SET FileName= '" + nfilename + "' WHERE AttachmentID = " + NoAttachment);
 
 
             //folder untuk menyimpan file pdf
@@ -146,7 +146,7 @@ namespace ISC056A.KOMISI.Laporan
                 ;
 
             //update link
-            Db.Execute("UPDATE ISC056A_MARKETINGJUAL..LapPDF SET Link= '" + link + "' WHERE AttachmentID = " + NoAttachment);
+            Db.Execute("UPDATE A_MARKETINGJUAL..LapPDF SET Link= '" + link + "' WHERE AttachmentID = " + NoAttachment);
 
             //format page
             p.StartInfo.Arguments = "--orientation landscape --page-width 8.5in --page-height 11in --margin-left 0 --margin-right 0 --margin-top 0.25cm --margin-bottom 0 " + link + " " + save;

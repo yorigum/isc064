@@ -1,6 +1,6 @@
 <%@ Reference Page="~/Log.aspx" %>
 
-<%@ Page Language="c#" Inherits="ISC056A.LEGAL.KontrakSertifikatEdit" CodeFile="KontrakSertifikatEdit2.aspx.cs" %>
+<%@ Page Language="c#" Inherits="A.LEGAL.KontrakSertifikatEdit" CodeFile="KontrakSertifikatEdit2.aspx.cs" %>
 
 <%@ Register TagPrefix="uc1" TagName="Head" Src="Head.ascx" %>
 <!DOCTYPE html>

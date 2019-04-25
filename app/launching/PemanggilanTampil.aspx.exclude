@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PemanggilanTampil.aspx.cs" Inherits="ISC056.LAUNCHING.PemanggilanTampil" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PemanggilanTampil.aspx.cs" Inherits=".LAUNCHING.PemanggilanTampil" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">

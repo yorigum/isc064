@@ -54,11 +54,11 @@
 				</tr>
 			</table>
 			<br>
-			<h1><a id="asp" runat="server">Print KPU + SP + SKEMA</a></h1>
+			<h1><a id="asp" runat="server">Print SP</a></h1>
 			<br>
 			<h1 style="display:none"><a id="atts" runat="server">Print TTS</a></h1>
 			<br>
-			<p style="padding:5px"><b>Prosedur 
+			<%--<p style="padding:5px"><b>Prosedur 
 					Lanjutan :</b></p>
 			<ul>
 			    <li>
@@ -93,7 +93,7 @@
 					Membuat jadwal tagihan diluar skema cara bayar yang berlaku. Prosedur tidak 
 					tersedia untuk surat pesanan yang sudah memiliki jadwal tagihan.
 				</li>--%>
-        </ul>
+        </ul>--%>
         <script src="/Js/Jquery.min.js"></script>
         <script src="/Js/jquery.signalR-2.2.3.min.js"></script>
         <script src="signalr/hubs" type="text/javascript"></script>

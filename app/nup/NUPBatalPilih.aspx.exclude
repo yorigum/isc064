@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="NUPBatalPilih.aspx.cs" Inherits="ISC056A.NUP.NUPBatalPilih" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="NUPBatalPilih.aspx.cs" Inherits="A.NUP.NUPBatalPilih" %>
 
 <!DOCTYPE html>
 

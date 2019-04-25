@@ -1,5 +1,5 @@
 <%@ Register TagPrefix="uc1" TagName="Head" Src="Head.ascx" %>
-<%@ Page language="c#" Inherits="ISC056.MARKETINGJUAL.Accounting" CodeFile="Accounting.aspx.cs" %>
+<%@ Page language="c#" Inherits="ISC064.MARKETINGJUAL.Accounting" CodeFile="Accounting.aspx.cs" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>

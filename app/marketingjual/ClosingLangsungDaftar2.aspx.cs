@@ -619,7 +619,7 @@ namespace ISC064.MARKETINGJUAL
             string Tipe = "02";
             if (LokasiVA != "S")
                 Tipe = "01";
-            NoVA = VA + TglKontrak.Year.ToString().Substring(2, 2) + TglKontrak.Month.ToString().PadLeft(2, '0') + Tipe + Lokasii.ToString() + Lantai.PadLeft(2,'0') + Nomor.PadLeft(2, '0');
+            NoVA = VA + TglKontrak.Year.ToString().Substring(2, 2) + TglKontrak.Month.ToString().PadLeft(2, '0') + Tipe + Lokasii.ToString() + Lantai.PadLeft(2, '0') + Nomor.PadLeft(2, '0');
 
             string sSQL = "UPDATE MS_KONTRAK"
                 + " SET JenisKPR = '" + KPR + "'"
@@ -766,11 +766,11 @@ namespace ISC064.MARKETINGJUAL
                 if (Request.QueryString["NUP"].ToString() == "0")
                 {
                     //UPDATE KE CUSTOMERRESERVASI
-                    Db.Execute("UPDATE [NUP02]..CustomerReservasi SET Status='C' WHERE NoReservasi='" + Request.QueryString["NoUrut"].ToString() + "'");
+                    Db.Execute("UPDATE [NUP03]..CustomerReservasi SET Status='C' WHERE NoReservasi='" + Request.QueryString["NoUrut"].ToString() + "'");
                 }
                 else
                 {
-                    Db.Execute("UPDATE [NUP02]..CustomerNUP SET Status='C' WHERE NoNUP='" + Request.QueryString["NoUrut"].ToString() + "'");
+                    Db.Execute("UPDATE [NUP03]..CustomerNUP SET Status='C' WHERE NoNUP='" + Request.QueryString["NoUrut"].ToString() + "'");
                     //UPDATE Ke CUSTOMERNUPDETAIL
                     NoTTS = SaveTTS2(Request.QueryString["NoUrut"].ToString()
                     , Db.SingleInteger("SELECT NoCustomer FROM MS_KONTRAK WHERE NoKontrak = '" + NoKontrak + "'"));
@@ -1131,30 +1131,30 @@ namespace ISC064.MARKETINGJUAL
                 decimal NilaiKontrak = 0;
                 decimal DPP = 0;
                 //Di coment karena di batam tidak ad PPN willy
-                //if (sifatppn.SelectedIndex == 1)
-                //{
-                //    if (includeppn)
-                //    {
-                //        DPP = Math.Round(Netto / (decimal)1.1);
+                if (sifatppn.SelectedIndex == 1)
+                {
+                    if (includeppn)
+                    {
+                        DPP = Math.Round(Netto / (decimal)1.1);
 
-                //        if (roundppn.Checked)
-                //            NilaiPPN = Math.Round(Netto - DPP);
-                //        else
-                //            NilaiPPN = Netto - DPP;
-                //    }
-                //    else
-                //    {
-                //        DPP = Netto;
-                //        NilaiPPN = (DPP * (decimal)0.1);
+                        if (roundppn.Checked)
+                            NilaiPPN = Math.Round(Netto - DPP);
+                        else
+                            NilaiPPN = Netto - DPP;
+                    }
+                    else
+                    {
+                        DPP = Netto;
+                        NilaiPPN = (DPP * (decimal)0.1);
 
-                //        if (roundppn.Checked)
-                //            NilaiPPN = Math.Round(NilaiPPN);
-                //    }
-                //}
-                //else
-                //{
-                DPP = Netto;
-                //}
+                        if (roundppn.Checked)
+                            NilaiPPN = Math.Round(NilaiPPN);
+                    }
+                }
+                else
+                {
+                    DPP = Netto;
+                }
 
                 NilaiKontrak = DPP + NilaiPPN;
                 decimal PPN = Math.Round(NilaiKontrak - DPP);
@@ -1546,8 +1546,8 @@ namespace ISC064.MARKETINGJUAL
         //NUP
         private int SaveTTS2(string NoNUP, int NoCustomer)
         {
-            DataTable rsPayment = Db.Rs("SELECT B.* FROM [NUP02]..CustomerNUP A"
-                + " INNER JOIN [NUP02]..CustomerPayment B ON A.NoPayment = B.NoPayment"
+            DataTable rsPayment = Db.Rs("SELECT B.* FROM [NUP03]..CustomerNUP A"
+                + " INNER JOIN [NUP03]..CustomerPayment B ON A.NoPayment = B.NoPayment"
                 + " WHERE NoNUP = '" + NoNUP + "'");
             DateTime TglTTS = Convert.ToDateTime(tglKontrak.Text);
             string Unit = Cf.Str(unit.Text);

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="PrintBFormTemplate.ascx.cs"
-    Inherits="ISC056.MARKETINGJUAL.PrintBFormTemplate" %>
+    Inherits="ISC064.MARKETINGJUAL.PrintBFormTemplate" %>
 <style type="text/css">
     .style1 {
         width: 28px;

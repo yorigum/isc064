@@ -5,7 +5,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace ISC056A.MARKETINGJUAL.Laporan
+namespace ISC064A.MARKETINGJUAL.Laporan
 {
     public partial class tes : System.Web.UI.Page
     {

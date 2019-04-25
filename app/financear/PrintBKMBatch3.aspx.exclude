@@ -1,6 +1,6 @@
 <%@ Reference Control="~/PrintBKMTemplate.ascx" %>
 
-<%@ Page Language="c#" Inherits="ISC056.FINANCEAR.PrintBKMBatch" CodeFile="PrintBKMBatch.aspx.cs" %>
+<%@ Page Language="c#" Inherits=".FINANCEAR.PrintBKMBatch" CodeFile="PrintBKMBatch.aspx.cs" %>
 
 <%@ Register TagPrefix="uc1" TagName="Head" Src="Head.ascx" %>
 <!DOCTYPE html>

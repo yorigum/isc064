@@ -170,7 +170,7 @@
                                                 </asp:RadioButtonList>
                                             </td>
                                         </tr>
-                                        <tr id="trppn" runat="server">
+                                    <%--    <tr id="trppn" runat="server">
                                             <td colspan="2">&nbsp;
                                             </td>
                                             <td>
@@ -243,7 +243,7 @@
                                                     <asp:Label ID="bunga2c" runat="server" CssClass="err"></asp:Label>
                                                 </div>
                                             </td>
-                                        </tr>
+                                        </tr>--%>
                                         <tr>
                                             <td style="vertical-align: top">Sumber Dana
                                             </td>

@@ -1,7 +1,7 @@
 <%@ Reference Page="~/Peta.aspx" %>
 <%@ Reference Page="~/Unit.aspx" %>
 
-<%@ Page Language="c#" Inherits="ISC056.ADMINJUAL.PetaUploadKoord" CodeFile="PetaUploadKoord.aspx.cs" %>
+<%@ Page Language="c#" Inherits=".ADMINJUAL.PetaUploadKoord" CodeFile="PetaUploadKoord.aspx.cs" %>
 
 <%@ Register TagPrefix="uc1" TagName="Head" Src="Head.ascx" %>
 <!DOCTYPE html>

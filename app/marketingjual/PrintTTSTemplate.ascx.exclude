@@ -1,4 +1,4 @@
-<%@ Control Language="c#" Inherits="ISC056.MARKETINGJUAL.PrintTTSTemplate" CodeFile="PrintTTSTemplate.ascx.cs" %>
+<%@ Control Language="c#" Inherits="ISC064.MARKETINGJUAL.PrintTTSTemplate" CodeFile="PrintTTSTemplate.ascx.cs" %>
 <style>
     .tt {
     }

@@ -1,4 +1,4 @@
-namespace ISC056.MARKETINGJUAL
+namespace ISC064.MARKETINGJUAL
 {
 	using System;
 	using System.Data;
@@ -33,7 +33,7 @@ namespace ISC056.MARKETINGJUAL
                 + "		WHEN 'UJ' THEN 'UANG JAMINAN'"
                 + "		WHEN 'DN' THEN 'DISKON'"
                 + " END AS CaraBayar2"
-                + " FROM ISC056_FINANCEAR..MS_TTS WHERE NoTTS = " + nomor;
+                + " FROM ISC064_FINANCEAR..MS_TTS WHERE NoTTS = " + nomor;
 
             DataTable rs = Db.Rs(strSql);
 
@@ -42,19 +42,19 @@ namespace ISC056.MARKETINGJUAL
                 string Tipe = "";
                 if (rs.Rows[0]["NoNUP"].ToString() == "")
                 {
-                    Tipe = Db.SingleString("Select Jenis From ISC056_MARKETINGJUAL..MS_KONTRAK Where NoKontrak = '" + rs.Rows[0]["Ref"].ToString() + "'");
+                    Tipe = Db.SingleString("Select Jenis From ISC064_MARKETINGJUAL..MS_KONTRAK Where NoKontrak = '" + rs.Rows[0]["Ref"].ToString() + "'");
                 }
                 else
                 {
-                    string NoStock = Db.SingleString("SELECT NoStock FROM ISC056_MARKETINGJUAL..MS_NUP_PRIORITY WHERE NoNUP = '" + rs.Rows[0]["NoNUP"].ToString() + "'");
-                    Tipe = Db.SingleString("SELECT Jenis FROM ISC056_MARKETINGJUAL..MS_UNIT WHERE NoStock = '" + NoStock + "'");
+                    string NoStock = Db.SingleString("SELECT NoStock FROM ISC064_MARKETINGJUAL..MS_NUP_PRIORITY WHERE NoNUP = '" + rs.Rows[0]["NoNUP"].ToString() + "'");
+                    Tipe = Db.SingleString("SELECT Jenis FROM ISC064_MARKETINGJUAL..MS_UNIT WHERE NoStock = '" + NoStock + "'");
                 }
-                string KTP1 = Db.SingleString("Select KTP1 From ISC056_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
-                string KTP2 = Db.SingleString("Select KTP2 From ISC056_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
-                string KTP3 = Db.SingleString("Select KTP3 From ISC056_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
-                string KTP4 = Db.SingleString("Select KTP4 From ISC056_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
-                string Email = Db.SingleString("Select Email From ISC056_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
-                string NoHP = Db.SingleString("Select NoHp From ISC056_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
+                string KTP1 = Db.SingleString("Select KTP1 From ISC064_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
+                string KTP2 = Db.SingleString("Select KTP2 From ISC064_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
+                string KTP3 = Db.SingleString("Select KTP3 From ISC064_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
+                string KTP4 = Db.SingleString("Select KTP4 From ISC064_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
+                string Email = Db.SingleString("Select Email From ISC064_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
+                string NoHP = Db.SingleString("Select NoHp From ISC064_MARKETINGJUAL..MS_CUSTOMER Where Nama = '" + rs.Rows[0]["Customer"].ToString() + "'");
 
                 typ.Text = Tipe;
                 alamat.Text = KTP1 + "," + KTP2 + "," + KTP3 + "," + KTP4;
@@ -64,7 +64,7 @@ namespace ISC056.MARKETINGJUAL
                 typ.Text = rs.Rows[0]["Jenis"].ToString();
                 nokwi.Text = rs.Rows[0]["NoTTS"].ToString().PadLeft(6, '0');
                 tglreal.Text = Cf.DayIndo(rs.Rows[0]["TglTTS"]);
-                kasir.Text = Db.SingleString("SELECT Nama FROM ISC056_SECURITY..USERNAME WHERE UserID = '" + rs.Rows[0]["UserID"].ToString() + "'");
+                kasir.Text = Db.SingleString("SELECT Nama FROM ISC064_SECURITY..USERNAME WHERE UserID = '" + rs.Rows[0]["UserID"].ToString() + "'");
 
                 tanggal.Text = Cf.DayIndo(rs.Rows[0]["TglTTS"]);
 

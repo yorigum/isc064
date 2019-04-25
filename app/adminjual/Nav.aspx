@@ -92,7 +92,7 @@
                             <li>
                                 <input value="Upload Price List Skema..." onclick="go(this, 'UnitUploadPLSkema.aspx')" class="navmenu" type="button"></li>
                             <li>
-                                <input value="Upload Site Plan..." onclick="go(this, 'Peta.aspx')" class="navmenu" type="button" />
+                                <input value="Upload Floor Plan..." onclick="go(this, 'Peta.aspx')" class="navmenu" type="button" />
                             </li>
                             <li>
                                 <input value="Upload Koordinat..." onclick="go(this, 'PetaUploadKoord.aspx')" class="navmenu" type="button" />

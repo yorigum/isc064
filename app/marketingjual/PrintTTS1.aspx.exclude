@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PrintTTS1.aspx.cs" Inherits="ISC056.MARKETINGJUAL.PrintTTS1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PrintTTS1.aspx.cs" Inherits="ISC064.MARKETINGJUAL.PrintTTS1" %>
 
 <%@ Reference Control="~/PrintTTSTemplate2.ascx" %>
 <!DOCTYPE html>

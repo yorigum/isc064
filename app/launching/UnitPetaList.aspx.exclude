@@ -1,4 +1,4 @@
-<%@ Page Language="c#" Inherits="ISC056.LAUNCHING.UnitPetaList" CodeFile="UnitPetaList.aspx.cs" %>
+<%@ Page Language="c#" Inherits=".LAUNCHING.UnitPetaList" CodeFile="UnitPetaList.aspx.cs" %>
 
 <%@ Register TagPrefix="uc1" TagName="Head" Src="Head.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >

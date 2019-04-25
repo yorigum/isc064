@@ -6,7 +6,7 @@ using System.Web.UI.HtmlControls;
 using System.IO;
 using System.Web.UI;
 
-namespace ISC056.LAUNCHING
+namespace .LAUNCHING
 {
     public partial class UnitPetaList : System.Web.UI.Page
     {

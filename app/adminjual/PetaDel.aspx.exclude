@@ -1,4 +1,4 @@
-<%@ Page language="c#" Inherits="ISC056.ADMINJUAL.PetaHapus" CodeFile="PetaDel.aspx.cs" %>
+<%@ Page language="c#" Inherits=".ADMINJUAL.PetaHapus" CodeFile="PetaDel.aspx.cs" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

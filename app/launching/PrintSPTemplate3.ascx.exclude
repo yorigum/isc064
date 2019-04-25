@@ -1,4 +1,4 @@
-﻿<%@ Control Language="c#" Inherits="ISC056.LAUNCHING.PrintSPTemplate3" CodeFile="PrintSPTemplate3.ascx.cs" %>
+﻿<%@ Control Language="c#" Inherits=".LAUNCHING.PrintSPTemplate3" CodeFile="PrintSPTemplate3.ascx.cs" %>
 <style>
     td {
         font-size: 7pt;

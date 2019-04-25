@@ -1,5 +1,5 @@
 ﻿<%@ Reference Control="~/PrintBFormTemplate.ascx" %>
-<%@ Page language="c#" Inherits="ISC056.MARKETINGJUAL.PrintBForm1" CodeFile="PrintBForm1.aspx.cs" %>
+<%@ Page language="c#" Inherits="ISC064.MARKETINGJUAL.PrintBForm1" CodeFile="PrintBForm1.aspx.cs" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <html>
 	<head>

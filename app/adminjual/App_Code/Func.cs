@@ -5,7 +5,7 @@ using System.Data;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 
-namespace ISC056.ADMINJUAL
+namespace ISC064.ADMINJUAL
 {
 	public class Func
 	{

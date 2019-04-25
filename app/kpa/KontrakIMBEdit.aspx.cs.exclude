@@ -4,7 +4,7 @@ using System.Data;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 
-namespace ISC056A.KPA
+namespace A.KPA
 {
 	public partial class KontrakIMBEdit : System.Web.UI.Page
 	{

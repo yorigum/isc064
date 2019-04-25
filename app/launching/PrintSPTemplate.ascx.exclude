@@ -1,4 +1,4 @@
-<%@ Control Language="c#" Inherits="ISC056.LAUNCHING.PrintSPTemplate" CodeFile="PrintSPTemplate.ascx.cs" %>
+<%@ Control Language="c#" Inherits=".LAUNCHING.PrintSPTemplate" CodeFile="PrintSPTemplate.ascx.cs" %>
 <link href="/Media/Style.css" type="text/css" rel="stylesheet">
 <style type="text/css">
     table, tr {

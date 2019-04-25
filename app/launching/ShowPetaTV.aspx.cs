@@ -22,11 +22,11 @@ namespace ISC064.LAUNCHING
         }
         private void Count()
         {
-            decimal Total = Db.SingleDecimal("SELECT ISNULL(COUNT(*),0) FROM MS_UNIT WHERE Lokasi='ASA'");
-            decimal Belum = Db.SingleDecimal("SELECT ISNULL(COUNT(*),0) FROM MS_UNIT WHERE Status='H' AND Lokasi='ASA' AND NoStock NOT IN (SELECT NoStock FROM MS_NUP_PRIORITY WHERE NoStock=MS_UNIT.NoStock)");
+            decimal Total = Db.SingleDecimal("SELECT ISNULL(COUNT(*),0) FROM MS_UNIT WHERE Lokasi='RK'");
+            decimal Belum = Db.SingleDecimal("SELECT ISNULL(COUNT(*),0) FROM MS_UNIT WHERE Status='H' AND Lokasi='RK' AND NoStock NOT IN (SELECT NoStock FROM MS_NUP_PRIORITY WHERE NoStock=MS_UNIT.NoStock)");
             decimal StockBergerak = (Total - Belum);
 
-            decimal Terjual = Db.SingleDecimal("SELECT ISNULL(COUNT(*),0) FROM MS_UNIT WHERE Lokasi='ASA' AND NoStock IN (SELECT NoStock FROM MS_NUP_PRIORITY WHERE NoStock=MS_UNIT.NoStock)");
+            decimal Terjual = Db.SingleDecimal("SELECT ISNULL(COUNT(*),0) FROM MS_UNIT WHERE Lokasi='RK' AND NoStock IN (SELECT NoStock FROM MS_NUP_PRIORITY WHERE NoStock=MS_UNIT.NoStock)");
             
             total.InnerText = Total.ToString();
             belum.InnerText = Belum.ToString();
@@ -47,7 +47,7 @@ namespace ISC064.LAUNCHING
                 + " Peta = '" + NamaPeta + "'";
             DataTable rs = Db.Rs(strSql);
             //width height
-            var siteplan = new SitePlan(700, 600, "/marketingjual/FP/Base/PETA_" + PetaID + ".jpg", "/marketingjual/FP/Base/PETA_" + PetaID + ".png");
+            var siteplan = new SitePlan(900, 500, "/marketingjual/FP/Base/PETA_" + PetaID + ".jpg", "/marketingjual/FP/Base/PETA_" + PetaID + ".png");
 
 
             foreach (DataRow r in rs.Rows)
@@ -107,10 +107,10 @@ namespace ISC064.LAUNCHING
             if (Unit.Status == "B")
             {
                 var adaKontrak = Db.SingleInteger("Select count(*) from ms_kontrak where NoStock='" + NoStock + "' and Status='A'") > 0;
-                int adaPriority = Db.SingleInteger("Select count(*) from MS_NUP_PRIORITY where NoStock='" + NoStock + "' AND Tipe='RUMAH'");
+                int adaPriority = Db.SingleInteger("Select count(*) from MS_NUP_PRIORITY where NoStock='" + NoStock + "' AND Tipe='RK'");
 
                 string NoNUPPriority = Db.SingleString("SELECT NoNUP FROM MS_NUP_PRIORITY WHERE NoStock='" + NoStock + "'");
-                decimal TotBayar = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiBayar),0) FROM MS_NUP_PELUNASAN WHERE NoNup = '" + NoNUPPriority + "' AND Tipe = 'RUMAH'");
+                decimal TotBayar = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiBayar),0) FROM MS_NUP_PELUNASAN WHERE NoNup = '" + NoNUPPriority + "' AND Tipe = 'RK'");
 
                 int CountLun = Db.SingleInteger("SELECT COUNT(*) FROM MS_NUP_PELUNASAN WHERE NoNUP = '" + NoNUPPriority + "'");
                 string Kon = Db.SingleString("SELECT Nokontrak FROM MS_NUP_PRIORITY WHERE NoNup = '"+ NoNUPPriority + "'");

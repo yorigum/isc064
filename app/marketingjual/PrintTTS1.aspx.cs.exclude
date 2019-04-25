@@ -5,7 +5,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Diagnostics;
 
-namespace ISC056.MARKETINGJUAL
+namespace ISC064.MARKETINGJUAL
 {
     public partial class PrintTTS1 : System.Web.UI.Page
     {

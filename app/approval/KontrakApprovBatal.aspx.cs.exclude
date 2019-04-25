@@ -8,7 +8,7 @@ using System.Web.UI.HtmlControls;
 using System.Text;
 using Microsoft.AspNet.SignalR;
 
-namespace ISC056.APPROVAL
+namespace .APPROVAL
 {
     public partial class KontrakApprovBatal : System.Web.UI.Page
     {
@@ -110,7 +110,7 @@ namespace ISC056.APPROVAL
 
         private static DataTable HakApp(string ProjectID)
         {
-            DataTable hakapp = Db.Rs("SELECT * FROM ISC056_SECURITY..REF_APPROVAL WHERE Tipe = 3 AND Project='" + ProjectID + "'");
+            DataTable hakapp = Db.Rs("SELECT * FROM _SECURITY..REF_APPROVAL WHERE Tipe = 3 AND Project='" + ProjectID + "'");
 
             return hakapp;
         }
@@ -147,10 +147,10 @@ namespace ISC056.APPROVAL
                 w += "AND NoKontrak IN (SELECT NoKontrak FROM MS_KONTRAK_APP_LOG WHERE NoKontrak = a.NoKontrak AND Tipe = 3 AND Lvl = " + (lvl - 1) + " AND Approve = 1 AND Finish = 0)";
             }
 
-            string strSql = " SELECT a.*, b.NoUnit, c.Nama, d.Nama AS Agent FROM ISC056_MARKETINGJUAL..MS_KONTRAK a"
-                            + " INNER JOIN ISC056_MARKETINGJUAL..MS_UNIT b ON a.NoStock = b.NoStock"
-                            + " INNER JOIN ISC056_MARKETINGJUAL..MS_CUSTOMER c ON a.NoCustomer = c.NoCustomer"
-                            + " INNER JOIN ISC056_MARKETINGJUAL..MS_AGENT d ON a.NoAgent = d.NoAgent"
+            string strSql = " SELECT a.*, b.NoUnit, c.Nama, d.Nama AS Agent FROM _MARKETINGJUAL..MS_KONTRAK a"
+                            + " INNER JOIN _MARKETINGJUAL..MS_UNIT b ON a.NoStock = b.NoStock"
+                            + " INNER JOIN _MARKETINGJUAL..MS_CUSTOMER c ON a.NoCustomer = c.NoCustomer"
+                            + " INNER JOIN _MARKETINGJUAL..MS_AGENT d ON a.NoAgent = d.NoAgent"
                             + " WHERE a.ApprovalBatal = 1"
                             + " AND a.Status <> 'B'"
                             + " AND a.Project = '" + project.SelectedValue + "'"
@@ -258,10 +258,10 @@ namespace ISC056.APPROVAL
         }
         private void Fill()
         {
-            string strSql = " SELECT a.*, b.NoUnit, c.Nama, d.Nama AS Agent FROM ISC056_MARKETINGJUAL..MS_KONTRAK a"
-                            + " INNER JOIN ISC056_MARKETINGJUAL..MS_UNIT b ON a.NoStock = b.NoStock"
-                            + " INNER JOIN ISC056_MARKETINGJUAL..MS_CUSTOMER c ON a.NoCustomer = c.NoCustomer"
-                            + " INNER JOIN ISC056_MARKETINGJUAL..MS_AGENT d ON a.NoAgent = d.NoAgent"
+            string strSql = " SELECT a.*, b.NoUnit, c.Nama, d.Nama AS Agent FROM _MARKETINGJUAL..MS_KONTRAK a"
+                            + " INNER JOIN _MARKETINGJUAL..MS_UNIT b ON a.NoStock = b.NoStock"
+                            + " INNER JOIN _MARKETINGJUAL..MS_CUSTOMER c ON a.NoCustomer = c.NoCustomer"
+                            + " INNER JOIN _MARKETINGJUAL..MS_AGENT d ON a.NoAgent = d.NoAgent"
                             + " WHERE a.ApprovalBatal = 1"
                             + " AND a.Status <> 'B'"
                             + " AND a.Project = '" + project.SelectedValue + "'"
@@ -422,7 +422,7 @@ namespace ISC056.APPROVAL
             int Lvl = Convert.ToInt16(lvl);
             int MaxApp = 0;
             if (HakApp(project.SelectedValue).Rows.Count > 0)
-                MaxApp = Db.SingleByte("SELECT TOP 1 Lvl FROM ISC056_SECURITY..REF_APPROVAL WHERE Tipe = 3 AND Project='" + project.SelectedValue + "' ORDER BY Lvl DESC");
+                MaxApp = Db.SingleByte("SELECT TOP 1 Lvl FROM _SECURITY..REF_APPROVAL WHERE Tipe = 3 AND Project='" + project.SelectedValue + "' ORDER BY Lvl DESC");
 
             string Ket = "";
             string NoStock = "";
@@ -436,10 +436,10 @@ namespace ISC056.APPROVAL
                         Ket = "Tgl. Batal : " + Cf.Day(Convert.ToDateTime(Tgl));
 
                     //Push notif ke Approval selanjutnya
-                    string Pemohon = Db.SingleString("SELECT PemohonBatal FROM ISC056_MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak = '" + NoKontrak + "'");
+                    string Pemohon = Db.SingleString("SELECT PemohonBatal FROM _MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak = '" + NoKontrak + "'");
                     byte nextLvl = Convert.ToByte(Lvl + 1);
 
-                    DataTable rsNextApp = Db.Rs("SELECT * FROM ISC056_SECURITY..REF_APPROVAL WHERE Tipe = 3 "
+                    DataTable rsNextApp = Db.Rs("SELECT * FROM _SECURITY..REF_APPROVAL WHERE Tipe = 3 "
                         + " AND Lvl = " + (Lvl + 1));
 
                         for (int i = 0; i < rsNextApp.Rows.Count; i++)
@@ -451,11 +451,11 @@ namespace ISC056.APPROVAL
                     else
                     {
                         NoStock = Db.SingleString("SELECT NoStock FROM MS_KONTRAK WHERE NoKontrak = '" + NoKontrak + "'");
-                        Db.Execute("EXEC ISC056_MARKETINGJUAL..spKontrakBatal "
+                        Db.Execute("EXEC _MARKETINGJUAL..spKontrakBatal "
                         + " '" + NoKontrak + "'"
                         );
 
-                        if (Db.SingleString("SELECT Status FROM ISC056_MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak = '" + NoKontrak + "'") == "B")
+                        if (Db.SingleString("SELECT Status FROM _MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak = '" + NoKontrak + "'") == "B")
                         {
                             DataTable rs = Db.Rs("SELECT"
                                 + " MS_KONTRAK.NoKontrak AS [No. Kontrak]"
@@ -463,17 +463,17 @@ namespace ISC056.APPROVAL
                                 + ",MS_CUSTOMER.Nama AS [Customer]"
                                 + ",MS_AGENT.Nama AS [Agent]"
                                 + ",AlasanBatal AS [Alasan Pembatalan]"
-                                + " FROM ISC056_MARKETINGJUAL..MS_KONTRAK AS MS_KONTRAK INNER JOIN ISC056_MARKETINGJUAL..MS_CUSTOMER AS MS_CUSTOMER"
+                                + " FROM _MARKETINGJUAL..MS_KONTRAK AS MS_KONTRAK INNER JOIN _MARKETINGJUAL..MS_CUSTOMER AS MS_CUSTOMER"
                                 + " ON MS_KONTRAK.NoCustomer = MS_CUSTOMER.NoCustomer"
-                                + " INNER JOIN ISC056_MARKETINGJUAL..MS_AGENT AS MS_AGENT"
+                                + " INNER JOIN _MARKETINGJUAL..MS_AGENT AS MS_AGENT"
                                 + " ON MS_KONTRAK.NoAgent = MS_AGENT.NoAgent"
                                 + " WHERE MS_KONTRAK.NoKontrak = '" + NoKontrak + "'");
 
-                            decimal NilaiBiaya = Db.SingleDecimal("SELECT BiayaBatal FROM ISC056_MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak ='" + NoKontrak + "'");
+                            decimal NilaiBiaya = Db.SingleDecimal("SELECT BiayaBatal FROM _MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak ='" + NoKontrak + "'");
 
                             if (NilaiBiaya != 0)
                             {
-                                Db.Execute("EXEC ISC056_MARKETINGJUAL..spTagihanDaftar "
+                                Db.Execute("EXEC _MARKETINGJUAL..spTagihanDaftar "
                                     + " '" + NoKontrak + "'"
                                     + ",'BIAYA ADM. PEMBATALAN'"
                                     + ",'" + Cf.Day(DateTime.Today) + "'"
@@ -490,13 +490,13 @@ namespace ISC056.APPROVAL
                             // );
 
                             decimal NilaiMasuk = Db.SingleDecimal(
-                                "SELECT ISNULL(SUM(NilaiPelunasan),0) FROM ISC056_MARKETINGJUAL..MS_PELUNASAN WHERE NoKontrak = '" + NoKontrak + "'");
-                            Db.Execute("UPDATE ISC056_MARKETINGJUAL..MS_KONTRAK SET BatalMasuk = "
+                                "SELECT ISNULL(SUM(NilaiPelunasan),0) FROM _MARKETINGJUAL..MS_PELUNASAN WHERE NoKontrak = '" + NoKontrak + "'");
+                            Db.Execute("UPDATE _MARKETINGJUAL..MS_KONTRAK SET BatalMasuk = "
                                 + NilaiMasuk + " WHERE NoKontrak = '" + NoKontrak + "'");
-                            decimal NilaiKlaim = Db.SingleDecimal("SELECT NilaiKlaim FROM ISC056_MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak ='" + NoKontrak + "'");
-                            decimal NilaiPengembalian = Db.SingleDecimal("SELECT NilaiPulang FROM ISC056_MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak ='" + NoKontrak + "'");
-                            decimal TotalLunas = Db.SingleDecimal("SELECT TotalLunasBatal FROM ISC056_MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak ='" + NoKontrak + "'");
-                            string acc = Db.SingleString("SELECT AccBatal FROM ISC056_MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak ='" + NoKontrak + "'");
+                            decimal NilaiKlaim = Db.SingleDecimal("SELECT NilaiKlaim FROM _MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak ='" + NoKontrak + "'");
+                            decimal NilaiPengembalian = Db.SingleDecimal("SELECT NilaiPulang FROM _MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak ='" + NoKontrak + "'");
+                            decimal TotalLunas = Db.SingleDecimal("SELECT TotalLunasBatal FROM _MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak ='" + NoKontrak + "'");
+                            string acc = Db.SingleString("SELECT AccBatal FROM _MARKETINGJUAL..MS_KONTRAK WHERE NoKontrak ='" + NoKontrak + "'");
 
                             Ket = Cf.LogCapture(rs)
                                 + "<br>Biaya Administrasi : " + Cf.Num(NilaiBiaya)
@@ -512,7 +512,7 @@ namespace ISC056.APPROVAL
 
                             //floor plan
                             string Peta = Db.SingleString("SELECT Peta "
-                                + " FROM ISC056_MARKETINGJUAL..MS_UNIT AS MS_UNIT INNER JOIN ISC056_MARKETINGJUAL..MS_KONTRAK AS MS_KONTRAK ON MS_UNIT.NoStock = MS_KONTRAK.NoStock "
+                                + " FROM _MARKETINGJUAL..MS_UNIT AS MS_UNIT INNER JOIN _MARKETINGJUAL..MS_KONTRAK AS MS_KONTRAK ON MS_UNIT.NoStock = MS_KONTRAK.NoStock "
                                 + " WHERE NoKontrak = '" + NoKontrak + "'");
                             Func.GenerateFP(Peta);
 
@@ -522,8 +522,8 @@ namespace ISC056.APPROVAL
 
                             //SA01
                             string CnnEsales = "Data Source=.;Initial Catalog=SA01;Persist Security Info=True;User ID=batavianet;Password=iNDigo100";
-                            string ClosingID = Db.SingleString("SELECT ISNULL(ClosingID,'') FROM ISC056_MARKETINGJUAL..MS_Kontrak WHERE NoKontrak='" + NoKontrak + "'");
-                            string AlasanBatal = Db.SingleString("SELECT ISNULL(AlasanBatal,'') FROM ISC056_MARKETINGJUAL..MS_Kontrak WHERE NoKontrak='" + NoKontrak + "'");
+                            string ClosingID = Db.SingleString("SELECT ISNULL(ClosingID,'') FROM _MARKETINGJUAL..MS_Kontrak WHERE NoKontrak='" + NoKontrak + "'");
+                            string AlasanBatal = Db.SingleString("SELECT ISNULL(AlasanBatal,'') FROM _MARKETINGJUAL..MS_Kontrak WHERE NoKontrak='" + NoKontrak + "'");
 
                             if (ClosingID != "")
                             {
@@ -587,7 +587,7 @@ namespace ISC056.APPROVAL
 
                 if (HakApp(project.SelectedValue).Rows.Count > 0)
                 {
-                    Db.Execute("EXEC ISC056_MARKETINGJUAL..spLogKontrakApp "
+                    Db.Execute("EXEC _MARKETINGJUAL..spLogKontrakApp "
                     + " '" + NoKontrak + "'"
                     + ",'" + Act.UserID + "'"
                     + "," + Approve //Approve
@@ -605,7 +605,7 @@ namespace ISC056.APPROVAL
                     }
                 }
 
-                Db.Execute("EXEC ISC056_MARKETINGJUAL..spLogKontrak "
+                Db.Execute("EXEC _MARKETINGJUAL..spLogKontrak "
                     + " 'APR-BA'"
                     + ",'" + Act.UserID + "'"
                     + ",'" + Act.IP + "'"

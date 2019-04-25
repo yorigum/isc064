@@ -13,7 +13,6 @@
     <link href="/Media/Style.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/fontawesome/css/font-awesome.min.css">
     <meta name="ctrl" content="5">
-    <meta name="sec" content="Level Sales - Edit Level Sales">
 </head>
 <body onkeyup="if(event.keyCode==27) window.close()">
     <form id="Form1" method="post" runat="server">

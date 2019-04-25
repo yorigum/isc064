@@ -1,6 +1,6 @@
 <%@ Reference Page="~/Log.aspx" %>
 
-<%@ Page Language="c#" Inherits="ISC056A.KPA.KontrakIMBEdit" CodeFile="KontrakIMBEdit.aspx.cs" %>
+<%@ Page Language="c#" Inherits="A.KPA.KontrakIMBEdit" CodeFile="KontrakIMBEdit.aspx.cs" %>
 
 <%@ Register TagPrefix="uc1" TagName="Head" Src="Head.ascx" %>
 <!DOCTYPE html>

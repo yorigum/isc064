@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeFile="KontrakApprovBatal.aspx.cs" Inherits="ISC056.APPROVAL.KontrakApprovBatal" %>
+﻿<%@ Page Language="C#" CodeFile="KontrakApprovBatal.aspx.cs" Inherits=".APPROVAL.KontrakApprovBatal" %>
 
 <%@ Register TagPrefix="uc1" TagName="Head" Src="Head.ascx" %>
 <!DOCTYPE html>
