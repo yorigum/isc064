@@ -92,7 +92,7 @@
 					<br>
 					Membuat jadwal tagihan diluar skema cara bayar yang berlaku. Prosedur tidak 
 					tersedia untuk surat pesanan yang sudah memiliki jadwal tagihan.
-				</li>--%>
+				</li>
         </ul>--%>
         <script src="/Js/Jquery.min.js"></script>
         <script src="/Js/jquery.signalR-2.2.3.min.js"></script>

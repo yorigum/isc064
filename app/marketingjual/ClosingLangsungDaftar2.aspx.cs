@@ -12,6 +12,7 @@ namespace ISC064.MARKETINGJUAL
     {
         //public decimal HargaTanah = 0;
         //public decimal HargaBangunan = 0;
+        //public decimal HargaBangunan = 0;
 
         protected void Page_Load(object sender, System.EventArgs e)
         {

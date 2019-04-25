@@ -121,9 +121,11 @@ namespace ISC064.MARKETINGJUAL
         {
             if (valid())
             {
-                decimal pl = Db.SingleDecimal("SELECT ISNULL(PriceList, 0) FROM MS_UNIT"
-                   + " WHERE NoStock = '" + NoStock + "'");
+                //decimal pl = Db.SingleDecimal("SELECT ISNULL(PriceList, 0) FROM MS_UNIT"
+                //   + " WHERE NoStock = '" + NoStock + "'");
 
+                decimal pl = Db.SingleDecimal("SELECT ISNULL(PriceList, 0) FROM MS_PRICELIST"
+                + " WHERE NoStock = '" + NoStock + "' AND NoSkema='" + carabayar.SelectedValue + "'");
                 gross.Text = Cf.Num(pl);
 
                 string RumusDiskon = "";

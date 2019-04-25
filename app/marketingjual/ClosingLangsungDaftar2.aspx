@@ -170,14 +170,15 @@
                                                 </asp:RadioButtonList>
                                             </td>
                                         </tr>
-                                    <%--    <tr id="trppn" runat="server">
+                                        <tr id="trppn" runat="server">
                                             <td colspan="2">&nbsp;
                                             </td>
                                             <td>
                                                 <asp:CheckBox ID="roundppn" runat="server" Checked="True" Text="Nilai PPN Dibulatkan"></asp:CheckBox>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <div style="visibility:hidden">
+                                        <tr style="visibility:hidden;">
                                             <td style="vertical-align: top">Diskon Harga Jual
                                             </td>
                                             <td style="vertical-align: top">:
@@ -200,7 +201,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr style="visibility:hidden">
                                             <td style="vertical-align: top">Diskon Tambahan
                                             </td>
                                             <td style="vertical-align: top">:
@@ -225,7 +226,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr style="visibility:hidden">
                                             <td style="vertical-align: top">Bunga
                                             </td>
                                             <td style="vertical-align: top">:
@@ -243,7 +244,8 @@
                                                     <asp:Label ID="bunga2c" runat="server" CssClass="err"></asp:Label>
                                                 </div>
                                             </td>
-                                        </tr>--%>
+                                        </tr>
+                                        </div>
                                         <tr>
                                             <td style="vertical-align: top">Sumber Dana
                                             </td>
@@ -251,13 +253,13 @@
                                             </td>
                                             <td>
                                                 <asp:DropDownList ID="ddlSumberDana" runat="server" OnSelectedIndexChanged="ddlSumberDana_SelectedIndexChanged"
-                                                    AutoPostBack="true">
+                                                    AutoPostBack="true" Enabled="false">
                                                     <asp:ListItem></asp:ListItem>
-                                                    <asp:ListItem Value="0">Dana Sendiri</asp:ListItem>
-                                                    <asp:ListItem Value="1">Pinjaman Bank</asp:ListItem>
+                                                    <asp:ListItem Value="0" Selected="True">Dana Sendiri</asp:ListItem>
+                                                    <%--<asp:ListItem Value="1">Pinjaman Bank</asp:ListItem>
                                                     <asp:ListItem Value="2">Warisan/Hibah</asp:ListItem>
                                                     <asp:ListItem Value="3">Lainnya</asp:ListItem>
-                                                </asp:DropDownList>
+                                               --%> </asp:DropDownList>
                                                 <asp:Label ID="ddlSumberDanac" runat="server" CssClass="err"></asp:Label>
                                             </td>
                                         </tr>
@@ -276,14 +278,14 @@
                                             <td style="vertical-align: top">:
                                             </td>
                                             <td>
-                                                <asp:DropDownList ID="ddlTujuan" runat="server" OnSelectedIndexChanged="ddlTujuan_SelectedIndexChanged"
+                                                <asp:DropDownList Enabled="false" ID="ddlTujuan" runat="server" OnSelectedIndexChanged="ddlTujuan_SelectedIndexChanged"
                                                     AutoPostBack="true">
                                                     <asp:ListItem></asp:ListItem>
-                                                    <asp:ListItem Value="0">Investasi</asp:ListItem>
+                                                   <%-- <asp:ListItem Value="0">Investasi</asp:ListItem>
                                                     <asp:ListItem Value="1">Jual Kembali</asp:ListItem>
-                                                    <asp:ListItem Value="2">Dipakai Sendiri</asp:ListItem>
-                                                    <asp:ListItem Value="3">Lainnya</asp:ListItem>
-                                                </asp:DropDownList>
+                                                   --%> <asp:ListItem Value="2" Selected="True">Dipakai Sendiri</asp:ListItem>
+                                                    <%--<asp:ListItem Value="3">Lainnya</asp:ListItem>
+                                                --%></asp:DropDownList>
                                                 <asp:Label ID="ddlTujuanc" runat="server" CssClass="err"></asp:Label>
                                             </td>
                                         </tr>
