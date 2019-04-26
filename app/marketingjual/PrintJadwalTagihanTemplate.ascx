@@ -1,4 +1,18 @@
 <%@ Control Language="c#" Inherits="ISC064.MARKETINGJUAL.PrintJadwalTagihanTemplate" CodeFile="PrintJadwalTagihanTemplate.ascx.cs" %>
+<style type="text/css">
+    .auto-style1 {
+        width: 2%;
+        height: 14px;
+    }
+    .auto-style2 {
+        width: 30%;
+        height: 14px;
+    }
+    .auto-style3 {
+        width: 38%;
+        height: 14px;
+    }
+</style>
 <table cellspacing="0" width="100%">
     <tr>
         <td width="35%">
@@ -73,14 +87,13 @@
                 <td style="font-size: 8pt; text-align: left">Depok,&nbsp;<asp:Label ID="tglnow" runat="server"></asp:Label></td>
             </tr>
             <tr>
-                <td style="font-size: 8pt; width: 2%; text-align: center;">
+                <td style="font-size: 8pt; text-align: center;" class="auto-style1">
                     &nbsp;
                 </td>
-                <td style="font-size: 8pt; width:30%; text-align: center;">Dibuat Oleh,</td>
-                <td style="font-size: 8pt; width: 38%; text-align: center;">&nbsp;</td>
-                <td style="font-size: 8pt; width: 30%; text-align: center;">Disetujui,</td>
+                <td style="font-size: 8pt; text-align: center;" class="auto-style2">Dibuat Oleh,</td>
+                <td style="font-size: 8pt; text-align: center;" class="auto-style3"></td>
+                <td style="font-size: 8pt; text-align: center;" >Disetujui,</td>
             </tr>
-            <tr style="height: 100px;"></tr>
             <tr>
                 <td style="font-size: 8pt; width: 2%; text-align: center;">
                     &nbsp;

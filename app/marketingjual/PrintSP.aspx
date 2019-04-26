@@ -15,7 +15,7 @@
     <link href="/Media/Style.css" type="text/css" rel="stylesheet">
     <meta name="ctrl" content="3">
     <meta name="sec" content="Print Surat Pesanan">
-    <style type="text/css">
+    <%--<style type="text/css">
         #print TD {
             FONT: 6.5pt arial;
         }
@@ -53,7 +53,7 @@
             color:white;
             width:100%;
         }
-    </style>
+    </style>--%>
 </head>
 <body class="body-padding" onkeyup="if(event.keyCode==27&amp;&amp;document.getElementById('cancel')){document.getElementById('cancel').click()}else if(event.keyCode==27){document.getElementById('cancel2').click()}">
     <script type="text/JavaScript" src="/Js/MD5.js"></script>

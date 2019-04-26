@@ -72,7 +72,13 @@
                             <td>
                                 <asp:DropDownList ID="project" runat="server"></asp:DropDownList>
                             </td>
-						    <td valign="top">Present Value</td>
+						     <td>Lokasi</td>
+                            <td>:</td>
+                            <td>
+                                <asp:DropDownList ID="lokasi" runat="server"></asp:DropDownList>
+                            </td>
+						   
+                            <td valign="top">Present Value</td>
 			                <td valign="top">:</td>
 			                <td>
 			                    <div id="persentingakat" runat="server">

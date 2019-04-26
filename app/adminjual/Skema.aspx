@@ -56,6 +56,14 @@
                             </td>
                         </tr>
 						<tr>
+                            <td>Tipe</td>
+                            <td>:</td>
+                            <td>
+                                <asp:DropDownList ID="tipeUnitList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="project_SelectedIndexChanged"></asp:DropDownList>
+                            </td>
+                        </tr>
+						
+                        <tr>
 			                <td valign="top">Present Value</td>
 			                <td valign="top">:</td>
 			                <td>

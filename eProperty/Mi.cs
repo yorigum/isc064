@@ -97,6 +97,8 @@ namespace ISC064
                         || mc == "66-6C-2E-84-A4-B1"// server 203
                         || mc == "18-66-DA-97-F9-16"
                         || mc == "0C-D2-92-B1-1D-3B" // yohanes-pc
+                        || mc == "28-E3-47-1B-C6-64" //febri
+                        || mc == "00-16-3E-E3-BE-91" // server
                         )
 						return true;
 					else
@@ -115,8 +117,11 @@ namespace ISC064
                     || mc == "0C-D2-92-B1-18-59" //anggi-pc
                     || mc == "AC-E0-10-2E-DB-DB"
                     || mc == "0C-D2-92-B1-1D-3B" // yohanes-pc
+                        || mc == "28-E3-47-1B-C6-64" //febri
+                        || mc == "00-16-3E-E3-BE-91" // server
+
                     )
-					return true;
+                    return true;
 				else
 					return false; //false
 			}

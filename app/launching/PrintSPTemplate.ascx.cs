@@ -37,11 +37,11 @@ namespace ISC064.LAUNCHING
             {
                 nokontrak.Text = rs.Rows[0]["NoKontrak"].ToString();
                 tglkontrak.Text = Cf.DayIndo(rs.Rows[0]["TglKontrak"]);
-                namaproject.Text = rs.Rows[0]["NamaProject"].ToString();
+               // namaproject.Text = rs.Rows[0]["NamaProject"].ToString();
                 namapers.Text = rs.Rows[0]["NamaPers"].ToString();
                 nilaikontrak.Text = Cf.NumBulat(rs.Rows[0]["NilaiKontrak"]);
                 skema.Text = Db.SingleString("select ISNULL(Nama, '') from REF_SKEMA where Nomor = '" + rs.Rows[0]["Refskema"] + "'");
-                ag.Text = Db.SingleString("SELECT NAMA FROM MS_AGENT WHERE NoAgent = " + rs.Rows[0]["NoAgent"].ToString());
+                //ag.Text = Db.SingleString("SELECT NAMA FROM MS_AGENT WHERE NoAgent = " + rs.Rows[0]["NoAgent"].ToString());
 
                 //fill data customer
                 int CountCus = Db.SingleInteger("select count(*) from MS_CUSTOMER where NoCustomer = '" + rs.Rows[0]["NoCustomer"] + "'");
@@ -64,7 +64,7 @@ namespace ISC064.LAUNCHING
 
                         hp1.Text = rsCus.Rows[j]["NoHP"].ToString();
                         hp2.Text = rsCus.Rows[j]["NoHP2"].ToString();
-                        email.Text = rsCus.Rows[j]["Email"].ToString();
+                       // email.Text = rsCus.Rows[j]["Email"].ToString();
                     }
                 }
 
@@ -77,7 +77,7 @@ namespace ISC064.LAUNCHING
                     DataTable rsUnit = Db.Rs(strSqlUnit);
                     for (int k = 0; k < rsUnit.Rows.Count; k++)
                     {
-                        jenisproperti.Text = rsUnit.Rows[k]["JenisProperti"].ToString();
+                     //   jenisproperti.Text = rsUnit.Rows[k]["JenisProperti"].ToString();
                         namajalan.Text = rsUnit.Rows[k]["NamaJalan"].ToString();
                         nounit.Text = rsUnit.Rows[k]["Nomor"].ToString().PadLeft(2, '0');
                         jenis.Text = rsUnit.Rows[k]["Jenis"].ToString();
@@ -91,12 +91,12 @@ namespace ISC064.LAUNCHING
                 int CountGimmick = Db.SingleInteger("select count(*) from MS_KONTRAK_GIMMICK where NoKontrak = '" + nomor + "'");
                 if (CountGimmick != 0)
                 {
-                    gimmicktr.Visible = true;
+                  //  gimmicktr.Visible = true;
                     FillTb();
                 }
                 else
                 {
-                    gimmicktr.Visible = false;
+                    //gimmicktr.Visible = false;
                 }
             }
         }
@@ -108,7 +108,7 @@ namespace ISC064.LAUNCHING
                 + " WHERE NoKontrak = '" + nomor + "'";
 
             DataTable rs = Db.Rs(strSql);
-            Rpt.NoData(rpt, rs, "Daftar tagihan untuk kontrak tersebut masih kosong.");
+           // Rpt.NoData(rpt, rs, "Daftar tagihan untuk kontrak tersebut masih kosong.");
 
             for (int i = 0; i < rs.Rows.Count; i++)
             {
@@ -124,7 +124,7 @@ namespace ISC064.LAUNCHING
                 r.Cells.Add(c);
 
                 Rpt.BorderNoList(r);
-                rpt.Rows.Add(r);
+             //   rpt.Rows.Add(r);
             }
         }
 

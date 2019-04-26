@@ -19,43 +19,57 @@ namespace ISC064.MARKETINGJUAL
 
             Rpt.NoData(rpt, rs, "Log file tidak tersedia.");
 
-            for (int i = 0; i < rs.Rows.Count; i++)
+            for (int i = 1; i < rs.Rows.Count; i++)
             {
                 if (!Response.IsClientConnected) break;
 
                 TableRow r = new TableRow();
                 TableCell c;
-
                 c = new TableCell();
-                if(rs.Rows[i]["Lokasi"].ToString()=="A")
-                    c.Text = "<a href=\"TabelStokA.aspx\">"
-                            + "Tower A"
-                            + "</a>";
-                else if (rs.Rows[i]["Lokasi"].ToString() == "B")
-                    c.Text = "<a href=\"TabelStokB.aspx\">"
-                      + "Tower B"
-                      + "</a>";
-                else if (rs.Rows[i]["Lokasi"].ToString() == "C")
-                    c.Text = "<a href=\"TabelStokC.aspx\">"
-                        + "Tower C"
-                        + "</a>";
-                else if (rs.Rows[i]["Lokasi"].ToString() == "S")
-                    c.Text = "<a href=\"TabelStokS.aspx\">"
-                        + "Shop House"
-                        + "</a>";
-                //else
-                //    c.Text = "<a href=\"TabelStokView.aspx?Nama=" + rs.Rows[i]["Nama"] + "&Lokasi=" + rs.Rows[i]["Lokasi"] + "&Project='" + project.SelectedValue + "'\">"
-                //      + rs.Rows[i]["Nama"].ToString()
+
+                //TableRow r2 = new TableRow();
+                //TableCell c2;
+                //c2 = new TableCell();
+
+                //TableRow r3 = new TableRow();
+                //TableCell c3;
+                //c3 = new TableCell();
+
+                //    c.Text = "<a href=\"TabelStokA.aspx\">"
+                //            + "Ground Floor Plan"
+                //            + "</a>";
+                //    c2.Text = "<a href=\"TabelStokB.aspx\">"
+                //      + "2nd Floor Plan"
                 //      + "</a>";
+                //    c3.Text = "<a href=\"TabelStokC.aspx\">"
+                //        + "3rd Floor Plan"
+                //        + "</a>";
+
+                ////else
+                c.Text = "<a href=\"TabelStokView.aspx?Nama=" + rs.Rows[i]["Nama"] + "&Lokasi=" + rs.Rows[i]["Lokasi"] + "&Project='" + project.SelectedValue + "'\">"
+                  + rs.Rows[i]["Nama"].ToString()
+                  + "</a>";
                 r.Cells.Add(c);
 
                 Rpt.Border(r);
                 rpt.Rows.Add(r);
 
+                //r2.Cells.Add(c2);
+
+                //Rpt.Border(r2);
+                //rpt.Rows.Add(r2);
+
+
+                //r3.Cells.Add(c3);
+
+                //Rpt.Border(r3);
+                //rpt.Rows.Add(r3);
+
+
             }
 
         }
-
+        
     }
 
 }

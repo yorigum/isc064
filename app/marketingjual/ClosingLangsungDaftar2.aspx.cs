@@ -101,7 +101,8 @@ namespace ISC064.MARKETINGJUAL
             }
 
             //Cara bayar
-            DataTable rs2 = Db.Rs("SELECT Nomor,Nama FROM REF_SKEMA WHERE Status = 'A' AND Project = '" + Project + "' ORDER BY Nama");
+            string Lokasi = Db.SingleString("SELECT Lokasi FROM MS_UNIT WHERE NoStock = '" + NoStock + "'");
+            DataTable rs2 = Db.Rs("SELECT Nomor,Nama FROM REF_SKEMA WHERE Status = 'A' AND Project = '" + Project + "'AND TipeUnit='"+ Lokasi +"' ORDER BY Nama");
             skema.Items.Add(new ListItem("*** CUSTOMIZE / PENDING", "0")); //cara bayar customize
 
             for (int i = 0; i < rs2.Rows.Count; i++)
@@ -149,7 +150,7 @@ namespace ISC064.MARKETINGJUAL
             else
             {
                 string unitpesanan = unit.Text = rs.Rows[0]["NoUnit"].ToString();
-
+                
                 if (Request.QueryString["NoAgent"] != null && Request.QueryString["NoSkema"].ToString() != null)
                 {
                     agent.SelectedValue = Request.QueryString["NoAgent"].ToString();

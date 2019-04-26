@@ -44,11 +44,23 @@ namespace ISC064.ADMINJUAL
             }
         }
 
+        public void UnitList(DropDownList d)
+        {
+            string strSql = "SELECT * FROM " + Mi.DbPrefix + "MARKETINGJUAL..REF_LOKASI WHERE Project = 'MARC'";
+            DataTable rs = Db.Rs(strSql);
+            for (int i = 0; i < rs.Rows.Count; i++)
+            {
+                string v = rs.Rows[i]["Lokasi"].ToString();
+                string t = v + " - " + rs.Rows[i]["Nama"].ToString();
+                d.Items.Add(new ListItem(t, v));
+            }
+        }
+
         private void FillHeader()
         {
             Js.NumberFormat(barunominal);
             Act.ProjectList(project);
-
+            UnitList(lokasi);
             diskon.Attributes["onfocus"] = "tempnum=CalcFocus(this);tempdisc=this.value;";
             diskon.Attributes["onblur"] = "if(this.value!=tempdisc){"
                 + "recaldisc(document.getElementById('diskon'));"
@@ -72,7 +84,7 @@ namespace ISC064.ADMINJUAL
 
                 jenis.SelectedValue = rsHeader.Rows[0]["Jenis"].ToString();
                 Cf.SelectedValue(project, rsHeader.Rows[0]["Project"].ToString());
-
+                Cf.SelectedValue(lokasi, rsHeader.Rows[0]["TipeUnit"].ToString());
                 if (rsHeader.Rows[0]["Status"].ToString() == "A")
                 {
                     aktif.Checked = true;
@@ -457,6 +469,7 @@ namespace ISC064.ADMINJUAL
                 
                 //Response.Write("UPDATE " + Mi.DbPrefix + "MARKETINGJUAL..REF_SKEMA SET  Jenis = '" + jenis.SelectedValue + "' WHERE Nomor = '" + Nomor + "'  ");
                 Db.Execute("UPDATE " + Mi.DbPrefix + "MARKETINGJUAL..REF_SKEMA SET Jenis = '" + jenis.SelectedValue + "' WHERE Nomor = '" + Nomor + "'  ");
+                Db.Execute("UPDATE " + Mi.DbPrefix + "MARKETINGJUAL..REF_SKEMA SET TipeUnit = '" + lokasi.SelectedValue + "' WHERE Nomor = '" + Nomor + "'  ");
 
                 DataTable rsHeaderAft = Db.Rs("SELECT "
                     + " Nomor"

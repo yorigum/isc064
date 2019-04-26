@@ -762,8 +762,8 @@ namespace ISC064.MARKETINGJUAL
 
 
                 //Rounding
-                SisaRounding += NilaiTagihan - (RThousand ? RoundUp(NilaiTagihan) : RoundUp(NilaiTagihan));
-                NilaiTagihan = RThousand ? RoundUp(NilaiTagihan) : RoundUp(NilaiTagihan);
+                SisaRounding += NilaiTagihan - (RThousand ? RoundThousand(NilaiTagihan) : RoundUp(NilaiTagihan));
+                NilaiTagihan = RThousand ? RoundThousand(NilaiTagihan) : RoundUp(NilaiTagihan);
 
 
                 if (index == rs.Rows.Count - 1)

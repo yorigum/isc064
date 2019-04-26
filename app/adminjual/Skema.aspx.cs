@@ -17,12 +17,14 @@ namespace ISC064.ADMINJUAL
             if (!Page.IsPostBack)
             {
                 Act.ProjectList(project);
+                UnitList(tipeUnitList);
                 Bind();
                 FillTable();
             }
 
             FeedBack();
         }
+
 
         private void FeedBack()
         {
@@ -99,6 +101,18 @@ namespace ISC064.ADMINJUAL
                 + "}";
 
             diskon.Attributes["style"] = "display: none;";
+        }
+
+        public void UnitList(DropDownList d)
+        {
+            string strSql = "SELECT * FROM " + Mi.DbPrefix + "MARKETINGJUAL..REF_LOKASI WHERE Project = 'MARC'";
+            DataTable rs = Db.Rs(strSql);
+            for (int i = 0; i < rs.Rows.Count; i++)
+            {
+                string v = rs.Rows[i]["Lokasi"].ToString();
+                string t = v + " - " + rs.Rows[i]["Nama"].ToString();
+                d.Items.Add(new ListItem(t, v));
+            }
         }
 
         private bool valid()
@@ -328,7 +342,7 @@ namespace ISC064.ADMINJUAL
                 string BungaKet = Cf.Str(bungaket.Text);
                 bool RThousand = round.Checked;
                 string Project = project.SelectedValue;
-
+                string TipeUnit = tipeUnitList.SelectedValue;
                 Db.Execute("EXEC " + Mi.DbPrefix + "MARKETINGJUAL..spSkemaBaru"
                     + " '" + Nama + "'"
                     + ",'" + Diskon + "'"
@@ -337,6 +351,7 @@ namespace ISC064.ADMINJUAL
                     + ",'" + bunga1 + "'"
                     + ",'" + BungaKet + "'"
                     + ",'" + Project + "'"
+                    + ",'" + TipeUnit + "'"
                     );
 
                 //nomor skema terbaru
