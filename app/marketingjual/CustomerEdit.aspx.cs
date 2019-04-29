@@ -112,7 +112,7 @@ namespace ISC064.MARKETINGJUAL
                     inaktif.Checked = true;
 
                 notelp.Text = rs.Rows[0]["NoTelp"].ToString();
-                nohp.Text = rs.Rows[0]["NoHp"].ToString().Substring(0,3) != "+62" ? rs.Rows[0]["NoHp"].ToString().Substring(1) : rs.Rows[0]["NoHp"].ToString().Substring(3);
+                nohp.Text = rs.Rows[0]["NoHp"].ToString().Length > 2 ? rs.Rows[0]["NoHp"].ToString().Substring(0, 3) != "+62" ? rs.Rows[0]["NoHp"].ToString().Substring(1) : rs.Rows[0]["NoHp"].ToString().Substring(3) : "";
                 nohp2.Text = rs.Rows[0]["NoHP2"].ToString();
                 nokantor.Text = rs.Rows[0]["NoKantor"].ToString();
                 nofax.Text = rs.Rows[0]["NoFax"].ToString();
@@ -335,12 +335,16 @@ namespace ISC064.MARKETINGJUAL
         {
             if (validMandatory && valid())
             {
-                string hp = nohp.Text.Substring(0, 1);
-                string HP = nohp.Text;
+string hp = "";
+string HP = "";
+if(nohp.Text != ""){
+                hp = nohp.Text.Substring(0, 1);
+                HP = nohp.Text;
                 if (hp == "0")
                 {
                     HP = nohp.Text.Substring(1);
                 }
+}
                 string Nama = Cf.Str(nama.Text);
                 string Salutation = Cf.Str(salutation.Text);
                 string NamaBisnis = Cf.Str(namabisnis.Text);

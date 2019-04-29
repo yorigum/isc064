@@ -56,6 +56,12 @@ namespace ISC064.MARKETINGJUAL
             else if (metode.SelectedIndex == 2)
                 addq = " AND Status = 'B'";
 
+            string tambahlokasi = "";
+            if (Request.QueryString["lokasi"] != null)
+            {
+                tambahlokasi = " AND Lokasi = '" + Request.QueryString["lokasi"].ToString() + "'";
+            }
+
             string nav = "";
             if (Request.QueryString["l"] != null)
             {
@@ -101,6 +107,7 @@ namespace ISC064.MARKETINGJUAL
                 + " LIKE '%" + Cf.Str(keyword.Text) + "%'"
                 + " AND Project = '" + project.SelectedValue + "'"
                 + addq
+                + tambahlokasi
                 + " ORDER BY NoStock";
 
             DataTable rs = new DataTable();

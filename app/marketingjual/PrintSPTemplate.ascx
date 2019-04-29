@@ -9,17 +9,17 @@
    }*/
 
     .fontheader {
-        font-size: 16pt;
+        font-size: 14pt;
         font-family: 'Times New Roman', Times, serif;
     }
 
     .fontisi {
 
-       font-size: 11pt;
+       font-size: 9pt;
         font-family: 'Times New Roman', Times, serif;
     }
     td {
-        font-size: 11pt;
+        font-size: 9pt;
         font-family: 'Times New Roman', Times, serif;
     }
 
@@ -107,7 +107,7 @@
                 <tr>
                     <td><span class="fontisi">Luas Bangunan</span></td>
                     <td><span class="fontisi">:</span></td>
-                    <td><span class="fontisi"><asp:Label ID="luasbgn" runat="server"></asp:Label> &nbsp M2</span></td>
+                    <td><span class="fontisi"><asp:Label ID="luasbgn" runat="server"></asp:Label> &nbspm<sup>2</sup></span></td>
                 </tr>
                 <tr>
                     <td colspan="3"><span class="fontisi">&nbsp</span></td>
@@ -120,9 +120,9 @@
                         <table style="width:100%">
                             <tr>
                                 <td style="width:2%" class="fontisi">a)</td>
-                                <td style="width:13%" class="fontisi">Harga Pengikatan</td>
+                                <td style="width:18%" class="fontisi">Harga Pengikatan</td>
                                 <td style="width:2%" class="fontisi">:</td>
-                                <td style="width:81%" class="fontisi"><asp:Label ID="hargapengikatan" runat="server"></asp:Label></td>
+                                <td style="width:76%" class="fontisi"><asp:Label ID="hargapengikatan" runat="server"></asp:Label></td>
                             </tr>
                             <tr>
                                 <td style="width:2%" class="fontisi">b)</td>
@@ -228,8 +228,8 @@
                                 <td style="width:20%;text-align:left"></td>
                             </tr>
                             <tr>
-                                <td style="width:20%;text-align:center">.......................</td>
-                                <td style="width:20%;text-align:center">.......................</td>
+                                <td style="width:20%;text-align:center"><asp:Label ID="pemesan" runat="server"></asp:Label></td>
+                                <td style="width:20%;text-align:center"><asp:Label ID="marketing" runat="server"></asp:Label></td>
                                 <td style="width:20%;text-align:center">Sugino</td>
                             </tr>
                         </table>
@@ -256,7 +256,7 @@
                             <td style="width:98%">
                                 <table style="width:100%">
                                     <tr>
-                                        <td style="width:10%"><span class="fontisi">Type Unit</span></td>
+                                        <td style="width:20%"><span class="fontisi">Type Unit</span></td>
                                         <td style="width:2%"><span class="fontisi">:</span></td>
                                          <td><span class="fontisi"><asp:Label ID="jenispro2" runat="server"></asp:Label></span></td>
                                     </tr>
@@ -268,7 +268,7 @@
                                     <tr>
                                         <td style="width:10%"><span class="fontisi">Luas bangun</span></td>
                                         <td style="width:2%"><span class="fontisi">:</span></td>
-                                        <td style="width:88%"><span class="fontisi"><asp:Label ID="luas_bangun" runat="server"></asp:Label></span></td>
+                                        <td style="width:88%"><span class="fontisi"><asp:Label ID="luas_bangun" runat="server">&nbsp</asp:Label>&nbspm<sup>2</sup></span></td>
                                     </tr>
                                 </table>
                             </td>
@@ -284,7 +284,7 @@
                                 <table style="width:100%">
                                     <tr>
                                         <td style="width:2%;vertical-align:top"><span class="fontisi">a)</span></td>
-                                        <td style="width:10%"><span class="fontisi">Harga Pengikatan</span></td>
+                                        <td style="width:18%"><span class="fontisi">Harga Pengikatan</span></td>
                                         <td style="width:80%"><span class="fontisi">: <asp:Label ID="nilaikontrak1" runat="server"></asp:Label></span></td>
                                     </tr>
                                     <tr>
@@ -304,7 +304,7 @@
                             <td style="width:2%">&nbsp</td>
                             <td style="width:98%">
                                 <table style="width:100%">
-                                    <tr>
+                                    <tr style="display:none">
                                         <td style="width:30%"><span class="fontisi"><u><b>KETERANGAN</b></u></span></td>
                                         <td style="width:30%"><span class="fontisi"><u><b>NILAI(Rp)</b></u></span></td>
                                         <td style="width:30%"><span class="fontisi"><u><b>TGL JATUH TEMPO</b></u></span></td>
@@ -393,8 +393,8 @@
                                 <td style="width:20%;text-align:left"></td>
                             </tr>
                             <tr>
-                                <td style="width:20%;text-align:center">.......................</td>
-                                <td style="width:20%;text-align:center">.......................</td>
+                                <td style="width:20%;text-align:center"><asp:Label ID="pemesan2" runat="server"></asp:Label></td>
+                                <td style="width:20%;text-align:center"><asp:Label ID="marketing2" runat="server"></asp:Label></td>
                                 <td style="width:20%;text-align:center">Sugino</td>
                             </tr>
                         </table>
@@ -899,7 +899,7 @@
         </tbody>
     </table>
 
-    <table style="width:100%">
+    <table style="display:none;width:100%">
         
         <tr>
                 <td style="width:1%">CC</td>

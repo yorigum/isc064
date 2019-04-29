@@ -170,14 +170,14 @@
                                                 </asp:RadioButtonList>
                                             </td>
                                         </tr>
-                                        <tr id="trppn" runat="server">
+                                        <tr style="display:none" id="trppn" runat="server">
                                             <td colspan="2">&nbsp;
                                             </td>
                                             <td>
                                                 <asp:CheckBox ID="roundppn" runat="server" Checked="True" Text="Nilai PPN Dibulatkan"></asp:CheckBox>
                                             </td>
                                         </tr>
-                                        <div style="visibility:hidden">
+                                        <div style="display:none">
                                         <tr style="visibility:hidden;">
                                             <td style="vertical-align: top">Diskon Harga Jual
                                             </td>

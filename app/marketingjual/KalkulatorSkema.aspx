@@ -50,6 +50,11 @@
                             <td>Project</td>
                             <td>:</td>
                             <td><asp:DropDownList runat="server" ID="project" AutoPostBack="true" OnSelectedIndexChanged="project_SelectedIndexChanged"></asp:DropDownList></td>
+                        </tr>                        
+                        <tr>
+                            <td>Lokasi</td>
+                            <td>:</td>
+                            <td><asp:DropDownList runat="server" ID="lokasi" AutoPostBack="true" OnSelectedIndexChanged="lokasi_SelectedIndexChanged"></asp:DropDownList></td>
                         </tr>
                         <tr>
                             <td>No. Stock

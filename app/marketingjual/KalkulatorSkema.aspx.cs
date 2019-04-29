@@ -17,6 +17,8 @@ namespace ISC064.MARKETINGJUAL
             if (!Page.IsPostBack)
             {
                 Act.ProjectList(project);
+                LoadTipeUnit();
+
                 noskema.Visible = false;
                 hasil.Visible = false;
                 tb2.Visible = false;
@@ -29,7 +31,20 @@ namespace ISC064.MARKETINGJUAL
                     Js.Focus(this, hitung);
                 }
             }
-            btnpop.Attributes.Add("modal-url", "/marketingjual/DaftarUnit.aspx?calc=1&status=a&project=" + project.SelectedValue);
+            btnpop.Attributes.Add("modal-url", "/marketingjual/DaftarUnit.aspx?calc=1&project=" + project.SelectedValue + "&lokasi=" + lokasi.SelectedValue);
+        }
+        private void LoadTipeUnit()
+        {
+            string strSql = "SELECT * FROM REF_LOKASI";
+
+            DataTable rs = Db.Rs(strSql);
+            for (int i = 0; i < rs.Rows.Count; i++)
+            {
+                string v = rs.Rows[i]["Lokasi"].ToString();
+                string t = v + " - " + rs.Rows[i]["Nama"].ToString();
+                lokasi.Items.Add(new ListItem(t, v));
+            }
+            lokasi.SelectedIndex = 0;
         }
 
         private void InitForm()
@@ -96,11 +111,12 @@ namespace ISC064.MARKETINGJUAL
 
         private void Bind()
         {
-            string strAdd = "";
+            string strAdd = " AND TipeUnit = '" + lokasi.SelectedValue + "'";
             //if (TipeUnit != "")
             //  strAdd += " AND TipeUnit = '" + TipeUnit + "'";
-
+            string Lokasi = Db.SingleString("SELECT Lokasi FROM MS_UNIT WHERE NoStock = '" + NoStock + "'");
             DataTable rs = Db.Rs("SELECT Nomor,Nama FROM REF_SKEMA WHERE Status = 'A' AND Project = '" + project.SelectedValue + "'"
+                //+ " AND TipeUnit='"+ Lokasi +"'"
                 + strAdd);
             carabayar.Items.Add(new ListItem("Pilih Skema", "0"));
             for (int i = 0; i < rs.Rows.Count; i++)
@@ -333,12 +349,12 @@ namespace ISC064.MARKETINGJUAL
 
             }
 
-            string strAdd = "";
+            string strAdd = " AND TipeUnit = '" + lokasi.SelectedValue + "'";
 
             NomorSkema = Db.SingleInteger("SELECT TOP 1 Nomor FROM REF_SKEMA WHERE Status='A' AND Project = '" + project.SelectedValue + "' " + strAdd);
 
             carabayar.Items.Clear();
-            DataTable rs = Db.Rs("SELECT Nomor,Nama FROM REF_SKEMA WHERE Status = 'A' AND Project = '" + project.SelectedValue + "' ORDER BY Nama");
+            DataTable rs = Db.Rs("SELECT Nomor,Nama FROM REF_SKEMA WHERE Status = 'A' AND Project = '" + project.SelectedValue + "'" + strAdd + " ORDER BY Nama");
             carabayar.Items.Add(new ListItem("Pilih Skema", ""));
             for (int i = 0; i < rs.Rows.Count; i++)
             {
@@ -1175,6 +1191,17 @@ namespace ISC064.MARKETINGJUAL
             carabayar.Items.Clear();
             Bind();
             InitForm();
+        }
+        protected void lokasi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            carabayar.Items.Clear();
+            Bind();
+            InitForm();
+
+            if (nostock.Text != "")
+            {
+                Response.Redirect("KalkulatorSkema.aspx");
+            }
         }
     }
 }

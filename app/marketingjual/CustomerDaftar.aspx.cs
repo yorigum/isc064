@@ -547,8 +547,8 @@ namespace ISC064.MARKETINGJUAL
                 Db.Execute("UPDATE MS_CUSTOMER_LOG SET Project = '" + project.Text + "' WHERE LogID  = " + LogID);
 
                 ////// Save Data Agent dari eNUP - Willy 2019 Mar 13
-                if (Request.QueryString["NoAgent"].ToString() != "")
-                    SaveAgent(Request.QueryString["NoAgent"].ToString());
+               // if (Request.QueryString["NoAgent"].ToString() != "")
+              //      SaveAgent(Request.QueryString["NoAgent"].ToString());
                 ///////End Save Data Agent
 
 
@@ -560,19 +560,24 @@ namespace ISC064.MARKETINGJUAL
                 }
                 else if (dariClosing.Checked)
                 {
-                    if (Request.QueryString["NoAgent"].ToString() == "")
-                        Response.Redirect("ClosingLangsungDaftar2.aspx"
-                            + "?NoStock=" + Request.QueryString["NoStock"]
-                            + "&NoCustomer=" + NoCustomer);
-                    else
-                    {
-                        int NoAgent = 0;
-                        string NoUrut = Request.QueryString["NoUrut"].ToString();
-                        NoAgent = Db.SingleInteger("SELECT NoAgent FROM MS_AGENT WHERE NoAgentNUP='" + Request.QueryString["NoAgent"].ToString() + "'");
-                        Response.Redirect("ClosingLangsungDaftar2.aspx"
-                          + "?NoStock=" + Request.QueryString["NoStock"]
-                          + "&NUP=" + Request.QueryString["NUP"] + "&NoUrut=" + NoUrut + "&NoAgent=" + NoAgent + "&NoSkema=" + Request.QueryString["NoSkema"].ToString() + "&NoCustomer=" + NoCustomer);
-                    }
+                    Response.Redirect("ClosingLangsungDaftar2.aspx"
+                         + "?NoStock=" + Request.QueryString["NoStock"]
+                         + "&NoCustomer=" + NoCustomer);
+
+
+                    //if (Request.QueryString["NoAgent"].ToString() == "")
+                    //    Response.Redirect("ClosingLangsungDaftar2.aspx"
+                    //        + "?NoStock=" + Request.QueryString["NoStock"]
+                    //        + "&NoCustomer=" + NoCustomer);
+                    //else
+                    //{
+                    //    //int NoAgent = 0;
+                    //    //string NoUrut = Request.QueryString["NoUrut"].ToString();
+                    //    //NoAgent = Db.SingleInteger("SELECT NoAgent FROM MS_AGENT WHERE NoAgentNUP='" + Request.QueryString["NoAgent"].ToString() + "'");
+                    //    //Response.Redirect("ClosingLangsungDaftar2.aspx"
+                    //      + "?NoStock=" + Request.QueryString["NoStock"]
+                    //      + "&NUP=" + Request.QueryString["NUP"] + "&NoUrut=" + NoUrut + "&NoAgent=" + NoAgent + "&NoSkema=" + Request.QueryString["NoSkema"].ToString() + "&NoCustomer=" + NoCustomer);
+                    //}
 
                 }
                 else

@@ -15,7 +15,7 @@ namespace ISC064.MARKETINGJUAL
             Act.NoCache();
 
 
-            fillLegend();
+           // fillLegend();
             Display();
         }
         protected void fillLegend()
@@ -62,7 +62,7 @@ namespace ISC064.MARKETINGJUAL
                 + " Peta = '" + NamaPeta + "'";
             DataTable rs = Db.Rs(strSql);
 
-            var siteplan = new SitePlan(700, 603, "FP/Base/PETA_" + PetaID + ".jpg", "FP/Base/PETA_" + PetaID + ".png");
+            var siteplan = new SitePlan(1000, 603, "FP/Base/PETA_" + PetaID + ".jpg", "FP/Base/PETA_" + PetaID + ".png");
             foreach (DataRow r in rs.Rows)
             {
                 siteplan.Draw(r[2].ToString(), Color(r["NoStock"].ToString()), TableStock.Href(r["NoStock"].ToString()), "tooltip-url", "TooltipSiteplan.aspx?NoStock=" + r["NoStock"], r["NoStock"].ToString());
@@ -100,7 +100,7 @@ namespace ISC064.MARKETINGJUAL
                 if (adaPriority)
                     return "RGBa(255, 192, 203,0.6)"; //Unit DI Pilih //Pink
                 else
-                    return "RGBa(128, 128, 128,0.6)";//Hold Internal //Gray
+                    return "RGBa(255, 0, 0, 0.5)";//Hold Internal //Gray
             }
             else
             {
@@ -129,7 +129,7 @@ namespace ISC064.MARKETINGJUAL
                 }
                 else
                 {
-                    return "RGBa(249,238,88,0.6)";//Yellow
+                    return "RGBa(255, 255, 255, 0.5)";//Yellow
                 }
             }
         }

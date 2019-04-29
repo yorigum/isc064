@@ -58,7 +58,7 @@ namespace ISC064.MARKETINGJUAL
         private void InitForm()
         {
             //Sales
-            DataTable rs = Db.Rs("SELECT Nama,Principal,NoAgent FROM MS_AGENT WHERE Status = 'A' AND Project = '" + Project + "'"
+            DataTable rs = Db.Rs("SELECT Nama,Principal,NoAgent FROM MS_AGENT WHERE Status = 'A' AND Jabatan in (3,6) AND Project = '" + Project + "'"
                 + " ORDER BY Nama,NoAgent");
             for (int i = 0; i < rs.Rows.Count; i++)
             {

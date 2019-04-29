@@ -156,7 +156,7 @@ namespace ISC064.MARKETINGJUAL
 
                 tgl.Text = Cf.Day(DateTime.Today);
 
-                string ParamID = "BatasReservasi" + Project;
+                string ParamID = "BatasReservasi";// + Project;
                 string ParamReserve = Db.SingleString("SELECT VALUE FROM " + Mi.DbPrefix + "SECURITY..REF_PARAM WHERE ParamID = '" + ParamID + "'");
                 
                 if (!String.IsNullOrEmpty(ParamReserve))

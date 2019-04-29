@@ -42,7 +42,7 @@ namespace ISC064.MARKETINGJUAL
                 //namapers.Text = rs.Rows[0]["NamaPers"].ToString();
                 hargapengikatan.Text=nilaikontrak1.Text =Cf.NumBulat(rs.Rows[0]["NilaiKontrak"]);
                 carabayar.Text = cara_bayar.Text = cara_bayar1.Text = Db.SingleString("select ISNULL(Nama, '') from REF_SKEMA where Nomor = '" + rs.Rows[0]["Refskema"] + "'");
-                //ag.Text = Db.SingleString("SELECT NAMA FROM MS_AGENT WHERE NoAgent = " + rs.Rows[0]["NoAgent"].ToString());
+                marketing.Text = marketing2.Text=Db.SingleString("SELECT NAMA FROM MS_AGENT WHERE NoAgent = " + rs.Rows[0]["NoAgent"].ToString());
 
                 //fill data customer
                 int CountCus = Db.SingleInteger("select count(*) from MS_CUSTOMER where NoCustomer = '" + rs.Rows[0]["NoCustomer"] + "'");
@@ -53,7 +53,7 @@ namespace ISC064.MARKETINGJUAL
                     DataTable rsCus = Db.Rs(strSqlCus);
                     for (int j = 0; j < rsCus.Rows.Count; j++)
                     {
-                        namacs.Text = namacs2.Text = rsCus.Rows[j]["Nama"].ToString();
+                        namacs.Text = namacs2.Text = pemesan.Text = pemesan2.Text = rsCus.Rows[j]["Nama"].ToString();
                         noktp.Text = rsCus.Rows[j]["NoKTP"].ToString();
                         npwp.Text = rsCus.Rows[j]["NPWP"].ToString();
 
@@ -93,7 +93,7 @@ namespace ISC064.MARKETINGJUAL
                         lantai_blok_unit.Text =lantai1.Text= rsUnit.Rows[k]["Lantai"].ToString();
                         lantai_blok_unit2.Text = unit1.Text=rsUnit.Rows[k]["Nomor"].ToString().PadLeft(2, '0');
                         //jenis.Text = rsUnit.Rows[k]["Jenis"].ToString();
-                        luasbgn.Text = Cf.Num(rsUnit.Rows[k]["LuasNett"]);
+                        luasbgn.Text =luas_bangun.Text= Cf.Num(rsUnit.Rows[k]["LuasNett"]);
                         //luassg.Text = Cf.Num(rsUnit.Rows[k]["LuasSG"]);
                         //lokasi.Text = rsUnit.Rows[k]["Lokasi"].ToString();
                     }
