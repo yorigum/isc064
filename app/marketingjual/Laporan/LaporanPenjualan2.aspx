@@ -267,6 +267,7 @@
                     <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">Bunga</asp:TableHeaderCell>
                     <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">Nilai Kontrak (Include PPN)</asp:TableHeaderCell>
                     <asp:TableHeaderCell HorizontalAlign="Center" ColumnSpan="3" BackColor="#1E90FF" ForeColor="White">Perincian Kontrak</asp:TableHeaderCell>
+                     <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">NUP</asp:TableHeaderCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableHeaderCell HorizontalAlign="Center" BackColor="#1E90FF" ForeColor="White">Nilai Kontrak (Exclude PPN)</asp:TableHeaderCell>
@@ -300,6 +301,7 @@
                     <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">Biaya Administrasi</asp:TableHeaderCell>
                     <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">Pembayaran</asp:TableHeaderCell>
                     <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">Nilai Pengembalian</asp:TableHeaderCell>
+                    <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">NUP</asp:TableHeaderCell>
                 </asp:TableRow>
                 <asp:TableRow>
                 </asp:TableRow>
@@ -329,6 +331,7 @@
                 <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">Bunga</asp:TableHeaderCell>
                 <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">Nilai Kontrak</asp:TableHeaderCell>
                 <asp:TableHeaderCell HorizontalAlign="Center" ColumnSpan="2" BackColor="#1E90FF" ForeColor="White">Perincian Kontrak</asp:TableHeaderCell>
+                <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">NUP</asp:TableHeaderCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableHeaderCell HorizontalAlign="Center" BackColor="#1E90FF" ForeColor="White">DPP</asp:TableHeaderCell>
@@ -360,6 +363,7 @@
                 <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">Bunga</asp:TableHeaderCell>
                 <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">Nilai Kontrak (Include PPN)</asp:TableHeaderCell>
                 <asp:TableHeaderCell HorizontalAlign="Center" ColumnSpan="2" BackColor="#1E90FF" ForeColor="White">Perincian Kontrak</asp:TableHeaderCell>
+                <asp:TableHeaderCell HorizontalAlign="Center" RowSpan="2" BackColor="#1E90FF" ForeColor="White">NUP</asp:TableHeaderCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableHeaderCell HorizontalAlign="Center" BackColor="#1E90FF" ForeColor="White">Nilai Kontrak (Exclude PPN)</asp:TableHeaderCell>

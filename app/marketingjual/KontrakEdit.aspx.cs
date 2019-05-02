@@ -692,6 +692,7 @@ namespace ISC064.MARKETINGJUAL
                     + ",'" + TglKontrak + "'"
                     + ", " + NoAgent
                     + ",'" + TargetST + "'"
+                    + ",'" + NUP + "'"
                     );
                 Db.Execute("UPDATE MS_KONTRAK SET NoKontrakManual='" + nkm.Text + "' WHERE NoKontrak='" + NoKontrak + "'");
                 int kpr = 0;

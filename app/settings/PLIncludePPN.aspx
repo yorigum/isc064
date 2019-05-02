@@ -32,7 +32,7 @@
                     </td>
                     <td>
                         <p class="pparam">
-                            <asp:CheckBox ID="include" runat="server" Text="Ya" />
+                            <asp:CheckBox Checked="true" ID="include" runat="server" Text="Ya" />
                         </p>
                     </td>
                 </tr>

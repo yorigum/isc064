@@ -1,9 +1,6 @@
 using System;
-using System.Drawing;
 using System.Data;
 using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
-using System.Collections;
 
 namespace ISC064.MARKETINGJUAL
 {
@@ -633,9 +630,15 @@ namespace ISC064.MARKETINGJUAL
                 }
                 else
                 {
-                    c.Text = Nama + " " + (cc + i + 1);
+                    if (Tipe == "BF" && count == 1)
+                    {
+                        c.Text = Nama;
+                    }
+                    else
+                    {
+                        c.Text = Nama + " " + (cc + i + 1);
+                    }
                 }
-                //c.Text = Nama + " " + (cc + i + 1);
                 r.Cells.Add(c);
 
                 if (i == 0)
@@ -695,70 +698,24 @@ namespace ISC064.MARKETINGJUAL
 
                 decimal Nominal = Convert.ToDecimal(nominal.Text);
                 decimal Netto = Convert.ToDecimal(netto.Text);
-                
+
                 decimal Nominal4 = 0;
                 decimal Nominal5 = 0;
-                
+
 
                 if (persen.Checked) Nominal = Netto * (Nominal / 100);
-
-
-                //if (carabayar2.SelectedValue == "KPR")
-                //{
-                //    if (Tipe == "ANG")
-                //    {
-                //        if (i == count - 1)
-                //        {
-                //            Nominal = Math.Round(Nominal / count);
-                //        }
-                //        else
-                //        {
-                //            Nominal = RoundThousand(Nominal / count);
-                //        }
-                //    }
-                //    else
-                //    {
-                //        Nominal = RoundThousand(Nominal / count);
-                //    }
-                //}
-                //else
-                //{
-                //    Nominal = RoundThousand(Nominal / count);
-                //}
-
-
-                //if (rounding.Checked)
-                //{
-                //    //Nominal = RoundThousand(Nominal / count);
-                //    Nominal2 = RoundThousand(Nominal / count);
-                //    Nominal3 = Math.Round(Nominal / count);
-                //    Nominal4 = Nominal2 - Nominal3;
-                //    JumNom += Nominal4;
-
-                //    if(Nama == "KPR")
-                //    {
-                //        Nominal = Nominal2 - JumNom;
-                //    }
-                //    else
-                //    {
-                //        Nominal = Nominal2 - JumNom;
-                //    }
-                //}
-                //else
-                //{
-                //    Nominal = Math.Round(Nominal / count);
-                //}
 
                 if (rounding.Checked)
                 {
                     Nominal2 = RoundThousand(Nominal / count);
-                    Nominal3 = Math.Round(Nominal / count);
+                    Nominal3 = RoundThousand(Math.Round(Nominal / count));
 
                     Nominal = Nominal3 - Nominal2;
                 }
                 else
                 {
                     Nominal = Math.Round(Nominal / count);
+                    Nominal3 = RoundThousand(Nominal);
                 }
 
                 c = new TableCell();
@@ -781,9 +738,6 @@ namespace ISC064.MARKETINGJUAL
 
                 Rpt.Border(r);
                 rpt.Rows.Add(r);
-
-                //JumNom += Nominal;
-                //Response.Write(JumNom);
             }
         }
 
@@ -825,9 +779,9 @@ namespace ISC064.MARKETINGJUAL
         private void Isi(bool potongbf)
         {
             Func.KontrakHeader(NoKontrak, nokontrakdetail, unitdetail, namadetail, agent);
-            
-            SetBaris(bfkali, "BF", "BOOKING FEE", bflama1, bflama2, bfhari1, bfhari2, bfjumlah, bfpersen);
-            SetBaris(dpkali, "DP", "DP", dplama1, dplama2, dphari1, dphari2, dpjumlah, dppersen);
+
+            SetBaris(bfkali, "BF", "UANG TANDA JADI", bflama1, bflama2, bfhari1, bfhari2, bfjumlah, bfpersen);
+            SetBaris(dpkali, "DP", "UANG MUKA", dplama1, dplama2, dphari1, dphari2, dpjumlah, dppersen);
             //SetBaris(angkali, "ANG", "ANGSURAN", anglama1, anglama2, anghari1, anghari2, angjumlah, angpersen);
 
             int kpr = Db.SingleInteger("select count(*) from REF_SKEMA_DETAIL where KPR = 1 AND Nomor = " + skema.SelectedValue);
@@ -837,10 +791,8 @@ namespace ISC064.MARKETINGJUAL
             }
             else
             {
-                SetBaris(angkali, "ANG", "ANGSURAN", anglama1, anglama2, anghari1, anghari2, angjumlah, angpersen);
+                SetBaris(angkali, "ANG", "PEMBAYARAN", anglama1, anglama2, anghari1, anghari2, angjumlah, angpersen);
             }
-
-            Response.Write(dppersen.Text);
 
             //potong booking fee harus dikontrol pada saat POSTBACK
             if (potongbf)
@@ -1027,13 +979,13 @@ namespace ISC064.MARKETINGJUAL
                     int TagihanKe = Db.SingleInteger("select ISNULL(MAX(TagihanKe),0) + 1 from MS_TAGIHAN_LAPORAN where NoKontrak = '" + NoKontrak + "'");
                     decimal TotalTagihanBef = 0;
                     for (int i = 1; i < rpt.Rows.Count; i++)
-                {
-                    if (!Response.IsClientConnected) break;
+                    {
+                        if (!Response.IsClientConnected) break;
 
-                    string Tipe = rpt.Rows[i].Cells[1].Text;
-                    string NamaTagihan = Cf.Str(rpt.Rows[i].Cells[2].Text);
-                    DateTime TglJT = Convert.ToDateTime(rpt.Rows[i].Cells[3].Text);
-                    decimal NilaiTagihan = Convert.ToDecimal(rpt.Rows[i].Cells[4].Text);
+                        string Tipe = rpt.Rows[i].Cells[1].Text;
+                        string NamaTagihan = Cf.Str(rpt.Rows[i].Cells[2].Text);
+                        DateTime TglJT = Convert.ToDateTime(rpt.Rows[i].Cells[3].Text);
+                        decimal NilaiTagihan = Convert.ToDecimal(rpt.Rows[i].Cells[4].Text);
 
                         Db.Execute("EXEC spTagihanDaftarTEMP"
                             + " '" + NoKontrak + "'"
@@ -1067,8 +1019,21 @@ namespace ISC064.MARKETINGJUAL
 
                     Db.Execute("UPDATE MS_KONTRAK SET FlagReschedule = 1, ApprovelReschedule = 1 WHERE NoKontrak ='" + NoKontrak + "'");
 
-                    int NoUrutMax = Db.SingleInteger("SELECT MAX(NoUrut) FROM MS_TAGIHAN_TEMP WHERE NoKontrak = '" + NoKontrak + "' ");
+                    int NoUrutMax = Db.SingleInteger("SELECT MAX(NoUrut) FROM MS_TAGIHAN WHERE NoKontrak = '" + NoKontrak + "' AND Tipe <> 'ADM'");
+                    decimal TotalTagihan = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan),0) FROM MS_TAGIHAN WHERE NoKontrak = '" + NoKontrak + "'");
+                    decimal NIlaiKontrak = Db.SingleDecimal("SELECT ISNULL(NilaiKontrak,0) FROM MS_KONTRAK WHERE NoKontrak = '" + NoKontrak + "'");
+                    decimal HasilAkhir = NIlaiKontrak - TotalTagihan;
+                    decimal NilaiTag = Db.SingleDecimal("SELECT ISNULL(NilaiTagihan,0) FROM MS_TAGIHAN WHERE NoKontrak = '" + NoKontrak + "' AND NoUrut = " + NoUrutMax);
 
+                    if (HasilAkhir < 0)
+                    {
+                        HasilAkhir = HasilAkhir * -1;
+                        Db.Execute("UPDATE MS_TAGIHAN SET NilaiTagihan = '" + (NilaiTag - HasilAkhir) + "' WHERE NoKontrak = '" + NoKontrak + "' AND NoUrut = '" + NoUrutMax + "'  ");
+                    }
+                    else
+                    {
+                        Db.Execute("UPDATE MS_TAGIHAN SET NilaiTagihan = NilaiTagihan + " + (NilaiTag + HasilAkhir) + " WHERE NoKontrak = '" + NoKontrak + "' AND NoUrut = '" + (NoUrutMax) + "'  ");
+                    }
                     //    //decimal A = Db.SingleDecimal("select Isnull(sum(Nilaitagihan),0) from ms_tagihan where NoKontrak = '" + NoKontrak + "' and NoUrut IN (select NoTagihan from ms_pelunasan where NoKontrak = '" + NoKontrak + "')");
                     //    //decimal B = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiPelunasan), 0) FROM MS_PELUNASAN a INNER JOIN MS_TAGIHAN b ON a.NoTagihan = b.NoUrut AND a.NoKontrak = b.NoKontrak WHERE a.NoKontrak = '" + NoKontrak + "' AND b.Tipe <> 'ADM'");
                     //    //decimal C = A - B;
@@ -1078,6 +1043,7 @@ namespace ISC064.MARKETINGJUAL
                     //    //decimal NilaiLunasVoid = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan),0) FROM MS_TAGIHAN where nourut in (select notagihan from ms_pelunasan where NoKontrak = '" + NoKontrak + "' AND NilaiPelunasan = 0) AND Nokontrak = '" + NoKontrak + "'");
                     //    //decimal NilaiTagihanTerakhir = NilaiKontrak - NilaiLunas - TotalTagihanBef - NilaiLunasVoid;
                     //    //decimal NilaiterakhirBaru = NilaiTagihanTerakhir - C;
+
 
                     Db.Execute("UPDATE MS_TAGIHAN_TEMP SET KPR = " + 1 + " WHERE NoKontrak = '" + NoKontrak + "' AND NoUrut = '" + (NoUrutMax) + "'");
 
@@ -1245,14 +1211,7 @@ namespace ISC064.MARKETINGJUAL
                 DataTable caraBef = Db.Rs("SELECT CaraBayar AS [Cara Bayar] FROM MS_KONTRAK WHERE NoKontrak='" + NoKontrak + "'");
 
                 Db.Execute("DELETE FROM MS_TAGIHAN where nourut not in (select notagihan from ms_pelunasan where NoKontrak = '" + NoKontrak + "' AND NilaiPelunasan > 0) AND Nokontrak = '" + NoKontrak + "' AND Tipe != 'ADM'");
-                //Db.Execute("DELETE FROM MS_TAGIHAN where nourut not in (select notagihan from ms_pelunasan where NoKontrak = '" + NoKontrak + "') AND Nokontrak = '" + NoKontrak + "' AND Tipe <> 'ADM'");
-
-                //string strSql = "SELECT * FROM MS_TAGIHAN_TEMP WHERE NoKontrak = '" + NoKontrak + "'"
-                //+ " ORDER BY NoUrut";
-
-                //DataTable rs = Db.Rs(strSql);
-                //Rpt.NoData(rptTagihanNew, rs, "No Reservartion.");
-
+                
                 decimal TotalTagihanBef = 0;
                 for (int i = 1; i < rpt.Rows.Count; i++)
                 {
@@ -1316,14 +1275,33 @@ namespace ISC064.MARKETINGJUAL
                 //string Skema = Db.SingleString("Select Skema From MS_TAGIHAN_HEADER WHERE NoKontrak ='" + NoKontrak + "'");
                 Db.Execute("UPDATE MS_TAGIHAN_HEADER SET ApprovelReschedule = 1 WHERE NoKontrak ='" + NoKontrak + "'");
                 Db.Execute("UPDATE MS_KONTRAK SET FlagReschedule = 0, ApprovelReschedule = 0 WHERE NoKontrak ='" + NoKontrak + "'");
+                Db.Execute("UPDATE MS_KONTRAK SET RefSkema = '" + skema.SelectedValue + "' WHERE NoKontrak ='" + NoKontrak + "'");
                 Db.Execute("UPDATE MS_KONTRAK SET CaraBayar = '" + CB + "', Skema = '" + Skema + "' WHERE NoKontrak = '" + NoKontrak + "'");
 
-                int NoUrutMax = Db.SingleInteger("SELECT ISNULL(MAX(NoUrut),0) FROM MS_TAGIHAN_TEMP WHERE NoKontrak = '" + NoKontrak + "' ");
+                //int NoUrutMax = Db.SingleInteger("SELECT ISNULL(MAX(NoUrut),0) FROM MS_TAGIHAN_TEMP WHERE NoKontrak = '" + NoKontrak + "' ");
+
+                int NoUrutMax = Db.SingleInteger("SELECT MAX(NoUrut) FROM MS_TAGIHAN WHERE NoKontrak = '" + NoKontrak + "' AND Tipe <> 'ADM'");
+                decimal TotalTagihan = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiTagihan),0) FROM MS_TAGIHAN WHERE NoKontrak = '" + NoKontrak + "'");
+                decimal NIlaiKontrak = Db.SingleDecimal("SELECT ISNULL(NilaiKontrak,0) FROM MS_KONTRAK WHERE NoKontrak = '" + NoKontrak + "'");
+                decimal HasilAkhir = NIlaiKontrak - TotalTagihan;
+                decimal NilaiTag = Db.SingleDecimal("SELECT ISNULL(NilaiTagihan,0) FROM MS_TAGIHAN WHERE NoKontrak = '" + NoKontrak + "' AND NoUrut = " + NoUrutMax);
+
+                if (HasilAkhir < 0)
+                {
+                    HasilAkhir = HasilAkhir * -1;
+                    Db.Execute("UPDATE MS_TAGIHAN SET NilaiTagihan = '" + (NilaiTag - HasilAkhir) + "' WHERE NoKontrak = '" + NoKontrak + "' AND NoUrut = '" + NoUrutMax + "'  ");
+                }
+                else
+                {
+                    Db.Execute("UPDATE MS_TAGIHAN SET NilaiTagihan = NilaiTagihan + " + (NilaiTag + HasilAkhir) + " WHERE NoKontrak = '" + NoKontrak + "' AND NoUrut = '" + (NoUrutMax) + "'  ");
+                }
 
                 if (CB == "KPR")
                 {
                     Db.Execute("Update Ms_Tagihan Set KPR = " + 1 + " Where NoKontrak = '" + NoKontrak + "' And NamaTagihan = 'PENCAIRAN KPR'"); ;//Nourut = '" + NoUrutMax + "'");
                 }
+
+                Db.Execute("EXEC spTagihanbalance '" + NoKontrak + "'");
 
                 //decimal NilaiKontrak = Db.SingleDecimal("SELECT NilaiKontrak FROM MS_KONTRAK WHERE NoKontrak = '" + NoKontrak + "' ");
                 //decimal NilaiLunas = Db.SingleDecimal("SELECT ISNULL(SUM(NilaiPelunasan),0) FROM MS_PELUNASAN WHERE NoKontrak = '" + NoKontrak + "' ");
@@ -1447,25 +1425,6 @@ namespace ISC064.MARKETINGJUAL
                 return input;
             }
         }
-        #endregion
-        #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e)
-        {
-            //
-            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
-            //
-            InitializeComponent();
-            base.OnInit(e);
-        }
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-
-        }
-        #endregion
+        #endregion]
     }
 }

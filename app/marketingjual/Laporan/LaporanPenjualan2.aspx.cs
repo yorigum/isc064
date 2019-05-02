@@ -338,6 +338,7 @@ namespace ISC064.MARKETINGJUAL.Laporan
             decimal jumDiscTambahan = 0;
             decimal jumHargaGimmick = 0;
             decimal jumHargaLainLain = 0;
+            string noNUP = "";
 
             for (int i = 0; i < rs1.Rows.Count; i++)
             {
@@ -495,6 +496,12 @@ namespace ISC064.MARKETINGJUAL.Laporan
                 c1.HorizontalAlign = HorizontalAlign.Left;
                 r1.Cells.Add(c1);
 
+                c1 = new TableCell();
+                c1.Text = rs1.Rows[i]["NUP"].ToString();
+                c1.HorizontalAlign = HorizontalAlign.Left;
+                r1.Cells.Add(c1);
+
+                noNUP= rs1.Rows[i]["NUP"].ToString();
 
                 rptA.Rows.Add(r1);
 
@@ -591,8 +598,13 @@ namespace ISC064.MARKETINGJUAL.Laporan
                     c4.HorizontalAlign = HorizontalAlign.Right;
                     r4.Cells.Add(c4);
 
+                    //c4 = new TableCell();
+                    //c4.Text = "";
+                    //r4.Cells.Add(c4);
+
                     c4 = new TableCell();
-                    c4.Text = "";
+                    c4.Text = noNUP;
+                    c4.HorizontalAlign = HorizontalAlign.Center;
                     r4.Cells.Add(c4);
 
                     rptA.Rows.Add(r4);
@@ -1117,6 +1129,16 @@ namespace ISC064.MARKETINGJUAL.Laporan
                 r1.Cells.Add(c1);
 
 
+                c1 = new TableCell();
+                string noNUP = rs1.Rows[i]["NUP"].ToString();
+
+                c1.Text = rs1.Rows[i]["NUP"].ToString();
+                c1.HorizontalAlign = HorizontalAlign.Left;
+                r1.Cells.Add(c1);
+
+                noNUP = rs1.Rows[i]["NUP"].ToString();
+
+
                 rptD.Rows.Add(r1);
 
                 if (i == rs1.Rows.Count - 1)
@@ -1492,6 +1514,11 @@ namespace ISC064.MARKETINGJUAL.Laporan
                 t4 += PPN;
                 gt4 += PPN;
                 c.Text = Cf.Num(PPN);
+                c.HorizontalAlign = HorizontalAlign.Right;
+                r.Cells.Add(c);
+
+                c = new TableCell();
+                c.Text = rs.Rows[i]["NUP"].ToString();
                 c.HorizontalAlign = HorizontalAlign.Right;
                 r.Cells.Add(c);
 

@@ -50,7 +50,7 @@ namespace ISC064.ADMINJUAL
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
             //Isi skema aktif
-            DataTable rs = Db.Rs("SELECT * FROM " + Mi.DbPrefix + "MARKETINGJUAL..REF_SKEMA WHERE Status = 'A' AND Project = '" + project.SelectedValue + "'");
+            DataTable rs = Db.Rs("SELECT * FROM " + Mi.DbPrefix + "MARKETINGJUAL..REF_SKEMA WHERE Status = 'A' AND Project = '" + project.SelectedValue + "' AND TipeUnit = '" + tipeUnitList.SelectedValue + "'");
             Rpt.NoData(sb, rs, "<font style='font:8pt'>Tidak terdapat skema cara bayar dengan status aktif.</font>");
 
             for (int i = 0; i < rs.Rows.Count; i++)
@@ -59,7 +59,7 @@ namespace ISC064.ADMINJUAL
 
                 sb.Append("<li>"
                     + "<a href=\"javascript:popSkema('" + rs.Rows[i]["Nomor"].ToString() + "')\">"
-                    + rs.Rows[i]["Nama"] + " "
+                    + rs.Rows[i]["Nama"] + " ("+rs.Rows[i]["Nomor"]+")"
                     + "</a>"
                     + "</li>"
                     );

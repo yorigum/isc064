@@ -20,7 +20,7 @@ namespace ISC064.SETTINGS
                 Act.ProjectList(project);
                 fill();
             }
-
+            include.Checked = true;
             FeedBack();
         }
 
@@ -40,6 +40,7 @@ namespace ISC064.SETTINGS
 
         protected void fill()
         {
+
             string ya = Db.SingleString("SELECT Value FROM REF_PARAM WHERE ParamID = '" + PL + "'");
             include.Checked = ya == "True";
 

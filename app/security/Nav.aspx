@@ -87,6 +87,9 @@
                                 <input value="Counter..." onclick="go(this, 'CounterLaunching.aspx')" class="navmenu" type="button"></li>
                         </ul>
                     </li>
+                    <span class="fa fa-database sb-ico"></span>
+                    <li>
+                        <input value="BackupDatabase" onclick="go(this, 'BackupDatabase.aspx')" class="navmenu" type="button" /></li>
                     <span class="fa fa-exclamation-circle sb-ico"></span>
                     <li>
                         <input value="Error" onclick="go(this, 'Problem.aspx')" class="navmenu" type="button" /></li>

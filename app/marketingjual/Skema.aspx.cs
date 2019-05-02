@@ -65,6 +65,7 @@ namespace ISC064.MARKETINGJUAL
 				string v = rs.Rows[i]["Nomor"].ToString();
 				string t = rs.Rows[i]["Nama"] + " ("+v.PadLeft(3,'0')+")";
 				carabayar.Items.Add(new ListItem(t,v));
+                Response.Write(v);
 			}
 
 			if(rs.Rows.Count==0)

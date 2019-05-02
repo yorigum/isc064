@@ -175,7 +175,7 @@ namespace ISC064.MARKETINGJUAL
         }
         void fillChartCaraBayar()
         {
-            int kpa = Db.SingleInteger("SELECT ISNULL(COUNT(*),0) FROM MS_KONTRAK WHERE Status = 'A' AND CaraBayar = 'KPA' AND Project = '" + project2.SelectedValue + "' ");
+            int kpa = Db.SingleInteger("SELECT ISNULL(COUNT(*),0) FROM MS_KONTRAK WHERE Status = 'A' AND CaraBayar = 'KPR' AND Project = '" + project2.SelectedValue + "' ");
             int cash = Db.SingleInteger("SELECT ISNULL(COUNT(*),0) FROM MS_KONTRAK WHERE Status = 'A' AND CaraBayar = 'CASH KERAS' AND Project = '" + project2.SelectedValue + "' ");
             int bertahap = Db.SingleInteger("SELECT ISNULL(COUNT(*),0) FROM MS_KONTRAK WHERE Status = 'A' AND CaraBayar = 'CASH BERTAHAP' AND Project = '" + project2.SelectedValue + "' ");
 
@@ -183,7 +183,7 @@ namespace ISC064.MARKETINGJUAL
 
             Script += " <script type='text/javascript'>";
             Script += "var chartCaraBayar =[{";
-            Script += "      'title': 'KPA',";
+            Script += "      'title': 'KPR',";
             Script += "      'color': '#1DC7EA',";
             Script += "      'value': " + kpa + "";
             Script += "   }, {";

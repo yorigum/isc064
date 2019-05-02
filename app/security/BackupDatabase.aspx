@@ -26,7 +26,7 @@
                 <td>&nbsp;</td>
                 <td>
                     <asp:TextBox ID="tglbackup" runat="server" CssClass="txt_center" Width="85"></asp:TextBox>
-                    <label for="tglbackup" class="btn btn-cal"><i class="fa fa-calendar"></i></label>
+                    <input type="button" value="..." class="btn" onclick="openCalendar('tglbackup')">
                     <asp:Label ID="tglbackupc" runat="server" CssClass="err"></asp:Label>
                 </td>
                 <td>

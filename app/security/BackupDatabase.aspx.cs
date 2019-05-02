@@ -66,7 +66,7 @@ namespace ISC064.SECURITY
             if (valid())
             {
                 DateTime TglBackup = Convert.ToDateTime(tglbackup.Text);
-                ExecuteBackup("Exec [spAutoBackup] '" + Param.FolderBackup + "','" + Cf.Tgl112(TglBackup) + "'");
+                ExecuteBackup("Exec [ISC064_SECURITY]..[spAutoBackup] '" + Param.FolderBackup + "','" + Cf.Tgl112(TglBackup) + "'");
                 Response.Redirect("BackupDatabase2.aspx?TglBackup=" + TglBackup);
             }
         }

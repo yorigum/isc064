@@ -47,7 +47,7 @@ namespace ISC064.MARKETINGJUAL.Laporan
             dari.Text = Cf.Day(Cf.AwalBulan());
             sampai.Text = Cf.Day(Cf.AkhirBulan());
 
-            //lokasi.SelectedIndex = 0;
+            lokasi.SelectedIndex = 0;
 
             DataTable rs;
             string Project = project.SelectedIndex == 0 ? "Project IN (" + Act.ProjectListSql + ")" : "Project = '" + project.SelectedValue + "'";

@@ -119,7 +119,7 @@
                                 <div id="chartCaraBayar" class="ct-chart ct-perfect-fourth"></div>
                                 <div class="footer">
                                     <div class="legend">
-                                        <i class="fa fa-circle text-info"></i>KPA
+                                        <i class="fa fa-circle text-info"></i>KPR
                                         <i class="fa fa-circle text-danger"></i>CASH KERAS
                                         <i class="fa fa-circle" style="color: #00e600"></i>CASH BERTAHAP
                                     </div>
